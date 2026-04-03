@@ -43,7 +43,7 @@ function CategoryBadgeInline({ category }: { category: string }) {
     funny: '#f59e0b',
     sarcastic: '#ef4444',
     wholesome: '#10b981',
-    dev: '#6366f1',
+    nerd: '#6366f1',
     existential: '#8b5cf6',
     corporate: '#0ea5e9',
     chaotic: '#f97316',

@@ -4,7 +4,7 @@ export type Category =
   | 'funny'
   | 'sarcastic'
   | 'wholesome'
-  | 'dev'
+  | 'nerd'
   | 'existential'
   | 'corporate'
   | 'chaotic';
@@ -37,7 +37,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   funny: 'Funny',
   sarcastic: 'Sarcastic',
   wholesome: 'Wholesome',
-  dev: 'Dev',
+  nerd: 'Nerd',
   existential: 'Existential',
   corporate: 'Corporate',
   chaotic: 'Chaotic',

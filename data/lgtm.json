@@ -2,7 +2,7 @@
   {
     "id": 1,
     "meaning": "Looks Good To Me",
-    "category": "dev",
+    "category": "nerd",
     "description": "The original, the classic. The one that started it all.",
     "tags": [
       "original",
@@ -28,7 +28,7 @@
   {
     "id": 3,
     "meaning": "Looks Great, Totally Merged",
-    "category": "dev",
+    "category": "nerd",
     "description": "You didn't read it. Nobody reads it. It's fine.",
     "tags": [
       "code-review",
@@ -77,7 +77,7 @@
   {
     "id": 7,
     "meaning": "Literally Going To Merge",
-    "category": "dev",
+    "category": "nerd",
     "description": "No notes. Just vibes. Shipping it.",
     "tags": [
       "shipping",
@@ -152,7 +152,7 @@
   {
     "id": 13,
     "meaning": "Looks Good To Machines",
-    "category": "dev",
+    "category": "nerd",
     "description": "CI passed. That's basically the same as a human review, right?",
     "tags": [
       "ci",
@@ -165,7 +165,7 @@
   {
     "id": 14,
     "meaning": "Local Git Totally Munged",
-    "category": "dev",
+    "category": "nerd",
     "description": "Your local environment is a crime scene, but ship it anyway.",
     "tags": [
       "git",
@@ -242,7 +242,7 @@
   {
     "id": 20,
     "meaning": "Linting Good, Tests Missing",
-    "category": "dev",
+    "category": "nerd",
     "description": "The code style is immaculate. The test coverage is zero.",
     "tags": [
       "testing",
@@ -293,7 +293,7 @@
   {
     "id": 24,
     "meaning": "Line Got Too Many",
-    "category": "dev",
+    "category": "nerd",
     "description": "That function is 800 lines. Nobody will say anything. LGTM.",
     "tags": [
       "code-quality",
@@ -358,7 +358,7 @@
   {
     "id": 29,
     "meaning": "Let's Go Touch Matplotlib",
-    "category": "dev",
+    "category": "nerd",
     "description": "A rallying cry for data scientists who've touched the configs.",
     "tags": [
       "python",
@@ -462,7 +462,7 @@
   {
     "id": 37,
     "meaning": "Let GPT Think More",
-    "category": "dev",
+    "category": "nerd",
     "description": "Modern code review: delegate to the machine, merge the answer.",
     "tags": [
       "ai",
@@ -514,7 +514,7 @@
   {
     "id": 41,
     "meaning": "Let Greybeard Take Maintainership",
-    "category": "dev",
+    "category": "nerd",
     "description": "Pass the burden to the most experienced. They'll know what to do. Maybe.",
     "tags": [
       "senior",
@@ -566,7 +566,7 @@
   {
     "id": 45,
     "meaning": "Looks Great To Most",
-    "category": "dev",
+    "category": "nerd",
     "description": "Collective approval is still approval. Democracy in code review.",
     "tags": [
       "democracy",
@@ -670,7 +670,7 @@
   {
     "id": 53,
     "meaning": "Let Go, Then Maintain",
-    "category": "dev",
+    "category": "nerd",
     "description": "The eternal cycle of every software project.",
     "tags": [
       "cycle",
@@ -709,7 +709,7 @@
   {
     "id": 56,
     "meaning": "Language Grew Too Much",
-    "category": "dev",
+    "category": "nerd",
     "description": "Started with bash. Now it's a distributed system. Classic.",
     "tags": [
       "scope-creep",
@@ -813,7 +813,7 @@
   {
     "id": 64,
     "meaning": "Loaded, Green, Tests Missing",
-    "category": "dev",
+    "category": "nerd",
     "description": "All checks passed. There are no checks. Ship it.",
     "tags": [
       "ci",
@@ -865,7 +865,7 @@
   {
     "id": 68,
     "meaning": "Linter Got Totally Mocked",
-    "category": "dev",
+    "category": "nerd",
     "description": "eslint-disable on every line. The linter weeps silently.",
     "tags": [
       "eslint",
@@ -891,7 +891,7 @@
   {
     "id": 70,
     "meaning": "Let's Go Terraform More",
-    "category": "dev",
+    "category": "nerd",
     "description": "Infrastructure as code becomes infrastructure as chaos.",
     "tags": [
       "terraform",
@@ -917,7 +917,7 @@
   {
     "id": 72,
     "meaning": "Lacks Good Test Management",
-    "category": "dev",
+    "category": "nerd",
     "description": "Eighty percent coverage... of the happy path only.",
     "tags": [
       "testing",
@@ -1021,7 +1021,7 @@
   {
     "id": 80,
     "meaning": "Loops, Globals, Total Madness",
-    "category": "dev",
+    "category": "nerd",
     "description": "The code works by accident. Do not refactor. Do not touch. Do not look directly at it.",
     "tags": [
       "globals",
@@ -1112,7 +1112,7 @@
   {
     "id": 87,
     "meaning": "Latency Got Too Much",
-    "category": "dev",
+    "category": "nerd",
     "description": "P99 is 14 seconds. The SLA says 200ms. Ship it anyway.",
     "tags": [
       "latency",
@@ -1229,7 +1229,7 @@
   {
     "id": 96,
     "meaning": "Low-key Genius Technical Move",
-    "category": "dev",
+    "category": "nerd",
     "description": "Nobody noticed how elegant that solution was. It will be overwritten in six months.",
     "tags": [
       "elegant",
@@ -1242,7 +1242,7 @@
   {
     "id": 97,
     "meaning": "Literally Go Test More",
-    "category": "dev",
+    "category": "nerd",
     "description": "The review comment that should appear on every PR but never does.",
     "tags": [
       "testing",
@@ -1294,7 +1294,7 @@
   {
     "id": 101,
     "meaning": "Long, Granular, Tedious Migration",
-    "category": "dev",
+    "category": "nerd",
     "description": "The migration has 47 steps. Step 23 has never worked in production.",
     "tags": [
       "migration",
@@ -1409,7 +1409,7 @@
   {
     "id": 110,
     "meaning": "Logic Got Totally Mangled",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "When the business logic defies all known laws of computation.",
     "tags": [
@@ -1422,7 +1422,7 @@
   {
     "id": 111,
     "meaning": "Looks Great, Timidly Merging",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "You approved it but your finger hovered over the button for three minutes.",
     "tags": [
@@ -1446,7 +1446,7 @@
   {
     "id": 113,
     "meaning": "Linting Generates Tiny Miseries",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "141 warnings about trailing spaces. Each one personal.",
     "tags": [
@@ -1507,7 +1507,7 @@
   {
     "id": 118,
     "meaning": "Lingering Ghost Throughout Main",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "epic",
     "description": "That function that everyone is afraid to touch but nobody removes.",
     "tags": [
@@ -1544,7 +1544,7 @@
   {
     "id": 121,
     "meaning": "Loads Gracefully, Technically Maybe",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Performance review: optimistic at best.",
     "tags": [
@@ -1568,7 +1568,7 @@
   {
     "id": 123,
     "meaning": "Let's Get This Merged",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Enthusiasm over caution. The PR is three days old.",
     "tags": [
@@ -1594,7 +1594,7 @@
   {
     "id": 125,
     "meaning": "Lost Going Through Monorepo",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Three levels of symlinks and you still haven't found the entry point.",
     "tags": [
@@ -1670,7 +1670,7 @@
   {
     "id": 131,
     "meaning": "Laser-Guided Type Mutation",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "epic",
     "description": "TypeScript gymnastics that should not compile but somehow does.",
     "tags": [
@@ -1721,7 +1721,7 @@
   {
     "id": 135,
     "meaning": "Legendary Git Tree Maneuver",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "legendary",
     "description": "The rebase that untangled six months of merge conflicts in one command.",
     "tags": [
@@ -1734,7 +1734,7 @@
   {
     "id": 136,
     "meaning": "Local Got Totally Munged",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Your dev environment has entered a state that requires formatting the laptop.",
     "tags": [
@@ -1772,7 +1772,7 @@
   {
     "id": 139,
     "meaning": "Loops Get Terribly Messy",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Nested for-loops in a language that has map() and filter().",
     "tags": [
@@ -1824,7 +1824,7 @@
   {
     "id": 143,
     "meaning": "Lurking Gremlins, Truly Malicious",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Intermittent test failures that only happen in CI on Wednesdays.",
     "tags": [
@@ -1837,7 +1837,7 @@
   {
     "id": 144,
     "meaning": "Let's Grab The Manual",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "RTFM, said kindly, in a code review comment.",
     "tags": [
@@ -1863,7 +1863,7 @@
   {
     "id": 146,
     "meaning": "Latency Gets To Me",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "P99: 2.3 seconds. P50: fine. Sleep: none.",
     "tags": [
@@ -1876,7 +1876,7 @@
   {
     "id": 147,
     "meaning": "Let's Go Touch Matplotlib",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Nobody wants to touch the visualization layer. Someone has to.",
     "tags": [
@@ -1941,7 +1941,7 @@
   {
     "id": 152,
     "meaning": "Low-Key Genius Thinking Mode",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "The commit that solves three open issues with four lines of code.",
     "tags": [
@@ -1980,7 +1980,7 @@
   {
     "id": 155,
     "meaning": "Landing Gracefully Takes Mastery",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "epic",
     "description": "Zero-downtime deployment on a system that was never designed for it.",
     "tags": [
@@ -2032,7 +2032,7 @@
   {
     "id": 159,
     "meaning": "Lines Get Tangled, Man",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "CSS specificity reaching triple digits.",
     "tags": [
@@ -2058,7 +2058,7 @@
   {
     "id": 161,
     "meaning": "Let's Get To Mocking",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Unit tests that mock everything including the actual unit under test.",
     "tags": [
@@ -2096,7 +2096,7 @@
   {
     "id": 164,
     "meaning": "Legendary Grand Tour: Microservices",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "legendary",
     "description": "The architecture migration that touched every service and somehow didn't break production.",
     "tags": [
@@ -2174,7 +2174,7 @@
   {
     "id": 170,
     "meaning": "Lock, Guard, Then Merge",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Proper mutex usage in a concurrent system. Applause is warranted.",
     "tags": [
@@ -2226,7 +2226,7 @@
   {
     "id": 174,
     "meaning": "Let's Go Through Migration",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Another database schema change. Another round of altered tables.",
     "tags": [
@@ -2239,7 +2239,7 @@
   {
     "id": 175,
     "meaning": "Lags Gracefully, Tests Missing",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Performance is poor. Coverage is zero. Ship it.",
     "tags": [
@@ -2330,7 +2330,7 @@
   {
     "id": 182,
     "meaning": "Left Grid, Tried Moving",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Flexbox migration from an ancient float-based layout. Courage required.",
     "tags": [
@@ -2369,7 +2369,7 @@
   {
     "id": 185,
     "meaning": "Let's Grant This Merge",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The polite way to say you've been waiting for this approval for a week.",
     "tags": [
@@ -2408,7 +2408,7 @@
   {
     "id": 188,
     "meaning": "Looping, Groaning, Then Migrating",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "The refactor that started as a 'quick cleanup' and is now in its third month.",
     "tags": [
@@ -2421,7 +2421,7 @@
   {
     "id": 189,
     "meaning": "Let's Get To Memoization",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Caching a calculation that runs 4ms. The meeting to discuss it ran 90 minutes.",
     "tags": [
@@ -2473,7 +2473,7 @@
   {
     "id": 193,
     "meaning": "Loves Going Through Monoliths",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "The developer who defends the monolith at every architecture review. Correctly.",
     "tags": [
@@ -2538,7 +2538,7 @@
   {
     "id": 198,
     "meaning": "Let's Go Through Modules",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The ritual of untangling circular imports on a Monday morning.",
     "tags": [
@@ -2616,7 +2616,7 @@
   {
     "id": 204,
     "meaning": "Let's Get Technical, Mostly",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The architecture discussion that devolves into font preferences within six minutes.",
     "tags": [
@@ -2668,7 +2668,7 @@
   {
     "id": 208,
     "meaning": "Left, Gone, Totally Missing",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The engineer who reviewed your PR last week is no longer at the company.",
     "tags": [
@@ -2707,7 +2707,7 @@
   {
     "id": 211,
     "meaning": "Laziness, Genius-Tier, Thoroughly Modern",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "epic",
     "description": "The one-liner that replaces forty lines because you finally read the stdlib docs.",
     "tags": [
@@ -2733,7 +2733,7 @@
   {
     "id": 213,
     "meaning": "Laboriously Generated Test Mocks",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "Forty lines of mock setup for a test that asserts one boolean.",
     "tags": [
@@ -2811,7 +2811,7 @@
   {
     "id": 219,
     "meaning": "Let's Go Test More",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Coverage went from 0% to 1%. Progress.",
     "tags": [
@@ -2824,7 +2824,7 @@
   {
     "id": 220,
     "meaning": "Large God-Type Monstrosity",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "epic",
     "description": "The 'base controller' class that has 87 methods and no clear purpose.",
     "tags": [
@@ -2863,7 +2863,7 @@
   {
     "id": 223,
     "meaning": "Let's Go Touch Monads",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "The Haskell pull request nobody was expecting in a Python codebase.",
     "tags": [
@@ -2889,7 +2889,7 @@
   {
     "id": 225,
     "meaning": "Leaving Gaps, Telling Maybe",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The interface that is documented with one example that doesn't cover your case.",
     "tags": [
@@ -2915,7 +2915,7 @@
   {
     "id": 227,
     "meaning": "Lightly Grazing The Math",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Floating-point arithmetic where 0.1 + 0.2 is close enough for government work.",
     "tags": [
@@ -2928,7 +2928,7 @@
   {
     "id": 228,
     "meaning": "Lost, Generally, Through Microservices",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "epic",
     "description": "Distributed tracing reveals the request bounced through eleven services. Six are yours.",
     "tags": [
@@ -2967,7 +2967,7 @@
   {
     "id": 231,
     "meaning": "Let's Get To Maintaining",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The heroic commitment to dependency updates on a Friday afternoon.",
     "tags": [
@@ -2993,7 +2993,7 @@
   {
     "id": 233,
     "meaning": "Lingering Ghost That Maintains",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "The script nobody owns but everyone depends on, living in a shared S3 bucket.",
     "tags": [
@@ -3045,7 +3045,7 @@
   {
     "id": 237,
     "meaning": "Let's Get To Multiprocessing",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "The Python script about to learn what the GIL actually does.",
     "tags": [
@@ -3098,7 +3098,7 @@
   {
     "id": 241,
     "meaning": "Leans Gently Toward Minimalism",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "rare",
     "description": "The refactor that removed more lines than it added and solved more bugs than it created.",
     "tags": [
@@ -3203,7 +3203,7 @@
   {
     "id": 249,
     "meaning": "Lines, Generally, Tell Much",
-    "category": "dev",
+    "category": "nerd",
     "rarity": "common",
     "description": "Reading git blame to understand why the code exists as it does.",
     "tags": [
