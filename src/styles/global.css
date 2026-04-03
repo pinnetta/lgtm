@@ -67,67 +67,32 @@
   }
 }
 
+
 [data-theme="light"] {
   --color-bg: #f8f8f5;
   --color-surface: #ffffff;
   --color-surface-raised: #f1f0ec;
   --color-border: #e2e0d8;
-
   --color-text: #1a1917;
   --color-text-muted: #6b6860;
   --color-text-faint: #9c9a92;
-
   --color-accent: #5b4cf0;
   --color-accent-hover: #4a3dd4;
   --color-accent-subtle: #ede9ff;
-
   --color-common: #71717a;
   --color-common-bg: #f4f4f5;
   --color-common-border: #d4d4d8;
-
   --color-rare: #2563eb;
   --color-rare-bg: #eff6ff;
   --color-rare-border: #bfdbfe;
-
   --color-epic: #7c3aed;
   --color-epic-bg: #f5f3ff;
   --color-epic-border: #ddd6fe;
-
   --color-legendary: #d97706;
   --color-legendary-bg: #fffbeb;
   --color-legendary-border: #fde68a;
 }
 
-[data-theme="dark"] {
-  --color-bg: #0f0f0e;
-  --color-surface: #1a1917;
-  --color-surface-raised: #242320;
-  --color-border: #2e2c28;
-
-  --color-text: #f0efe8;
-  --color-text-muted: #9c9a92;
-  --color-text-faint: #6b6860;
-
-  --color-accent: #7c6cf5;
-  --color-accent-hover: #9585f7;
-  --color-accent-subtle: #1e1a3d;
-
-  --color-common: #a1a1aa;
-  --color-common-bg: #27272a;
-  --color-common-border: #3f3f46;
-
-  --color-rare: #60a5fa;
-  --color-rare-bg: #172554;
-  --color-rare-border: #1e3a8a;
-
-  --color-epic: #a78bfa;
-  --color-epic-bg: #1e0a3c;
-  --color-epic-border: #4c1d95;
-
-  --color-legendary: #fbbf24;
-  --color-legendary-bg: #1c1102;
-  --color-legendary-border: #78350f;
-}
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -160,17 +125,6 @@ a:hover {
   text-decoration: underline;
 }
 
-@theme {
-  --color-brand-accent: var(--color-accent);
-  --color-brand-bg: var(--color-bg);
-  --color-brand-surface: var(--color-surface);
-  --color-brand-border: var(--color-border);
-  --color-brand-text: var(--color-text);
-  --color-brand-muted: var(--color-text-muted);
-
-  --font-mono: var(--font-mono);
-  --font-sans: var(--font-sans);
-}
 
 .container {
   width: 100%;
@@ -259,6 +213,11 @@ a:hover {
 .btn-ghost:hover {
   background: var(--color-surface-raised);
   color: var(--color-text);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 @keyframes fade-in {

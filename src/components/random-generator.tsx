@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import type { LGTMEntry, Rarity } from '../lib/lgtm';
 import { RARITY_LABELS, CATEGORY_LABELS } from '../lib/lgtm';
+import { RARITY_COLORS, RARITY_ICONS, CATEGORY_COLORS } from '../lib/content';
+import { COPY_FEEDBACK_MS } from '../lib/config';
 import { weightedRandomExcluding } from '../lib/random';
 
 interface Props {
@@ -8,14 +10,8 @@ interface Props {
   initialEntry?: LGTMEntry;
 }
 
-const RARITY_COLORS: Record<Rarity, string> = {
-  common: 'var(--color-common)',
-  rare: 'var(--color-rare)',
-  epic: 'var(--color-epic)',
-  legendary: 'var(--color-legendary)',
-};
-
 function RarityBadgeInline({ rarity }: { rarity: Rarity }) {
+  const icon = RARITY_ICONS[rarity];
   return (
     <span
       className={`badge-${rarity}`}
@@ -31,24 +27,14 @@ function RarityBadgeInline({ rarity }: { rarity: Rarity }) {
         padding: '0.3em 0.65em',
       }}
     >
-      {rarity === 'legendary' && <span aria-hidden="true">★</span>}
-      {rarity === 'epic' && <span aria-hidden="true">◆</span>}
+      {icon && <span aria-hidden="true">{icon}</span>}
       {RARITY_LABELS[rarity]}
     </span>
   );
 }
 
 function CategoryBadgeInline({ category }: { category: string }) {
-  const CAT_COLORS: Record<string, string> = {
-    funny: '#f59e0b',
-    sarcastic: '#ef4444',
-    wholesome: '#10b981',
-    nerd: '#6366f1',
-    existential: '#8b5cf6',
-    corporate: '#0ea5e9',
-    chaotic: '#f97316',
-  };
-  const clr = CAT_COLORS[category] ?? 'var(--color-text-muted)';
+  const clr = CATEGORY_COLORS[category] ?? 'var(--color-text-muted)';
   return (
     <a
       href={`/categories/${category}`}
@@ -85,7 +71,7 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
       setCurrent(picked);
       history.replaceState(null, '', `/lgtm/${picked.id}`);
     }
-  }, []); 
+  }, []);
 
   const generate = useCallback(() => {
     if (isAnimating) return;
@@ -106,8 +92,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch {
       const el = document.createElement('input');
       el.value = shareUrl;
@@ -115,9 +99,9 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
       el.select();
       document.execCommand('copy');
       document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     }
+    setCopied(true);
+    setTimeout(() => setCopied(false), COPY_FEEDBACK_MS);
   };
 
   const rarityColor = RARITY_COLORS[current.rarity as Rarity] ?? 'var(--color-common)';

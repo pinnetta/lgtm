@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
+import { THEME_STORAGE_KEY } from '../lib/config';
 
 type Theme = 'system' | 'light' | 'dark';
-
-const CYCLE: Theme[] = ['system', 'light', 'dark'];
-const STORAGE_KEY = 'lgtm-theme';
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
@@ -48,48 +46,45 @@ function IconMoon() {
   );
 }
 
-const ICONS: Record<Theme, () => JSX.Element> = {
-  system: IconSystem,
-  light: IconSun,
-  dark: IconMoon,
-};
-
-const LABELS: Record<Theme, string> = {
-  system: 'System theme',
-  light: 'Light theme',
-  dark: 'Dark theme',
-};
+const THEMES: { value: Theme; icon: () => JSX.Element; label: string }[] = [
+  { value: 'system', icon: IconSystem, label: 'System theme' },
+  { value: 'light',  icon: IconSun,    label: 'Light theme' },
+  { value: 'dark',   icon: IconMoon,   label: 'Dark theme' },
+];
 
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState<Theme>('system');
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    if (stored && CYCLE.includes(stored)) {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    const valid = THEMES.map((t) => t.value);
+    if (stored && valid.includes(stored)) {
       setTheme(stored);
       applyTheme(stored);
     }
   }, []);
 
   function cycle() {
-    const next = CYCLE[(CYCLE.indexOf(theme) + 1) % CYCLE.length];
+    const idx = THEMES.findIndex((t) => t.value === theme);
+    const next = THEMES[(idx + 1) % THEMES.length].value;
     setTheme(next);
     applyTheme(next);
     if (next === 'system') {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(THEME_STORAGE_KEY);
     } else {
-      localStorage.setItem(STORAGE_KEY, next);
+      localStorage.setItem(THEME_STORAGE_KEY, next);
     }
   }
 
-  const Icon = ICONS[theme];
+  const current = THEMES.find((t) => t.value === theme)!;
+  const Icon = current.icon;
 
   return (
     <button
       type="button"
       onClick={cycle}
-      aria-label={LABELS[theme]}
-      title={LABELS[theme]}
+      aria-label={current.label}
+      title={current.label}
       style={{
         display: 'inline-flex',
         alignItems: 'center',

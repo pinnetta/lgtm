@@ -9,9 +9,4 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     include: ['src/test/**/*.test.{ts,tsx}'],
   },
-  resolve: {
-    alias: {
-      // Allow JSON imports the same way the app does
-    },
-  },
 });

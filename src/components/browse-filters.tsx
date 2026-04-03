@@ -1,6 +1,9 @@
 import { useState, useMemo } from 'react';
 import type { LGTMEntry, Rarity } from '../lib/lgtm';
-import { RARITY_LABELS, CATEGORY_LABELS, RARITY_WEIGHTS, getAllRarities } from '../lib/lgtm';
+import { RARITY_LABELS, CATEGORY_LABELS, getAllRarities } from '../lib/lgtm';
+import { CATEGORY_COLORS, RARITY_COLORS, RARITY_ICONS, RARITY_ORDER } from '../lib/content';
+import { PAGE_SIZE } from '../lib/config';
+import Pagination from './pagination';
 
 interface Props {
   entries: LGTMEntry[];
@@ -15,33 +18,7 @@ const SORT_LABELS: Record<SortOption, string> = {
   newest: 'Newest first',
 };
 
-const RARITY_ORDER: Record<Rarity, number> = {
-  common: 0,
-  rare: 1,
-  epic: 2,
-  legendary: 3,
-};
-
-const CAT_COLORS: Record<string, string> = {
-  funny: '#f59e0b',
-  sarcastic: '#ef4444',
-  wholesome: '#10b981',
-  nerd: '#6366f1',
-  existential: '#8b5cf6',
-  corporate: '#0ea5e9',
-  chaotic: '#f97316',
-};
-
-const PAGE_SIZE = 25;
-
 function RarityDot({ rarity }: { rarity: Rarity }) {
-  const COLORS: Record<Rarity, string> = {
-    common: 'var(--color-common)',
-    rare: 'var(--color-rare)',
-    epic: 'var(--color-epic)',
-    legendary: 'var(--color-legendary)',
-  };
-
   return (
     <span
       aria-hidden="true"
@@ -50,7 +27,7 @@ function RarityDot({ rarity }: { rarity: Rarity }) {
         width: '8px',
         height: '8px',
         borderRadius: '50%',
-        background: COLORS[rarity],
+        background: RARITY_COLORS[rarity],
         flexShrink: 0,
         marginTop: '1px',
       }}
@@ -59,7 +36,7 @@ function RarityDot({ rarity }: { rarity: Rarity }) {
 }
 
 function EntryRow({ entry }: { entry: LGTMEntry }) {
-  const clr = CAT_COLORS[entry.category] ?? 'var(--color-text-muted)';
+  const clr = CATEGORY_COLORS[entry.category] ?? 'var(--color-text-muted)';
 
   return (
     <a
@@ -78,230 +55,60 @@ function EntryRow({ entry }: { entry: LGTMEntry }) {
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-accent)';
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          '0 2px 12px color-mix(in srgb, var(--color-accent) 10%, transparent)';
+        (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 8px color-mix(in srgb, var(--color-accent) 10%, transparent)';
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)';
         (e.currentTarget as HTMLElement).style.boxShadow = 'none';
       }}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', minWidth: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div style={{ minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
           <RarityDot rarity={entry.rarity as Rarity} />
           <span style={{
-            fontSize: '0.6875rem',
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--color-text-faint)',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
+            fontWeight: 600,
+            fontSize: '0.9375rem',
+            color: 'var(--color-text)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
           }}>
-            LGTM
+            {entry.meaning}
           </span>
         </div>
-        <span style={{
-          fontSize: '1.0625rem',
-          fontWeight: 700,
-          color: 'var(--color-text)',
-          lineHeight: 1.3,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}>
-          {entry.meaning}
-        </span>
         {entry.description && (
-          <span style={{
-            fontSize: '0.875rem',
+          <p style={{
+            margin: 0,
+            fontSize: '0.8125rem',
             color: 'var(--color-text-muted)',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
           }}>
             {entry.description}
-          </span>
+          </p>
         )}
       </div>
-
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        gap: '0.375rem',
-        flexShrink: 0,
-      }}>
-        <span
-          className={`badge-${entry.rarity}`}
-          style={{
-            fontSize: '0.6875rem',
-            fontWeight: 700,
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            padding: '0.2em 0.5em',
-            borderRadius: '4px',
-          }}
-        >
-          {entry.rarity === 'legendary' && '★ '}
-          {entry.rarity === 'epic' && '◆ '}
-          {RARITY_LABELS[entry.rarity as Rarity]}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem', flexShrink: 0 }}>
+        <span style={{
+          fontSize: '0.75rem',
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
+          color: RARITY_COLORS[entry.rarity as Rarity] ?? 'var(--color-text-faint)',
+        }}>
+          {RARITY_ICONS[entry.rarity as Rarity]}{RARITY_ICONS[entry.rarity as Rarity] ? ' ' : ''}{RARITY_LABELS[entry.rarity as Rarity]}
         </span>
         <span style={{
           fontSize: '0.75rem',
-          fontWeight: 500,
           color: clr,
-          background: `color-mix(in srgb, ${clr} 10%, var(--color-surface))`,
-          border: `1px solid color-mix(in srgb, ${clr} 25%, transparent)`,
-          borderRadius: '4px',
+          fontWeight: 500,
           padding: '0.15em 0.45em',
         }}>
           {CATEGORY_LABELS[entry.category] ?? entry.category}
         </span>
       </div>
     </a>
-  );
-}
-
-function Pagination({
-  page,
-  totalPages,
-  onPage,
-}: {
-  page: number;
-  totalPages: number;
-  onPage: (p: number) => void;
-}) {
-  if (totalPages <= 1) return null;
-
-  const pages: (number | '…')[] = [];
-
-  if (totalPages <= 7) {
-    for (let i = 1; i <= totalPages; i++) pages.push(i);
-  } else {
-    pages.push(1);
-    if (page > 3) pages.push('…');
-
-    const start = Math.max(2, page - 1);
-    const end = Math.min(totalPages - 1, page + 1);
-
-    for (let i = start; i <= end; i++) pages.push(i);
-
-    if (page < totalPages - 2) pages.push('…');
-    pages.push(totalPages);
-  }
-
-  const btnBase: React.CSSProperties = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: '2rem',
-    height: '2rem',
-    padding: '0 0.5rem',
-    borderRadius: '6px',
-    border: '1px solid var(--color-border)',
-    background: 'var(--color-surface)',
-    color: 'var(--color-text-muted)',
-    fontSize: '0.875rem',
-    fontWeight: 500,
-    cursor: 'pointer',
-    transition: 'background 0.15s, color 0.15s, border-color 0.15s',
-  };
-
-  const btnActive: React.CSSProperties = {
-    ...btnBase,
-    background: 'var(--color-accent)',
-    color: '#fff',
-    borderColor: 'var(--color-accent)',
-    fontWeight: 700,
-    cursor: 'default',
-  };
-
-  const btnDisabled: React.CSSProperties = {
-    ...btnBase,
-    opacity: 0.4,
-    cursor: 'not-allowed',
-  };
-
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '0.375rem',
-      flexWrap: 'wrap',
-      paddingTop: '1.5rem',
-    }}>
-      <button
-        style={page === 1 ? btnDisabled : btnBase}
-        onClick={() => page > 1 && onPage(page - 1)}
-        disabled={page === 1}
-        aria-label="Previous page"
-        onMouseEnter={(e) => {
-          if (page > 1) {
-            (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface-raised)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--color-text)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (page > 1) {
-            (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--color-text-muted)';
-          }
-        }}
-      >
-        ←
-      </button>
-
-      {pages.map((p, i) =>
-        p === '…' ? (
-          <span key={`ellipsis-${i}`} style={{ ...btnBase, cursor: 'default', border: 'none', background: 'none' }}>
-            …
-          </span>
-        ) : (
-          <button
-            key={p}
-            style={p === page ? btnActive : btnBase}
-            onClick={() => p !== page && onPage(p as number)}
-            aria-label={`Page ${p}`}
-            aria-current={p === page ? 'page' : undefined}
-            onMouseEnter={(e) => {
-              if (p !== page) {
-                (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface-raised)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'var(--color-text)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (p !== page) {
-                (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'var(--color-text-muted)';
-              }
-            }}
-          >
-            {p}
-          </button>
-        )
-      )}
-
-      <button
-        style={page === totalPages ? btnDisabled : btnBase}
-        onClick={() => page < totalPages && onPage(page + 1)}
-        disabled={page === totalPages}
-        aria-label="Next page"
-        onMouseEnter={(e) => {
-          if (page < totalPages) {
-            (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface-raised)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--color-text)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (page < totalPages) {
-            (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--color-text-muted)';
-          }
-        }}
-      >
-        →
-      </button>
-    </div>
   );
 }
 
@@ -439,8 +246,7 @@ export default function BrowseFilters({ entries }: Props) {
           </span>
           {allCategories.map((cat) => {
             const active = activeCategories.has(cat);
-            const clr = CAT_COLORS[cat] ?? 'var(--color-text-muted)';
-
+            const clr = CATEGORY_COLORS[cat] ?? 'var(--color-text-muted)';
             return (
               <button
                 key={cat}
@@ -478,14 +284,8 @@ export default function BrowseFilters({ entries }: Props) {
           </span>
           {allRarities.map((r) => {
             const active = activeRarities.has(r);
-            const COLORS: Record<Rarity, string> = {
-              common: 'var(--color-common)',
-              rare: 'var(--color-rare)',
-              epic: 'var(--color-epic)',
-              legendary: 'var(--color-legendary)',
-            };
-            const clr = COLORS[r];
-
+            const clr = RARITY_COLORS[r];
+            const icon = RARITY_ICONS[r];
             return (
               <button
                 key={r}
@@ -506,9 +306,7 @@ export default function BrowseFilters({ entries }: Props) {
                   textTransform: 'uppercase',
                 }}
               >
-                {r === 'legendary' && '★ '}
-                {r === 'epic' && '◆ '}
-                {RARITY_LABELS[r]}
+                {icon && `${icon} `}{RARITY_LABELS[r]}
               </button>
             );
           })}

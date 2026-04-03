@@ -1,16 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 import { weightedRandom, weightedRandomExcluding } from '../lib/random';
 import type { LGTMEntry } from '../lib/lgtm';
-
-function makeEntry(id: number, rarity: LGTMEntry['rarity']): LGTMEntry {
-  return { id, meaning: `Meaning ${id}`, category: 'funny', rarity };
-}
+import { makeEntry } from './fixtures';
 
 const entries: LGTMEntry[] = [
-  makeEntry(1, 'common'),
-  makeEntry(2, 'rare'),
-  makeEntry(3, 'epic'),
-  makeEntry(4, 'legendary'),
+  makeEntry({ id: 1, rarity: 'common' }),
+  makeEntry({ id: 2, rarity: 'rare' }),
+  makeEntry({ id: 3, rarity: 'epic' }),
+  makeEntry({ id: 4, rarity: 'legendary' }),
 ];
 
 describe('weightedRandom', () => {
@@ -26,17 +23,19 @@ describe('weightedRandom', () => {
   });
 
   it('returns the only entry when list has one item', () => {
-    const single = [makeEntry(99, 'common')];
+    const single = [makeEntry({ id: 99, rarity: 'common' })];
     expect(weightedRandom(single)).toBe(single[0]);
   });
 
   it('respects weights — common is more frequent than legendary', () => {
-    const pool = [makeEntry(1, 'common'), makeEntry(2, 'legendary')];
+    const pool = [makeEntry({ id: 1, rarity: 'common' }), makeEntry({ id: 2, rarity: 'legendary' })];
     let commonCount = 0;
     const TRIALS = 1000;
+
     for (let i = 0; i < TRIALS; i++) {
       if (weightedRandom(pool).rarity === 'common') commonCount++;
     }
+
     expect(commonCount / TRIALS).toBeGreaterThan(0.75);
   });
 
@@ -62,7 +61,7 @@ describe('weightedRandomExcluding', () => {
   });
 
   it('returns the single entry when pool has only one item', () => {
-    const single = [makeEntry(5, 'epic')];
+    const single = [makeEntry({ id: 5, rarity: 'epic' })];
     expect(weightedRandomExcluding(single, 5)).toBe(single[0]);
   });
 });

@@ -81,11 +81,6 @@ const detailUrl = `/lgtm/${entry.id}`;
     animation: shimmer 3s linear infinite;
   }
 
-  @keyframes shimmer {
-    0% { background-position: 100% 0; }
-    100% { background-position: -100% 0; }
-  }
-
   .lgtm-card:hover {
     border-color: var(--color-accent);
     box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent) 12%, transparent);

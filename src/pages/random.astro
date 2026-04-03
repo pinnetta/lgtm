@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/base-layout.astro';
-import { getAllEntries } from '../lib/lgtm';
+import { getAllEntries, RARITY_WEIGHTS } from '../lib/lgtm';
 
 const entries = getAllEntries();
 const entriesJson = JSON.stringify(
   entries.map((e) => ({ id: e.id, rarity: e.rarity }))
 );
+const weightsJson = JSON.stringify(RARITY_WEIGHTS);
 ---
 
 <BaseLayout
@@ -24,16 +25,15 @@ const entriesJson = JSON.stringify(
   </div>
 </BaseLayout>
 
-<script is:inline define:vars={{ entriesJson }}>
+<script is:inline define:vars={{ entriesJson, weightsJson }}>
   (function () {
     try {
       var entries = JSON.parse(entriesJson);
+      var weights = JSON.parse(weightsJson);
       if (!entries || entries.length === 0) {
         window.location.replace('/browse');
         return;
       }
-
-      var weights = { common: 60, rare: 30, epic: 15, legendary: 5 };
 
       var totalWeight = entries.reduce(function (sum, e) {
         return sum + (weights[e.rarity] || weights.common);

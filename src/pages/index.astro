@@ -8,22 +8,12 @@ import {
   RARITY_LABELS,
   RARITY_WEIGHTS,
 } from "../lib/lgtm";
+import { CATEGORY_TAGLINES, FACTS, RARITY_TAGLINES } from "../lib/content";
 
 const entries = getAllEntries();
-
 const totalEntries = entries.length;
 const totalCategories = getAllCategories().length;
 const legendaryCount = entries.filter((e) => e.rarity === "legendary").length;
-
-const CATEGORY_TAGLINES: Record<string, string> = {
-  funny: "make them laugh",
-  nerd: "for the nerds",
-  chaotic: "expect the unexpected",
-  wholesome: "spread the love",
-  sarcastic: "say it with sarcasm",
-  existential: "question everything",
-  corporate: "synergize the approval",
-};
 
 const categories = getAllCategories().map((cat) => ({
   name: cat,
@@ -32,59 +22,13 @@ const categories = getAllCategories().map((cat) => ({
   count: entries.filter((e) => e.category === cat).length,
 }));
 
-const FACTS = [
-  {
-    year: "2000s",
-    text: 'Developers started writing "LGTM" as quick shorthand approval in mailing list code reviews — faster to type than "looks good to me" in a multi-threaded reply chain.',
-  },
-  {
-    year: "2006",
-    text: "Linus Torvalds created Git in two weeks after the Linux kernel community lost access to their previous version control system.",
-  },
-  {
-    year: "2012",
-    text: "GitHub shipped pull requests, turning code review from an email thread into a structured, comment-threaded workflow used by millions.",
-  },
-  {
-    year: "2019",
-    text: 'GitHub added the formal "Approve" button to pull requests, giving LGTM an official home in the review flow.',
-  },
-  {
-    year: "2026+",
-    text: "LGTM has escaped the terminal. Developers use it playfully everywhere — Slack, Discord, memes, PRs — sometimes with very creative alternative meanings.",
-  },
-];
-
-const RARITIES = [
-  {
-    key: "common",
-    label: RARITY_LABELS.common,
-    tagline: "the everyday approval",
-    weight: RARITY_WEIGHTS.common,
-    badgeClass: "badge-common",
-  },
-  {
-    key: "rare",
-    label: RARITY_LABELS.rare,
-    tagline: "a bit more interesting",
-    weight: RARITY_WEIGHTS.rare,
-    badgeClass: "badge-rare",
-  },
-  {
-    key: "epic",
-    label: RARITY_LABELS.epic,
-    tagline: "worth a double-take",
-    weight: RARITY_WEIGHTS.epic,
-    badgeClass: "badge-epic",
-  },
-  {
-    key: "legendary",
-    label: RARITY_LABELS.legendary,
-    tagline: "rare, hilarious, unforgettable",
-    weight: RARITY_WEIGHTS.legendary,
-    badgeClass: "badge-legendary",
-  },
-];
+const RARITIES = (Object.keys(RARITY_WEIGHTS) as (keyof typeof RARITY_WEIGHTS)[]).map((key) => ({
+  key,
+  label: RARITY_LABELS[key],
+  tagline: RARITY_TAGLINES[key],
+  weight: RARITY_WEIGHTS[key],
+  badgeClass: `badge-${key}`,
+}));
 
 const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
 ---
@@ -200,14 +144,20 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
     <div class="container">
       <h2 class="section-title">A Brief History</h2>
       <div class="facts-strip">
-        {
-          FACTS.map((fact) => (
+        {FACTS.slice(0, 3).map((fact) => (
+          <div class="fact-card">
+            <span class="fact-year">{fact.year}</span>
+            <p class="fact-text">{fact.text}</p>
+          </div>
+        ))}
+        <div class="facts-bottom-row">
+          {FACTS.slice(3).map((fact) => (
             <div class="fact-card">
               <span class="fact-year">{fact.year}</span>
               <p class="fact-text">{fact.text}</p>
             </div>
-          ))
-        }
+          ))}
+        </div>
       </div>
     </div>
   </div>
@@ -562,13 +512,16 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
     gap: 1rem;
   }
 
-  .facts-strip .fact-card:nth-child(4),
-  .facts-strip .fact-card:nth-child(5) {
-    grid-column: auto;
+  .facts-bottom-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
   }
 
-  .facts-strip-bottom {
-    display: contents;
+  .facts-bottom-row .fact-card {
+    flex: 0 1 calc(33.333% - 0.5rem);
+    min-width: 0;
   }
 
   .fact-card {
@@ -803,79 +756,24 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
     .facts-strip {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .facts-bottom-row {
+      flex-direction: column;
+    }
+
+    .facts-bottom-row .fact-card {
+      flex: 1 1 auto;
+    }
   }
 
-  @media (min-width: 901px) {
-    .facts-strip {
-      grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 640px) {
+    .facts-bottom-row {
+      flex-direction: column;
     }
 
-    .fact-card:nth-child(4) {
-      grid-column: 1 / 2;
-      margin-left: calc(50% + 0.5rem);
-    }
-
-    .fact-card:nth-child(5) {
-      grid-column: 2 / 3;
-    }
-
-    .fact-card:nth-child(4),
-    .fact-card:nth-child(5) {
-      grid-column: auto;
-    }
-
-    .facts-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .facts-strip::after {
-      content: "";
-    }
-
-    .fact-card:nth-child(4),
-    .fact-card:nth-child(5) {
-      grid-row: 2;
-    }
-
-    .fact-card:nth-child(4) {
-      grid-column: 1 / 2;
-      margin-inline: auto;
-      width: 100%;
+    .facts-bottom-row .fact-card {
+      flex: 1 1 auto;
     }
   }
 </style>
 
-<script>
-  const factsStrip = document.querySelector(".facts-strip");
-
-  if (factsStrip) {
-    const cards = factsStrip.querySelectorAll(".fact-card");
-
-    if (cards.length === 5 && window.innerWidth >= 901) {
-      const wrapper = document.createElement("div");
-      wrapper.style.cssText =
-        "grid-column: 1 / -1; display: flex; justify-content: center; gap: 1rem;";
-
-      const card4 = cards[3];
-      const card5 = cards[4];
-
-      if (card4 && card5) {
-        const clone4 = card4.cloneNode(true) as HTMLElement;
-        const clone5 = card5.cloneNode(true) as HTMLElement;
-
-        clone4.style.cssText =
-          "flex: 0 1 calc(33.333% - 0.5rem); max-width: calc(33.333% - 0.5rem);";
-        clone5.style.cssText =
-          "flex: 0 1 calc(33.333% - 0.5rem); max-width: calc(33.333% - 0.5rem);";
-
-        wrapper.appendChild(clone4);
-        wrapper.appendChild(clone5);
-
-        card4.remove();
-        card5.remove();
-        factsStrip.appendChild(wrapper);
-      }
-    }
-  }
-</script>

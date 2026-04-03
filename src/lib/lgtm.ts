@@ -62,5 +62,5 @@ export function getAllCategories(): string[] {
 }
 
 export function getAllRarities(): Rarity[] {
-  return ['common', 'rare', 'epic', 'legendary'];
+  return Object.keys(RARITY_WEIGHTS) as Rarity[];
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { COPY_FEEDBACK_MS } from '../lib/config';
 
 interface Props {
   url: string;
@@ -20,7 +21,7 @@ export default function CopyShareButton({ url, label = 'Copy share link' }: Prop
       document.body.removeChild(el);
     }
     setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), COPY_FEEDBACK_MS);
   };
 
   return (

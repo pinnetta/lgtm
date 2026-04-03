@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ThemeSwitcher from '../components/theme-switcher';
+import { SITE_URL, THEME_STORAGE_KEY } from '../lib/config';
 
 interface Props {
   title?: string;
@@ -18,11 +19,10 @@ const {
   canonicalUrl,
 } = Astro.props;
 
-const siteUrl = 'https://lgtm.airscript.it';
-const resolvedCanonical = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).href;
+const resolvedCanonical = canonicalUrl ?? new URL(Astro.url.pathname, SITE_URL).href;
 const resolvedOgTitle = ogTitle ?? title;
 const resolvedOgDesc = ogDescription ?? description;
-const ogImageUrl = `${siteUrl}/og-default.png`;
+const ogImageUrl = `${SITE_URL}/og-default.png`;
 ---
 
 <!doctype html>
@@ -47,10 +47,10 @@ const ogImageUrl = `${siteUrl}/og-default.png`;
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <script is:inline>
+    <script is:inline define:vars={{ THEME_STORAGE_KEY }}>
       (function () {
         try {
-          var t = localStorage.getItem('lgtm-theme');
+          var t = localStorage.getItem(THEME_STORAGE_KEY);
           if (t === 'light' || t === 'dark') {
             document.documentElement.setAttribute('data-theme', t);
           }

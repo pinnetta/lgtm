@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '../../layouts/base-layout.astro';
-import LGTMCard from '../../components/lgtm-card.astro';
+import Breadcrumb from '../../components/breadcrumb.astro';
 import CategoryBadge from '../../components/category-badge.astro';
+import CategoryEntries from '../../components/category-entries';
 import { getAllEntries, getAllCategories, CATEGORY_LABELS } from '../../lib/lgtm';
 
 export async function getStaticPaths() {
   const entries = getAllEntries();
   const categories = getAllCategories();
+
   return categories.map((category) => ({
     params: { category },
     props: {
@@ -27,13 +29,11 @@ const label = CATEGORY_LABELS[category] ?? category;
   <div class="category-page">
     <div class="container">
 
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/categories">Categories</a>
-        <span aria-hidden="true">/</span>
-        <span>{label}</span>
-      </nav>
+      <Breadcrumb items={[
+        { label: 'Home', href: '/' },
+        { label: 'Categories', href: '/categories' },
+        { label },
+      ]} />
 
       <div class="page-header">
         <div class="header-row">
@@ -48,11 +48,7 @@ const label = CATEGORY_LABELS[category] ?? category;
         <a href="/browse" class="back-link">Browse all &rarr;</a>
       </div>
 
-      <div class="entries-grid">
-        {entries.map((entry) => (
-          <LGTMCard entry={entry} variant="default" showLink={true} />
-        ))}
-      </div>
+      <CategoryEntries client:load entries={entries} />
 
     </div>
   </div>
@@ -61,30 +57,6 @@ const label = CATEGORY_LABELS[category] ?? category;
 <style>
   .category-page {
     padding-block: 2.5rem 4rem;
-  }
-
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .breadcrumb a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-  }
-
-  .breadcrumb a:hover {
-    color: var(--color-accent);
-  }
-
-  .breadcrumb span:last-child {
-    color: var(--color-text);
-    font-weight: 500;
   }
 
   .page-header {
@@ -125,18 +97,14 @@ const label = CATEGORY_LABELS[category] ?? category;
     text-decoration: none;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 2px;
-    transition: color 0.15s, border-color 0.15s;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
   }
 
   .back-link:hover {
     color: var(--color-accent);
     border-color: var(--color-accent);
     text-decoration: none;
-  }
-
-  .entries-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1rem;
   }
 </style>
