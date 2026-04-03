@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { THEME_STORAGE_KEY } from '../lib/config';
+import { THEME_STORAGE_KEY } from '@/lib/config';
 
 type Theme = 'system' | 'light' | 'dark';
 

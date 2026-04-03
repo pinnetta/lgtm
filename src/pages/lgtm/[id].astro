@@ -1,12 +1,13 @@
 ---
-import BaseLayout from '../../layouts/base-layout.astro';
-import RarityBadge from '../../components/rarity-badge.astro';
-import CategoryBadge from '../../components/category-badge.astro';
-import CopyShareButton from '../../components/copy-share-button';
-import LegendaryEffect from '../../components/legendary-effect';
-import { getAllEntries } from '../../lib/lgtm';
-import type { Rarity } from '../../lib/lgtm';
-import { SITE_URL } from '../../lib/config';
+import BaseLayout from '@/layouts/base-layout.astro';
+import BreadcrumbBar from '@/components/breadcrumb-bar.astro';
+import RarityBadge from '@/components/rarity-badge.astro';
+import CategoryBadge from '@/components/category-badge.astro';
+import CopyShareButton from '@/components/copy-share-button';
+import LegendaryEffect from '@/components/legendary-effect';
+import { getAllEntries } from '@/lib/lgtm';
+import type { Rarity } from '@/lib/lgtm';
+import { SITE_URL } from '@/lib/config';
 
 export async function getStaticPaths() {
   const entries = getAllEntries();
@@ -28,8 +29,8 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
 
 <BaseLayout
   title={`LGTM: ${entry.meaning}`}
-  description={entry.description ?? `LGTM means "${entry.meaning}" — a ${entry.rarity} ${entry.category} interpretation.`}
-  ogTitle={`LGTM — ${entry.meaning}`}
+  description={entry.description ?? `LGTM means "${entry.meaning}", a ${entry.rarity} ${entry.category} interpretation.`}
+  ogTitle={`LGTM: ${entry.meaning}`}
   ogDescription={entry.description ?? `A ${entry.rarity} LGTM interpretation: "${entry.meaning}"`}
   canonicalUrl={shareUrl}
 >
@@ -37,33 +38,22 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
     <LegendaryEffect client:load />
   )}
 
-  <div class="detail-hero">
-    <div class="container">
-      <nav class="hero-breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/browse">Browse</a>
-        <span aria-hidden="true">/</span>
-        <span>#{entry.id}</span>
-      </nav>
+  <div class="detail-page" data-rarity={entry.rarity}>
+    <BreadcrumbBar items={[
+      { label: 'Home', href: '/' },
+      { label: 'Browse', href: '/browse' },
+      { label: `#${entry.id}` },
+    ]} />
 
-      <div class="hero-body animate-up">
-        <p class="hero-acronym">LGTM</p>
-        <h1 class="hero-meaning">{entry.meaning}</h1>
-      </div>
-    </div>
-
-    <div class="hero-rarity-strip" data-rarity={entry.rarity}></div>
-  </div>
-
-  <div class="detail-below">
-    <div class="container">
-
-      <div class="detail-card animate-up-delay-1" data-rarity={entry.rarity}>
+    <div class="detail-body">
+      <div class="detail-content animate-up">
         <div class="detail-badges">
           <RarityBadge rarity={entry.rarity as Rarity} size="lg" />
           <CategoryBadge category={entry.category} size="md" href={`/categories/${entry.category}`} />
         </div>
+
+        <p class="detail-acronym">LGTM</p>
+        <h1 class="detail-meaning">{entry.meaning}</h1>
 
         {entry.description && (
           <p class="detail-description">{entry.description}</p>
@@ -86,7 +76,7 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
         </div>
       </div>
 
-      <div class="detail-nav animate-up-delay-2">
+      <nav class="detail-nav animate-up-delay-1">
         {prevEntry ? (
           <a href={`/lgtm/${prevEntry.id}`} class="detail-nav-btn">
             <span class="detail-nav-arrow">&larr;</span>
@@ -99,8 +89,6 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
           <div class="detail-nav-placeholder"></div>
         )}
 
-        <a href="/browse" class="detail-nav-center">Browse all</a>
-
         {nextEntry ? (
           <a href={`/lgtm/${nextEntry.id}`} class="detail-nav-btn detail-nav-btn-right">
             <span class="detail-nav-label detail-nav-label-right">
@@ -112,136 +100,93 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
         ) : (
           <div class="detail-nav-placeholder"></div>
         )}
-      </div>
-
+      </nav>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .detail-hero {
-    background: var(--color-accent);
-    padding-top: 3.75rem;
-    padding-bottom: 4rem;
-    position: relative;
-  }
-
-  .hero-breadcrumb {
+  .detail-page {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    padding-top: 1.5rem;
+    flex: 1;
+    flex-direction: column;
+    transition: background 0.3s ease;
   }
 
-  .hero-breadcrumb a {
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    transition: color 0.15s;
+  .detail-page[data-rarity="common"] {
+    background: color-mix(in srgb, var(--color-common) 6%, var(--color-bg));
   }
 
-  .hero-breadcrumb a:hover {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
+  .detail-page[data-rarity="rare"] {
+    background: color-mix(in srgb, var(--color-rare) 7%, var(--color-bg));
   }
 
-  .hero-breadcrumb span:last-child {
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 500;
-    font-family: var(--font-mono);
+  .detail-page[data-rarity="epic"] {
+    background: color-mix(in srgb, var(--color-epic) 8%, var(--color-bg));
   }
 
-  .hero-body {
-    max-width: 720px;
+  .detail-page[data-rarity="legendary"] {
+    background: color-mix(in srgb, var(--color-legendary) 10%, var(--color-bg));
   }
 
-  .hero-acronym {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.55);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin: 0 0 0.75rem;
-  }
-
-  .hero-meaning {
-    font-size: clamp(2rem, 6vw, 2rem);
-    font-weight: 800;
-    color: #fff;
-    margin: 0;
-    line-height: 1.1;
-    padding-bottom: 2rem;
-    letter-spacing: -0.025em;
-  }
-
-  .hero-rarity-strip {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-  }
-
-  .hero-rarity-strip[data-rarity="common"] {
-    background: var(--color-common);
-  }
-
-  .hero-rarity-strip[data-rarity="rare"] {
-    background: var(--color-rare);
-  }
-
-  .hero-rarity-strip[data-rarity="epic"] {
-    background: var(--color-epic);
-  }
-
-  .hero-rarity-strip[data-rarity="legendary"] {
-    background: linear-gradient(90deg, var(--color-legendary), #f59e0b, var(--color-legendary));
-    background-size: 200%;
-    animation: shimmer 3s linear infinite;
-  }
-
-  .detail-below {
-    padding-block: 0 5rem;
-  }
-
-  .detail-card {
+  .detail-body {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 680px;
     width: 100%;
-    max-width: 720px;
     margin-inline: auto;
-    margin-top: -3rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    position: relative;
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s;
-    margin-bottom: 2rem;
+    padding-inline: 1.25rem;
+    padding-block: 3rem 2rem;
+    gap: 2.5rem;
+  }
+
+  .detail-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .detail-badges {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .detail-acronym {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--color-text-faint);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+
+  .detail-meaning {
+    font-size: clamp(1.875rem, 6vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-text);
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
 
   .detail-description {
     font-size: 1.0625rem;
     color: var(--color-text-muted);
-    line-height: 1.65;
+    line-height: 1.7;
     margin: 0 0 1.5rem;
+    max-width: 55ch;
   }
 
   .detail-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
   }
 
   .detail-tag {
@@ -250,53 +195,49 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
     color: var(--color-text-faint);
     padding: 0.25em 0.6em;
     border-radius: 6px;
-    background: var(--color-surface-raised);
+    background: color-mix(in srgb, var(--color-surface) 60%, transparent);
     border: 1px solid var(--color-border);
   }
 
   .detail-share {
     border-top: 1px solid var(--color-border);
     padding-top: 1.5rem;
-    margin-top: 0.25rem;
   }
 
   .share-label {
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.6875rem;
+    font-weight: 700;
     color: var(--color-text-faint);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin: 0 0 0.875rem;
+    margin: 0 0 0.75rem;
   }
 
   .share-actions {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 0.75rem;
-    flex-wrap: wrap;
   }
 
   .share-url {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     color: var(--color-text-muted);
-    background: var(--color-surface-raised);
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
     border: 1px solid var(--color-border);
     border-radius: 6px;
     padding: 0.4em 0.75em;
     word-break: break-all;
     flex: 1;
     min-width: 0;
+    display: flex;
+    align-items: center;
   }
 
   .detail-nav {
-    width: 100%;
-    max-width: 720px;
-    margin-inline: auto;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
   }
 
   .detail-nav-btn {
@@ -304,13 +245,14 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
     align-items: center;
     gap: 0.75rem;
     padding: 0.875rem 1rem;
-    background: var(--color-surface);
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
     border: 1px solid var(--color-border);
     border-radius: 12px;
     text-decoration: none;
     transition:
       border-color 0.15s,
       transform 0.15s,
+      background 0.15s,
       box-shadow 0.15s;
     min-width: 0;
     overflow: hidden;
@@ -318,6 +260,7 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
 
   .detail-nav-btn:hover {
     border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-surface) 90%, transparent);
     transform: translateY(-1px);
     box-shadow: 0 2px 12px color-mix(in srgb, var(--color-accent) 10%, transparent);
     text-decoration: none;
@@ -363,48 +306,18 @@ const nextEntry = currentIndex < allEntries.length - 1 ? allEntries[currentIndex
     white-space: nowrap;
   }
 
-  .detail-nav-center {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.15s;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-  }
-
-  .detail-nav-center:hover {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
   .detail-nav-placeholder {
     flex: 1;
   }
 
-  @media (max-width: 600px) {
-    .detail-hero {
-      padding-bottom: 3rem;
+  @media (max-width: 480px) {
+    .detail-body {
+      padding-block: 2rem 1.5rem;
     }
 
-    .detail-card {
-      margin-top: 1.5rem;
-      padding: 1.75rem 1.5rem;
-    }
-
-    .detail-nav {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-    }
-
-    .detail-nav-center {
-      grid-column: 1 / -1;
-      text-align: center;
-      order: -1;
-    }
-
-    .detail-nav-placeholder {
-      display: none;
+    .share-actions {
+      flex-direction: column;
+      align-items: stretch;
     }
   }
 </style>

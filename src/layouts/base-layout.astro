@@ -1,7 +1,7 @@
 ---
-import '../styles/global.css';
-import ThemeSwitcher from '../components/theme-switcher';
-import { SITE_URL, THEME_STORAGE_KEY } from '../lib/config';
+import '@/styles/global.css';
+import ThemeSwitcher from '@/components/theme-switcher';
+import { SITE_URL, THEME_STORAGE_KEY } from '@/lib/config';
 
 interface Props {
   title?: string;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const {
-  title = 'LGTM — Looks Good To Me (and more)',
+  title = 'LGTM',
   description = 'A curated, playful catalog of alternative meanings for the acronym LGTM. Generate a random one to use in your next pull request.',
   ogTitle,
   ogDescription,
@@ -94,7 +94,7 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
       <div class="container">
         <div class="footer-inner">
           <p class="footer-copy">
-            <span class="footer-logo">LGTM</span> &mdash; Because code review deserves more vocabulary.
+            <span class="footer-logo">LGTM</span>. Because code review deserves more vocabulary.
           </p>
           <div class="footer-links">
             <a href="/browse">Browse all</a>
@@ -170,6 +170,8 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
 
   .site-main {
     flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .site-footer {

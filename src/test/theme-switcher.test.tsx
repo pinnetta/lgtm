@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ThemeSwitcher from '../components/theme-switcher';
+import ThemeSwitcher from '@/components/theme-switcher';
 
 function getTheme() {
   return document.documentElement.getAttribute('data-theme');

@@ -1,4 +1,4 @@
-import type { LGTMEntry } from '../lib/lgtm';
+import type { LGTMEntry } from '@/lib/lgtm';
 
 export function makeEntry(overrides: Partial<LGTMEntry> = {}): LGTMEntry {
   return {

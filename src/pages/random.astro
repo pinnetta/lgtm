@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../layouts/base-layout.astro';
-import { getAllEntries, RARITY_WEIGHTS } from '../lib/lgtm';
+import BaseLayout from '@/layouts/base-layout.astro';
+import { getAllEntries, RARITY_WEIGHTS } from '@/lib/lgtm';
 
 const entries = getAllEntries();
 const entriesJson = JSON.stringify(
@@ -10,7 +10,7 @@ const weightsJson = JSON.stringify(RARITY_WEIGHTS);
 ---
 
 <BaseLayout
-  title="LGTM — Getting a random one..."
+  title="LGTM"
   description="Redirecting to a random LGTM meaning."
 >
   <div class="random-page">

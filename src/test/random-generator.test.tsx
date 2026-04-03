@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import RandomGenerator from '../components/random-generator';
-import type { LGTMEntry } from '../lib/lgtm';
-import { makeEntry } from './fixtures';
+import RandomGenerator from '@/components/random-generator';
+import type { LGTMEntry } from '@/lib/lgtm';
+import { makeEntry } from '@/test/fixtures';
 
 beforeEach(() => {
   vi.spyOn(window.history, 'replaceState').mockImplementation(() => {});

@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../../layouts/base-layout.astro';
-import CategoryBadge from '../../components/category-badge.astro';
-import { getAllEntries, getAllCategories, CATEGORY_LABELS } from '../../lib/lgtm';
+import BaseLayout from '@/layouts/base-layout.astro';
+import CategoryBadge from '@/components/category-badge.astro';
+import { getAllEntries, getAllCategories, CATEGORY_LABELS } from '@/lib/lgtm';
 
 const allEntries = getAllEntries();
 const categories = getAllCategories();
@@ -18,7 +18,7 @@ const categoryData = categories.map((cat) => {
 ---
 
 <BaseLayout
-  title="LGTM Categories"
+  title="LGTM"
   description="Browse LGTM alternative meanings by category: funny, sarcastic, wholesome, nerd, existential, corporate, and chaotic."
 >
   <div class="categories-page">

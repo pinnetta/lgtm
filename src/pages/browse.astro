@@ -1,14 +1,14 @@
 ---
-import BaseLayout from '../layouts/base-layout.astro';
-import BrowseFilters from '../components/browse-filters';
-import { getAllEntries } from '../lib/lgtm';
+import BaseLayout from '@/layouts/base-layout.astro';
+import BrowseFilters from '@/components/browse-filters';
+import { getAllEntries } from '@/lib/lgtm';
 
 const entries = getAllEntries();
 ---
 
 <BaseLayout
-  title="Browse all LGTM meanings"
-  description={`All ${entries.length} alternative meanings of LGTM — filterable by category, rarity, and searchable by keyword.`}
+  title="LGTM"
+  description={`All ${entries.length} alternative meanings of LGTM, filterable by category, rarity, and searchable by keyword.`}
 >
   <div class="browse-page">
     <div class="container">

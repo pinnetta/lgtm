@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
-import { weightedRandom, weightedRandomExcluding } from '../lib/random';
-import type { LGTMEntry } from '../lib/lgtm';
-import { makeEntry } from './fixtures';
+import { weightedRandom, weightedRandomExcluding } from '@/lib/random';
+import type { LGTMEntry } from '@/lib/lgtm';
+import { makeEntry } from '@/test/fixtures';
 
 const entries: LGTMEntry[] = [
   makeEntry({ id: 1, rarity: 'common' }),
@@ -27,7 +27,7 @@ describe('weightedRandom', () => {
     expect(weightedRandom(single)).toBe(single[0]);
   });
 
-  it('respects weights — common is more frequent than legendary', () => {
+  it('respects weights, common is more frequent than legendary', () => {
     const pool = [makeEntry({ id: 1, rarity: 'common' }), makeEntry({ id: 2, rarity: 'legendary' })];
     let commonCount = 0;
     const TRIALS = 1000;

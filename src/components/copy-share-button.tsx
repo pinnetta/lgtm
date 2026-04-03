@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { COPY_FEEDBACK_MS } from '../lib/config';
+import { Link, Check } from 'lucide-react';
+import { COPY_FEEDBACK_MS } from '@/lib/config';
 
 interface Props {
   url: string;
@@ -33,12 +34,12 @@ export default function CopyShareButton({ url, label = 'Copy share link' }: Prop
     >
       {copied ? (
         <>
-          <span aria-hidden="true">✓</span>
+          <Check size={14} aria-hidden="true" />
           Copied!
         </>
       ) : (
         <>
-          <span aria-hidden="true">⎘</span>
+          <Link size={14} aria-hidden="true" />
           {label}
         </>
       )}

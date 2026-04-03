@@ -51,7 +51,7 @@ export const RARITY_TAGLINES: Record<Rarity, string> = {
 export const FACTS = [
   {
     year: '2000s',
-    text: 'Developers started writing "LGTM" as quick shorthand approval in mailing list code reviews — faster to type than "looks good to me" in a multi-threaded reply chain.',
+    text: 'Developers started writing "LGTM" as quick shorthand approval in mailing list code reviews, faster to type than "looks good to me" in a multi-threaded reply chain.',
   },
   {
     year: '2006',
@@ -67,6 +67,6 @@ export const FACTS = [
   },
   {
     year: '2026+',
-    text: 'LGTM has escaped the terminal. Developers use it playfully everywhere — Slack, Discord, memes, PRs — sometimes with very creative alternative meanings.',
+    text: 'LGTM has escaped the terminal. Developers use it playfully everywhere: Slack, Discord, memes, PRs. Sometimes with very creative alternative meanings.',
   },
 ];

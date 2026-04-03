@@ -8,7 +8,7 @@ import {
   RARITY_WEIGHTS,
   RARITY_LABELS,
   CATEGORY_LABELS,
-} from '../lib/lgtm';
+} from '@/lib/lgtm';
 
 describe('getAllEntries', () => {
   it('returns a non-empty array', () => {

@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { LGTMEntry, Rarity } from '../lib/lgtm';
-import { RARITY_LABELS, CATEGORY_LABELS } from '../lib/lgtm';
-import { RARITY_COLORS, RARITY_ICONS, CATEGORY_COLORS } from '../lib/content';
-import { COPY_FEEDBACK_MS } from '../lib/config';
-import { weightedRandomExcluding } from '../lib/random';
+import { Shuffle, Link, Check, ExternalLink } from 'lucide-react';
+import type { LGTMEntry, Rarity } from '@/lib/lgtm';
+import { RARITY_LABELS, CATEGORY_LABELS } from '@/lib/lgtm';
+import { RARITY_COLORS, RARITY_ICONS, CATEGORY_COLORS } from '@/lib/content';
+import { COPY_FEEDBACK_MS } from '@/lib/config';
+import { weightedRandomExcluding } from '@/lib/random';
 
 interface Props {
   entries: LGTMEntry[];
@@ -218,7 +219,7 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           className="btn btn-primary"
           style={{ fontSize: '1rem', padding: '0.7rem 1.75rem', gap: '0.5rem' }}
         >
-          <span aria-hidden="true" style={{ fontSize: '1.1em' }}>⚄</span>
+          <Shuffle size={16} aria-hidden="true" />
           Generate another
         </button>
 
@@ -229,12 +230,12 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
         >
           {copied ? (
             <>
-              <span aria-hidden="true">✓</span>
+              <Check size={14} aria-hidden="true" />
               Copied!
             </>
           ) : (
             <>
-              <span aria-hidden="true">⎘</span>
+              <Link size={14} aria-hidden="true" />
               Copy link
             </>
           )}
@@ -245,7 +246,7 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           className="btn btn-ghost"
           style={{ fontSize: '0.9375rem' }}
         >
-          <span aria-hidden="true">↗</span>
+          <ExternalLink size={14} aria-hidden="true" />
           View detail
         </a>
       </div>

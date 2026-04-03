@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Pagination from './pagination';
-import type { LGTMEntry } from '../lib/lgtm';
-import { PAGE_SIZE } from '../lib/config';
+import Pagination from '@/components/pagination';
+import type { LGTMEntry } from '@/lib/lgtm';
+import { PAGE_SIZE } from '@/lib/config';
 
 interface Props {
   entries: LGTMEntry[];

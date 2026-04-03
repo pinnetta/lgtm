@@ -1,14 +1,15 @@
 ---
-import BaseLayout from "../layouts/base-layout.astro";
-import CategoryBadge from "../components/category-badge.astro";
+import BaseLayout from "@/layouts/base-layout.astro";
+import CategoryBadge from "@/components/category-badge.astro";
+import CountUp from "@/components/count-up";
 import {
   getAllEntries,
   getAllCategories,
   CATEGORY_LABELS,
   RARITY_LABELS,
   RARITY_WEIGHTS,
-} from "../lib/lgtm";
-import { CATEGORY_TAGLINES, FACTS, RARITY_TAGLINES } from "../lib/content";
+} from "@/lib/lgtm";
+import { CATEGORY_TAGLINES, FACTS, RARITY_TAGLINES } from "@/lib/content";
 
 const entries = getAllEntries();
 const totalEntries = entries.length;
@@ -46,7 +47,7 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
           </h1>
           <p class="hero-sub">
             Creative, shareable alternative meanings for the classic code review
-            acronym. Rarity-weighted fun — ready to paste in your next PR.
+            acronym. Rarity-weighted fun, ready to paste in your next PR.
           </p>
         </div>
 
@@ -114,7 +115,7 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
         </li>
       </ol>
       <p class="how-hint">
-        Rarity adds extra fun — the lower the odds, the better the story.
+        Rarity adds extra fun: the lower the odds, the better the story.
       </p>
     </div>
   </div>
@@ -124,17 +125,23 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
       <dl class="stats-list">
         <div class="stat">
           <dt class="stat-label">meanings collected</dt>
-          <dd class="stat-value">{totalEntries}</dd>
+          <dd class="stat-value">
+            <CountUp client:visible to={totalEntries} />
+          </dd>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat">
           <dt class="stat-label">flavour categories</dt>
-          <dd class="stat-value">{totalCategories}</dd>
+          <dd class="stat-value">
+            <CountUp client:visible to={totalCategories} duration={900} />
+          </dd>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat">
           <dt class="stat-label">rare &amp; hilarious</dt>
-          <dd class="stat-value stat-legendary">{legendaryCount}</dd>
+          <dd class="stat-value stat-legendary">
+            <CountUp client:visible to={legendaryCount} duration={1100} />
+          </dd>
         </div>
       </dl>
     </div>
@@ -144,20 +151,12 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
     <div class="container">
       <h2 class="section-title">A Brief History</h2>
       <div class="facts-strip">
-        {FACTS.slice(0, 3).map((fact) => (
-          <div class="fact-card">
+        {FACTS.map((fact, i) => (
+          <div class={`fact-card${i >= 3 ? ' fact-card-wide' : ''}`}>
             <span class="fact-year">{fact.year}</span>
             <p class="fact-text">{fact.text}</p>
           </div>
         ))}
-        <div class="facts-bottom-row">
-          {FACTS.slice(3).map((fact) => (
-            <div class="fact-card">
-              <span class="fact-year">{fact.year}</span>
-              <p class="fact-text">{fact.text}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   </div>
@@ -185,7 +184,7 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
     <div class="container">
       <h2 class="section-title">Rarity Tiers</h2>
       <p class="rarity-intro">
-        Every meaning has a rarity. The draw is weighted — common ones show up
+        Every meaning has a rarity. The draw is weighted: common ones show up
         more often, legendary ones are genuinely hard to land.
       </p>
       <div class="rarity-grid">
@@ -508,23 +507,12 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
 
   .facts-strip {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
-  }
-
-  .facts-bottom-row {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .facts-bottom-row .fact-card {
-    flex: 0 1 calc(33.333% - 0.5rem);
-    min-width: 0;
   }
 
   .fact-card {
+    grid-column: span 2;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 12px;
@@ -535,6 +523,10 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
     transition:
       border-color 0.15s,
       transform 0.15s;
+  }
+
+  .fact-card-wide {
+    grid-column: span 3;
   }
 
   .fact-card:hover {
@@ -728,6 +720,11 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
       grid-template-columns: 1fr;
     }
 
+    .fact-card,
+    .fact-card-wide {
+      grid-column: span 1;
+    }
+
     .stat {
       padding-inline: 1.25rem;
     }
@@ -757,22 +754,9 @@ const totalWeight = Object.values(RARITY_WEIGHTS).reduce((a, b) => a + b, 0);
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .facts-bottom-row {
-      flex-direction: column;
-    }
-
-    .facts-bottom-row .fact-card {
-      flex: 1 1 auto;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .facts-bottom-row {
-      flex-direction: column;
-    }
-
-    .facts-bottom-row .fact-card {
-      flex: 1 1 auto;
+    .fact-card,
+    .fact-card-wide {
+      grid-column: span 1;
     }
   }
 </style>

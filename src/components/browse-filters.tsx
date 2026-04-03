@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import type { LGTMEntry, Rarity } from '../lib/lgtm';
-import { RARITY_LABELS, CATEGORY_LABELS, getAllRarities } from '../lib/lgtm';
-import { CATEGORY_COLORS, RARITY_COLORS, RARITY_ICONS, RARITY_ORDER } from '../lib/content';
-import { PAGE_SIZE } from '../lib/config';
-import Pagination from './pagination';
+import type { LGTMEntry, Rarity } from '@/lib/lgtm';
+import { RARITY_LABELS, CATEGORY_LABELS, getAllRarities } from '@/lib/lgtm';
+import { CATEGORY_COLORS, RARITY_COLORS, RARITY_ICONS, RARITY_ORDER } from '@/lib/content';
+import { PAGE_SIZE } from '@/lib/config';
+import Pagination from '@/components/pagination';
 
 interface Props {
   entries: LGTMEntry[];
@@ -326,7 +326,7 @@ export default function BrowseFilters({ entries }: Props) {
           <strong style={{ color: 'var(--color-text)' }}>{filtered.length}</strong> of {entries.length} entries
           {filtered.length > PAGE_SIZE && (
             <span style={{ color: 'var(--color-text-faint)', marginLeft: '0.5rem' }}>
-              — page {clampedPage} of {totalPages}
+              page {clampedPage} of {totalPages}
             </span>
           )}
           {hasFilters && (

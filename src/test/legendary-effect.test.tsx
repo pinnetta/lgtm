@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 vi.mock('canvas-confetti', () => ({ default: vi.fn() }));
 
 import confetti from 'canvas-confetti';
-import LegendaryEffect from '../components/legendary-effect';
+import LegendaryEffect from '@/components/legendary-effect';
 
 beforeEach(() => {
   vi.clearAllMocks();
