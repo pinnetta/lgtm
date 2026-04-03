@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import LGTMCard from '../../components/LGTMCard.astro';
-import CategoryBadge from '../../components/CategoryBadge.astro';
+import BaseLayout from '../../layouts/base-layout.astro';
+import LGTMCard from '../../components/lgtm-card.astro';
+import CategoryBadge from '../../components/category-badge.astro';
 import { getAllEntries, getAllCategories, CATEGORY_LABELS } from '../../lib/lgtm';
 
 export async function getStaticPaths() {
@@ -27,7 +27,6 @@ const label = CATEGORY_LABELS[category] ?? category;
   <div class="category-page">
     <div class="container">
 
-      <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span aria-hidden="true">/</span>
@@ -36,7 +35,6 @@ const label = CATEGORY_LABELS[category] ?? category;
         <span>{label}</span>
       </nav>
 
-      <!-- Header -->
       <div class="page-header">
         <div class="header-row">
           <h1 class="page-title">{label}</h1>
@@ -45,13 +43,11 @@ const label = CATEGORY_LABELS[category] ?? category;
         <p class="page-sub">{entries.length} entries in this category.</p>
       </div>
 
-      <!-- All back links -->
       <div class="back-link-row">
         <a href="/categories" class="back-link">&larr; All categories</a>
         <a href="/browse" class="back-link">Browse all &rarr;</a>
       </div>
 
-      <!-- Entry grid -->
       <div class="entries-grid">
         {entries.map((entry) => (
           <LGTMCard entry={entry} variant="default" showLink={true} />

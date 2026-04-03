@@ -1,10 +1,6 @@
 import type { LGTMEntry, Rarity } from './lgtm';
 import { RARITY_WEIGHTS } from './lgtm';
 
-/**
- * Weighted random selection based on rarity.
- * Higher weight = more likely to be picked.
- */
 export function weightedRandom(entries: LGTMEntry[]): LGTMEntry {
   if (entries.length === 0) throw new Error('Cannot pick from empty list');
 
@@ -21,13 +17,9 @@ export function weightedRandom(entries: LGTMEntry[]): LGTMEntry {
     if (rand <= 0) return entry;
   }
 
-  // Fallback (floating point edge case)
   return entries[entries.length - 1]!;
 }
 
-/**
- * Pick a random entry, excluding the currently displayed one.
- */
 export function weightedRandomExcluding(
   entries: LGTMEntry[],
   excludeId: number,

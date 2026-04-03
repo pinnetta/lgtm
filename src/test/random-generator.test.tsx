@@ -1,9 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import RandomGenerator from '../components/RandomGenerator';
+import RandomGenerator from '../components/random-generator';
 import type { LGTMEntry } from '../lib/lgtm';
 
-// Suppress history.pushState / replaceState warnings in jsdom
 beforeEach(() => {
   vi.spyOn(window.history, 'replaceState').mockImplementation(() => {});
   vi.spyOn(window.history, 'pushState').mockImplementation(() => {});
@@ -12,7 +11,6 @@ beforeEach(() => {
 function makeEntry(id: number, rarity: LGTMEntry['rarity'] = 'common'): LGTMEntry {
   return {
     id,
-    acronym: 'LGTM',
     meaning: `Meaning ${id}`,
     category: 'funny',
     rarity,
@@ -23,8 +21,8 @@ function makeEntry(id: number, rarity: LGTMEntry['rarity'] = 'common'): LGTMEntr
 
 const entries: LGTMEntry[] = [
   makeEntry(1, 'common'),
-  makeEntry(2, 'regular'),
-  makeEntry(3, 'rare'),
+  makeEntry(2, 'rare'),
+  makeEntry(3, 'epic'),
   makeEntry(4, 'legendary'),
 ];
 
@@ -39,22 +37,22 @@ describe('RandomGenerator', () => {
     expect(screen.getByText('Description for 1')).toBeInTheDocument();
   });
 
-  it('renders a Generate another button', () => {
+  it('renders a generate another button', () => {
     render(<RandomGenerator entries={entries} initialEntry={entries[0]} />);
     expect(screen.getByText(/Generate another/i)).toBeInTheDocument();
   });
 
-  it('renders a Copy link button', () => {
+  it('renders a copy link button', () => {
     render(<RandomGenerator entries={entries} initialEntry={entries[0]} />);
     expect(screen.getByText(/Copy link/i)).toBeInTheDocument();
   });
 
-  it('renders a View detail link', () => {
+  it('renders a view detail link', () => {
     render(<RandomGenerator entries={entries} initialEntry={entries[0]} />);
     expect(screen.getByText(/View detail/i)).toBeInTheDocument();
   });
 
-  it('View detail link points to the current entry', () => {
+  it('view detail link points to the current entry', () => {
     render(<RandomGenerator entries={entries} initialEntry={entries[1]} />);
     const link = screen.getByRole('link', { name: /View detail/i });
     expect(link.getAttribute('href')).toBe('/lgtm/2');
@@ -72,11 +70,10 @@ describe('RandomGenerator', () => {
     });
   });
 
-  it('clicking Generate another triggers a new entry', async () => {
+  it('clicking generate another triggers a new entry', async () => {
     render(<RandomGenerator entries={entries} initialEntry={entries[0]} />);
     const btn = screen.getByText(/Generate another/i);
     fireEvent.click(btn);
-    // After the 180ms animation delay pushState should be called
     await waitFor(() => {
       expect(window.history.pushState).toHaveBeenCalled();
     }, { timeout: 500 });

@@ -1,44 +1,35 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------ */
-/* Design tokens — light & dark via CSS custom properties             */
-/* ------------------------------------------------------------------ */
-
 :root {
-  /* Surface */
   --color-bg: #f8f8f5;
   --color-surface: #ffffff;
   --color-surface-raised: #f1f0ec;
   --color-border: #e2e0d8;
 
-  /* Text */
   --color-text: #1a1917;
   --color-text-muted: #6b6860;
   --color-text-faint: #9c9a92;
 
-  /* Brand accent */
   --color-accent: #5b4cf0;
   --color-accent-hover: #4a3dd4;
   --color-accent-subtle: #ede9ff;
 
-  /* Rarity colours */
   --color-common: #71717a;
   --color-common-bg: #f4f4f5;
   --color-common-border: #d4d4d8;
 
-  --color-regular: #2563eb;
-  --color-regular-bg: #eff6ff;
-  --color-regular-border: #bfdbfe;
+  --color-rare: #2563eb;
+  --color-rare-bg: #eff6ff;
+  --color-rare-border: #bfdbfe;
 
-  --color-rare: #7c3aed;
-  --color-rare-bg: #f5f3ff;
-  --color-rare-border: #ddd6fe;
+  --color-epic: #7c3aed;
+  --color-epic-bg: #f5f3ff;
+  --color-epic-border: #ddd6fe;
 
   --color-legendary: #d97706;
   --color-legendary-bg: #fffbeb;
   --color-legendary-border: #fde68a;
 
-  /* Typography */
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
@@ -62,23 +53,19 @@
     --color-common-bg: #27272a;
     --color-common-border: #3f3f46;
 
-    --color-regular: #60a5fa;
-    --color-regular-bg: #172554;
-    --color-regular-border: #1e3a8a;
+    --color-rare: #60a5fa;
+    --color-rare-bg: #172554;
+    --color-rare-border: #1e3a8a;
 
-    --color-rare: #a78bfa;
-    --color-rare-bg: #1e0a3c;
-    --color-rare-border: #4c1d95;
+    --color-epic: #a78bfa;
+    --color-epic-bg: #1e0a3c;
+    --color-epic-border: #4c1d95;
 
     --color-legendary: #fbbf24;
     --color-legendary-bg: #1c1102;
     --color-legendary-border: #78350f;
   }
 }
-
-/* ------------------------------------------------------------------ */
-/* JS-controlled theme overrides (override prefers-color-scheme)      */
-/* ------------------------------------------------------------------ */
 
 [data-theme="light"] {
   --color-bg: #f8f8f5;
@@ -98,13 +85,13 @@
   --color-common-bg: #f4f4f5;
   --color-common-border: #d4d4d8;
 
-  --color-regular: #2563eb;
-  --color-regular-bg: #eff6ff;
-  --color-regular-border: #bfdbfe;
+  --color-rare: #2563eb;
+  --color-rare-bg: #eff6ff;
+  --color-rare-border: #bfdbfe;
 
-  --color-rare: #7c3aed;
-  --color-rare-bg: #f5f3ff;
-  --color-rare-border: #ddd6fe;
+  --color-epic: #7c3aed;
+  --color-epic-bg: #f5f3ff;
+  --color-epic-border: #ddd6fe;
 
   --color-legendary: #d97706;
   --color-legendary-bg: #fffbeb;
@@ -129,22 +116,18 @@
   --color-common-bg: #27272a;
   --color-common-border: #3f3f46;
 
-  --color-regular: #60a5fa;
-  --color-regular-bg: #172554;
-  --color-regular-border: #1e3a8a;
+  --color-rare: #60a5fa;
+  --color-rare-bg: #172554;
+  --color-rare-border: #1e3a8a;
 
-  --color-rare: #a78bfa;
-  --color-rare-bg: #1e0a3c;
-  --color-rare-border: #4c1d95;
+  --color-epic: #a78bfa;
+  --color-epic-bg: #1e0a3c;
+  --color-epic-border: #4c1d95;
 
   --color-legendary: #fbbf24;
   --color-legendary-bg: #1c1102;
   --color-legendary-border: #78350f;
 }
-
-/* ------------------------------------------------------------------ */
-/* Base resets                                                         */
-/* ------------------------------------------------------------------ */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -177,10 +160,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ------------------------------------------------------------------ */
-/* Tailwind v4 custom theme extension                                  */
-/* ------------------------------------------------------------------ */
-
 @theme {
   --color-brand-accent: var(--color-accent);
   --color-brand-bg: var(--color-bg);
@@ -192,10 +171,6 @@ a:hover {
   --font-mono: var(--font-mono);
   --font-sans: var(--font-sans);
 }
-
-/* ------------------------------------------------------------------ */
-/* Utility classes                                                     */
-/* ------------------------------------------------------------------ */
 
 .container {
   width: 100%;
@@ -211,25 +186,24 @@ a:hover {
   padding: 1.5rem;
 }
 
-/* ------------------------------------------------------------------ */
-/* Rarity badge utilities                                              */
-/* ------------------------------------------------------------------ */
-
 .badge-common {
   color: var(--color-common);
   background: var(--color-common-bg);
   border: 1px solid var(--color-common-border);
 }
-.badge-regular {
-  color: var(--color-regular);
-  background: var(--color-regular-bg);
-  border: 1px solid var(--color-regular-border);
-}
+
 .badge-rare {
   color: var(--color-rare);
   background: var(--color-rare-bg);
   border: 1px solid var(--color-rare-border);
 }
+
+.badge-epic {
+  color: var(--color-epic);
+  background: var(--color-epic-bg);
+  border: 1px solid var(--color-epic-border);
+}
+
 .badge-legendary {
   color: var(--color-legendary);
   background: var(--color-legendary-bg);
@@ -241,10 +215,6 @@ a:hover {
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-legendary) 30%, transparent); }
   50% { box-shadow: 0 0 8px 2px color-mix(in srgb, var(--color-legendary) 30%, transparent); }
 }
-
-/* ------------------------------------------------------------------ */
-/* Button base                                                         */
-/* ------------------------------------------------------------------ */
 
 .btn {
   display: inline-flex;
@@ -290,10 +260,6 @@ a:hover {
   background: var(--color-surface-raised);
   color: var(--color-text);
 }
-
-/* ------------------------------------------------------------------ */
-/* Page transitions                                                    */
-/* ------------------------------------------------------------------ */
 
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(6px); }

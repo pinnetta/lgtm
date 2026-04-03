@@ -1,10 +1,46 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import RandomGenerator from '../components/RandomGenerator';
-import { getAllEntries } from '../lib/lgtm';
+import BaseLayout from '../layouts/base-layout.astro';
+import RandomGenerator from '../components/random-generator';
+import { getAllEntries, getAllCategories, CATEGORY_LABELS } from '../lib/lgtm';
 
 const entries = getAllEntries();
 const initial = entries[0]!;
+
+const totalEntries = entries.length;
+const totalCategories = getAllCategories().length;
+const legendaryCount = entries.filter((e) => e.rarity === 'legendary').length;
+
+const CATEGORY_COLORS: Record<string, string> = {
+  funny: '#f59e0b',
+  sarcastic: '#ef4444',
+  wholesome: '#10b981',
+  dev: '#6366f1',
+  existential: '#8b5cf6',
+  corporate: '#0ea5e9',
+  chaotic: '#f97316',
+};
+
+const categories = getAllCategories().map((cat) => ({
+  name: cat,
+  label: CATEGORY_LABELS[cat] ?? cat,
+  count: entries.filter((e) => e.category === cat).length,
+  color: CATEGORY_COLORS[cat] ?? 'var(--color-accent)',
+}));
+
+const FACTS = [
+  {
+    year: '2006',
+    text: 'Linus Torvalds created Git in two weeks after the Linux kernel community lost access to their previous version control system.',
+  },
+  {
+    year: '2012',
+    text: 'GitHub shipped pull requests, turning code review from an email thread into a structured, comment-threaded workflow used by millions.',
+  },
+  {
+    year: '2019',
+    text: 'GitHub added the formal "Approve" button to pull requests, giving LGTM an official home in the review flow.',
+  },
+];
 ---
 
 <BaseLayout
@@ -13,7 +49,6 @@ const initial = entries[0]!;
 >
   <div class="hero-section">
     <div class="container">
-      <!-- Page heading -->
       <div class="hero-head">
         <h1 class="hero-title">
           What does <span class="acronym-highlight">LGTM</span> mean today?
@@ -24,10 +59,8 @@ const initial = entries[0]!;
         </p>
       </div>
 
-      <!-- The random generator (React island) -->
       <RandomGenerator client:load entries={entries} initialEntry={initial} />
 
-      <!-- Explore nudge -->
       <div class="explore-row">
         <a href="/browse" class="explore-link">
           Browse all {entries.length} entries &rarr;
@@ -35,6 +68,59 @@ const initial = entries[0]!;
         <a href="/categories" class="explore-link">
           View by category &rarr;
         </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="container">
+      <dl class="stats-list">
+        <div class="stat">
+          <dt class="stat-label">Total entries</dt>
+          <dd class="stat-value">{totalEntries}</dd>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <dt class="stat-label">Categories</dt>
+          <dd class="stat-value">{totalCategories}</dd>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <dt class="stat-label">Legendary</dt>
+          <dd class="stat-value stat-legendary">{legendaryCount}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="facts-section">
+    <div class="container">
+      <h2 class="section-title">A brief history of the merge</h2>
+      <div class="facts-strip">
+        {FACTS.map((fact) => (
+          <div class="fact-card">
+            <span class="fact-year">{fact.year}</span>
+            <p class="fact-text">{fact.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="highlights-section">
+    <div class="container">
+      <h2 class="section-title">Explore by category</h2>
+      <div class="highlights-grid">
+        {categories.map((cat) => (
+          <a
+            href={`/categories/${cat.name}`}
+            class="highlight-card"
+            style={`--cat-clr: ${cat.color}`}
+          >
+            <span class="highlight-label">{cat.label}</span>
+            <span class="highlight-count">{cat.count} entries</span>
+          </a>
+        ))}
       </div>
     </div>
   </div>
@@ -93,5 +179,151 @@ const initial = entries[0]!;
     color: var(--color-accent);
     border-color: var(--color-accent);
     text-decoration: none;
+  }
+
+  .stats-bar {
+    border-block: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding-block: 1.5rem;
+  }
+
+  .stats-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding-inline: 2.5rem;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 2.5rem;
+    background: var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .stat-legendary {
+    color: var(--color-legendary);
+  }
+
+  .facts-section {
+    padding-block: 3.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.25rem, 3vw, 1.625rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 1.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .facts-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .fact-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .fact-year {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.06em;
+  }
+
+  .fact-text {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .highlights-section {
+    padding-block: 0.5rem 4rem;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .highlight-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 1.25rem 1.5rem;
+    background: color-mix(in srgb, var(--cat-clr) 8%, var(--color-surface));
+    border: 1px solid color-mix(in srgb, var(--cat-clr) 20%, transparent);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .highlight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--cat-clr) 15%, transparent);
+    text-decoration: none;
+  }
+
+  .highlight-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cat-clr);
+    letter-spacing: -0.01em;
+  }
+
+  .highlight-count {
+    font-size: 0.8125rem;
+    color: var(--color-text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 480px) {
+    .stat {
+      padding-inline: 1.25rem;
+    }
+
+    .stat-divider {
+      height: 2rem;
+    }
   }
 </style>

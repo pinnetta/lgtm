@@ -30,14 +30,8 @@ describe('getAllEntries', () => {
     ids.forEach((id, idx) => expect(id).toBe(idx + 1));
   });
 
-  it('every entry has acronym LGTM', () => {
-    for (const e of getAllEntries()) {
-      expect(e.acronym).toBe('LGTM');
-    }
-  });
-
   it('every entry has a valid rarity', () => {
-    const valid = new Set(['common', 'regular', 'rare', 'legendary']);
+    const valid = new Set(['common', 'rare', 'epic', 'legendary']);
     for (const e of getAllEntries()) {
       expect(valid.has(e.rarity)).toBe(true);
     }
@@ -88,24 +82,24 @@ describe('getAllCategories', () => {
 
 describe('getAllRarities', () => {
   it('returns the four rarities', () => {
-    expect(getAllRarities()).toEqual(['common', 'regular', 'rare', 'legendary']);
+    expect(getAllRarities()).toEqual(['common', 'rare', 'epic', 'legendary']);
   });
 });
 
 describe('constants', () => {
-  it('RARITY_WEIGHTS are positive numbers', () => {
+  it('rarity weights are positive numbers', () => {
     for (const w of Object.values(RARITY_WEIGHTS)) {
       expect(w).toBeGreaterThan(0);
     }
   });
 
-  it('RARITY_LABELS covers all rarities', () => {
+  it('rarity labels covers all rarities', () => {
     expect(Object.keys(RARITY_LABELS)).toEqual(
-      expect.arrayContaining(['common', 'regular', 'rare', 'legendary'])
+      expect.arrayContaining(['common', 'rare', 'epic', 'legendary'])
     );
   });
 
-  it('CATEGORY_LABELS is a non-empty object', () => {
+  it('category labels is a non-empty object', () => {
     expect(Object.keys(CATEGORY_LABELS).length).toBeGreaterThan(0);
   });
 });

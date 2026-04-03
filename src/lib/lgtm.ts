@@ -1,4 +1,4 @@
-export type Rarity = 'common' | 'regular' | 'rare' | 'legendary';
+export type Rarity = 'common' | 'rare' | 'epic' | 'legendary';
 
 export type Category =
   | 'funny'
@@ -11,7 +11,6 @@ export type Category =
 
 export interface LGTMEntry {
   id: number;
-  acronym: 'LGTM';
   meaning: string;
   category: Category | string;
   rarity: Rarity;
@@ -22,15 +21,15 @@ export interface LGTMEntry {
 
 export const RARITY_WEIGHTS: Record<Rarity, number> = {
   common: 60,
-  regular: 30,
-  rare: 15,
+  rare: 30,
+  epic: 15,
   legendary: 5,
 };
 
 export const RARITY_LABELS: Record<Rarity, string> = {
   common: 'Common',
-  regular: 'Regular',
   rare: 'Rare',
+  epic: 'Epic',
   legendary: 'Legendary',
 };
 
@@ -63,5 +62,5 @@ export function getAllCategories(): string[] {
 }
 
 export function getAllRarities(): Rarity[] {
-  return ['common', 'regular', 'rare', 'legendary'];
+  return ['common', 'rare', 'epic', 'legendary'];
 }

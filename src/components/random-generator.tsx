@@ -10,8 +10,8 @@ interface Props {
 
 const RARITY_COLORS: Record<Rarity, string> = {
   common: 'var(--color-common)',
-  regular: 'var(--color-regular)',
   rare: 'var(--color-rare)',
+  epic: 'var(--color-epic)',
   legendary: 'var(--color-legendary)',
 };
 
@@ -32,7 +32,7 @@ function RarityBadgeInline({ rarity }: { rarity: Rarity }) {
       }}
     >
       {rarity === 'legendary' && <span aria-hidden="true">★</span>}
-      {rarity === 'rare' && <span aria-hidden="true">◆</span>}
+      {rarity === 'epic' && <span aria-hidden="true">◆</span>}
       {RARITY_LABELS[rarity]}
     </span>
   );
@@ -79,15 +79,13 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
   const [copied, setCopied] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // On mount with an initialEntry (from /lgtm/[id]), don't re-pick — just show it
-  // On mount without, pick a random one and update URL
   useEffect(() => {
     if (!initialEntry) {
       const picked = weightedRandomExcluding(entries, 0);
       setCurrent(picked);
       history.replaceState(null, '', `/lgtm/${picked.id}`);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); 
 
   const generate = useCallback(() => {
     if (isAnimating) return;
@@ -111,7 +109,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback: select a temp input
       const el = document.createElement('input');
       el.value = shareUrl;
       document.body.appendChild(el);
@@ -127,7 +124,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
-      {/* Main card */}
       <div
         ref={cardRef}
         style={{
@@ -145,7 +141,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           boxShadow: `0 8px 32px color-mix(in srgb, ${rarityColor} 10%, transparent)`,
         }}
       >
-        {/* Rarity accent bar */}
         <div
           style={{
             position: 'absolute',
@@ -160,13 +155,11 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           }}
         />
 
-        {/* Badges row */}
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
           <RarityBadgeInline rarity={current.rarity as Rarity} />
           <CategoryBadgeInline category={current.category} />
         </div>
 
-        {/* Acronym label */}
         <p style={{
           fontFamily: 'var(--font-mono)',
           fontSize: '0.8125rem',
@@ -179,7 +172,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           LGTM
         </p>
 
-        {/* Meaning */}
         <h1 style={{
           fontSize: 'clamp(1.625rem, 5vw, 2.5rem)',
           fontWeight: 800,
@@ -191,7 +183,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           {current.meaning}
         </h1>
 
-        {/* Description */}
         {current.description && (
           <p style={{
             fontSize: '1rem',
@@ -203,7 +194,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           </p>
         )}
 
-        {/* Tags */}
         {current.tags && current.tags.length > 0 && (
           <div style={{
             display: 'flex',
@@ -232,7 +222,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
         )}
       </div>
 
-      {/* Action buttons */}
       <div style={{
         display: 'flex',
         gap: '0.75rem',
@@ -277,7 +266,6 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
         </a>
       </div>
 
-      {/* Subtle URL hint */}
       <p style={{
         fontSize: '0.8125rem',
         color: 'var(--color-text-faint)',

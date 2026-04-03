@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BrowseFilters from '../components/BrowseFilters';
+import BaseLayout from '../layouts/base-layout.astro';
+import BrowseFilters from '../components/browse-filters';
 import { getAllEntries } from '../lib/lgtm';
 
 const entries = getAllEntries();
@@ -13,7 +13,6 @@ const entries = getAllEntries();
   <div class="browse-page">
     <div class="container">
 
-      <!-- Header -->
       <div class="page-header">
         <h1 class="page-title">Browse all <span class="accent">LGTM</span> meanings</h1>
         <p class="page-sub">
@@ -22,7 +21,6 @@ const entries = getAllEntries();
         </p>
       </div>
 
-      <!-- Filters + results (React island) -->
       <BrowseFilters client:load entries={entries} />
 
     </div>

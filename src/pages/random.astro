@@ -1,9 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../layouts/base-layout.astro';
 import { getAllEntries } from '../lib/lgtm';
 
-// Pass all entries to the client-side script via a JSON embed.
-// The script picks a weighted-random entry and redirects immediately.
 const entries = getAllEntries();
 const entriesJson = JSON.stringify(
   entries.map((e) => ({ id: e.id, rarity: e.rarity }))
@@ -26,7 +24,6 @@ const entriesJson = JSON.stringify(
   </div>
 </BaseLayout>
 
-<!-- Inline script: runs synchronously, no defer/async, redirects immediately -->
 <script is:inline define:vars={{ entriesJson }}>
   (function () {
     try {
@@ -36,7 +33,7 @@ const entriesJson = JSON.stringify(
         return;
       }
 
-      var weights = { common: 60, regular: 30, rare: 15, legendary: 5 };
+      var weights = { common: 60, rare: 30, epic: 15, legendary: 5 };
 
       var totalWeight = entries.reduce(function (sum, e) {
         return sum + (weights[e.rarity] || weights.common);
@@ -53,7 +50,6 @@ const entriesJson = JSON.stringify(
         }
       }
 
-      // Floating-point fallback
       window.location.replace('/lgtm/' + entries[entries.length - 1].id);
     } catch (err) {
       window.location.replace('/browse');

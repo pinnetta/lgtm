@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import ThemeSwitcher from '../components/ThemeSwitcher';
+import ThemeSwitcher from '../components/theme-switcher';
 
 interface Props {
   title?: string;
@@ -33,7 +33,6 @@ const ogImageUrl = `${siteUrl}/og-default.png`;
     <meta name="description" content={resolvedOgDesc} />
     <link rel="canonical" href={resolvedCanonical} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={resolvedCanonical} />
     <meta property="og:title" content={resolvedOgTitle} />
@@ -41,16 +40,13 @@ const ogImageUrl = `${siteUrl}/og-default.png`;
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:site_name" content="LGTM" />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={resolvedOgTitle} />
     <meta name="twitter:description" content={resolvedOgDesc} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- No-flash theme script: reads localStorage before CSS paints -->
     <script is:inline>
       (function () {
         try {
@@ -62,7 +58,6 @@ const ogImageUrl = `${siteUrl}/og-default.png`;
       })();
     </script>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -74,7 +69,6 @@ const ogImageUrl = `${siteUrl}/og-default.png`;
   </head>
 
   <body>
-    <!-- Nav -->
     <header class="site-header">
       <div class="container">
         <nav class="site-nav">
@@ -94,12 +88,10 @@ const ogImageUrl = `${siteUrl}/og-default.png`;
       </div>
     </header>
 
-    <!-- Main content -->
     <main class="site-main">
       <slot />
     </main>
 
-    <!-- Footer -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-inner">

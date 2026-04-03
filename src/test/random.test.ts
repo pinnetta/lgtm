@@ -1,15 +1,15 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { weightedRandom, weightedRandomExcluding } from '../lib/random';
 import type { LGTMEntry } from '../lib/lgtm';
 
 function makeEntry(id: number, rarity: LGTMEntry['rarity']): LGTMEntry {
-  return { id, acronym: 'LGTM', meaning: `Meaning ${id}`, category: 'funny', rarity };
+  return { id, meaning: `Meaning ${id}`, category: 'funny', rarity };
 }
 
 const entries: LGTMEntry[] = [
   makeEntry(1, 'common'),
-  makeEntry(2, 'regular'),
-  makeEntry(3, 'rare'),
+  makeEntry(2, 'rare'),
+  makeEntry(3, 'epic'),
   makeEntry(4, 'legendary'),
 ];
 
@@ -31,14 +31,12 @@ describe('weightedRandom', () => {
   });
 
   it('respects weights — common is more frequent than legendary', () => {
-    // Build a list of 1 common + 1 legendary and run many trials
     const pool = [makeEntry(1, 'common'), makeEntry(2, 'legendary')];
     let commonCount = 0;
     const TRIALS = 1000;
     for (let i = 0; i < TRIALS; i++) {
       if (weightedRandom(pool).rarity === 'common') commonCount++;
     }
-    // common weight 60, legendary weight 5 — common should win >75% of the time
     expect(commonCount / TRIALS).toBeGreaterThan(0.75);
   });
 
@@ -64,7 +62,7 @@ describe('weightedRandomExcluding', () => {
   });
 
   it('returns the single entry when pool has only one item', () => {
-    const single = [makeEntry(5, 'rare')];
+    const single = [makeEntry(5, 'epic')];
     expect(weightedRandomExcluding(single, 5)).toBe(single[0]);
   });
 });

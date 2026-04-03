@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import RarityBadge from '../../components/RarityBadge.astro';
-import CategoryBadge from '../../components/CategoryBadge.astro';
-import CopyShareButton from '../../components/CopyShareButton';
-import LegendaryEffect from '../../components/LegendaryEffect';
+import BaseLayout from '../../layouts/base-layout.astro';
+import RarityBadge from '../../components/rarity-badge.astro';
+import CategoryBadge from '../../components/category-badge.astro';
+import CopyShareButton from '../../components/copy-share-button';
+import LegendaryEffect from '../../components/legendary-effect';
 import { getAllEntries } from '../../lib/lgtm';
 import type { Rarity } from '../../lib/lgtm';
 
@@ -34,7 +34,6 @@ const shareUrl = `${siteUrl}/lgtm/${entry.id}`;
   <div class="detail-page">
     <div class="container">
 
-      <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span aria-hidden="true">/</span>
@@ -43,7 +42,6 @@ const shareUrl = `${siteUrl}/lgtm/${entry.id}`;
         <span>{entry.meaning}</span>
       </nav>
 
-      <!-- Main detail card -->
       <div class="detail-card" data-rarity={entry.rarity}>
         <div class="detail-badges">
           <RarityBadge rarity={entry.rarity as Rarity} size="lg" />
@@ -65,7 +63,6 @@ const shareUrl = `${siteUrl}/lgtm/${entry.id}`;
           </div>
         )}
 
-        <!-- Share section -->
         <div class="detail-share">
           <p class="share-label">Share this LGTM</p>
           <div class="share-actions">
@@ -132,8 +129,8 @@ const shareUrl = `${siteUrl}/lgtm/${entry.id}`;
   }
 
   .detail-card[data-rarity="common"]::before    { background: var(--color-common); }
-  .detail-card[data-rarity="regular"]::before   { background: var(--color-regular); }
   .detail-card[data-rarity="rare"]::before      { background: var(--color-rare); }
+  .detail-card[data-rarity="epic"]::before      { background: var(--color-epic); }
   .detail-card[data-rarity="legendary"]::before {
     background: linear-gradient(90deg, var(--color-legendary), #f59e0b, var(--color-legendary));
     background-size: 200%;

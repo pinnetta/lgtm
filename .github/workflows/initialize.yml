@@ -1,0 +1,11 @@
+name: Initialize
+
+on:
+  workflow_call:
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        run: echo "run ${{ github.run_id }}"

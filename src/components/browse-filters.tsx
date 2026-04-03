@@ -17,8 +17,8 @@ const SORT_LABELS: Record<SortOption, string> = {
 
 const RARITY_ORDER: Record<Rarity, number> = {
   common: 0,
-  regular: 1,
-  rare: 2,
+  rare: 1,
+  epic: 2,
   legendary: 3,
 };
 
@@ -35,8 +35,8 @@ const CAT_COLORS: Record<string, string> = {
 function RarityDot({ rarity }: { rarity: Rarity }) {
   const COLORS: Record<Rarity, string> = {
     common: 'var(--color-common)',
-    regular: 'var(--color-regular)',
     rare: 'var(--color-rare)',
+    epic: 'var(--color-epic)',
     legendary: 'var(--color-legendary)',
   };
   return (
@@ -138,7 +138,7 @@ function EntryRow({ entry }: { entry: LGTMEntry }) {
           }}
         >
           {entry.rarity === 'legendary' && '★ '}
-          {entry.rarity === 'rare' && '◆ '}
+          {entry.rarity === 'epic' && '◆ '}
           {RARITY_LABELS[entry.rarity as Rarity]}
         </span>
         <span style={{
@@ -229,7 +229,6 @@ export default function BrowseFilters({ entries }: Props) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* Search */}
       <div style={{ position: 'relative' }}>
         <span style={{
           position: 'absolute',
@@ -264,9 +263,7 @@ export default function BrowseFilters({ entries }: Props) {
         />
       </div>
 
-      {/* Filter chips row */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        {/* Category chips */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginRight: '0.25rem' }}>
             Category
@@ -298,7 +295,6 @@ export default function BrowseFilters({ entries }: Props) {
           })}
         </div>
 
-        {/* Rarity chips */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-faint)', letterSpacing: '0.06em', textTransform: 'uppercase', marginRight: '0.25rem' }}>
             Rarity
@@ -307,8 +303,8 @@ export default function BrowseFilters({ entries }: Props) {
             const active = activeRarities.has(r);
             const COLORS: Record<Rarity, string> = {
               common: 'var(--color-common)',
-              regular: 'var(--color-regular)',
               rare: 'var(--color-rare)',
+              epic: 'var(--color-epic)',
               legendary: 'var(--color-legendary)',
             };
             const clr = COLORS[r];
@@ -333,7 +329,7 @@ export default function BrowseFilters({ entries }: Props) {
                 }}
               >
                 {r === 'legendary' && '★ '}
-                {r === 'rare' && '◆ '}
+                {r === 'epic' && '◆ '}
                 {RARITY_LABELS[r]}
               </button>
             );
@@ -341,7 +337,6 @@ export default function BrowseFilters({ entries }: Props) {
         </div>
       </div>
 
-      {/* Sort + results summary row */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -397,7 +392,6 @@ export default function BrowseFilters({ entries }: Props) {
         </div>
       </div>
 
-      {/* Results */}
       {filtered.length === 0 ? (
         <div style={{
           textAlign: 'center',

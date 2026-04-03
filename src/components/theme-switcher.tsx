@@ -14,7 +14,6 @@ function applyTheme(theme: Theme) {
   }
 }
 
-// SVG icons — inline to avoid any asset dependency
 function IconSystem() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -64,7 +63,6 @@ const LABELS: Record<Theme, string> = {
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState<Theme>('system');
 
-  // Read persisted value on mount
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
     if (stored && CYCLE.includes(stored)) {

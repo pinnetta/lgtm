@@ -7,29 +7,17 @@ on:
     branches: [main]
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  initialize:
+    uses: ./.github/workflows/initialize.yml
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  verify:
+    needs: initialize
+    uses: ./.github/workflows/verify.yml
 
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+  build:
+    needs: verify
+    uses: ./.github/workflows/build.yml
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm build
-
-      - name: Test
-        run: pnpm test
+  test:
+    needs: build
+    uses: ./.github/workflows/test.yml

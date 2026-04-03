@@ -1,7 +1,7 @@
 ---
 import type { LGTMEntry } from '../lib/lgtm';
-import RarityBadge from './RarityBadge.astro';
-import CategoryBadge from './CategoryBadge.astro';
+import RarityBadge from './rarity-badge.astro';
+import CategoryBadge from './category-badge.astro';
 
 interface Props {
   entry: LGTMEntry;
@@ -73,8 +73,8 @@ const detailUrl = `/lgtm/${entry.id}`;
   }
 
   .lgtm-card[data-rarity="common"]::before    { background: var(--color-common); }
-  .lgtm-card[data-rarity="regular"]::before   { background: var(--color-regular); }
   .lgtm-card[data-rarity="rare"]::before      { background: var(--color-rare); }
+  .lgtm-card[data-rarity="epic"]::before      { background: var(--color-epic); }
   .lgtm-card[data-rarity="legendary"]::before {
     background: linear-gradient(90deg, var(--color-legendary), #f59e0b, var(--color-legendary));
     background-size: 200% 100%;
