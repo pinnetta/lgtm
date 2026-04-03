@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrowseFilters from '../components/BrowseFilters';
+import { getAllEntries } from '../lib/lgtm';
+
+const entries = getAllEntries();
+---
+
+<BaseLayout
+  title="Browse all LGTM meanings"
+  description={`All ${entries.length} alternative meanings of LGTM — filterable by category, rarity, and searchable by keyword.`}
+>
+  <div class="browse-page">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="page-header">
+        <h1 class="page-title">Browse all <span class="accent">LGTM</span> meanings</h1>
+        <p class="page-sub">
+          {entries.length} entries across all categories and rarities.
+          Filter, search, and find the perfect one for your PR.
+        </p>
+      </div>
+
+      <!-- Filters + results (React island) -->
+      <BrowseFilters client:load entries={entries} />
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .browse-page {
+    padding-block: 2.5rem 4rem;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+  }
+
+  .accent {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+  }
+
+  .page-sub {
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>

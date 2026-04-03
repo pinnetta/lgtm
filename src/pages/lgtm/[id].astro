@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RarityBadge from '../../components/RarityBadge.astro';
+import CategoryBadge from '../../components/CategoryBadge.astro';
+import CopyShareButton from '../../components/CopyShareButton';
+import LegendaryEffect from '../../components/LegendaryEffect';
+import { getAllEntries } from '../../lib/lgtm';
+import type { Rarity } from '../../lib/lgtm';
+
+export async function getStaticPaths() {
+  const entries = getAllEntries();
+  return entries.map((entry) => ({
+    params: { id: String(entry.id) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const siteUrl = 'https://lgtm.airscript.it';
+const shareUrl = `${siteUrl}/lgtm/${entry.id}`;
+---
+
+<BaseLayout
+  title={`LGTM: ${entry.meaning}`}
+  description={entry.description ?? `LGTM means "${entry.meaning}" — a ${entry.rarity} ${entry.category} interpretation.`}
+  ogTitle={`LGTM — ${entry.meaning}`}
+  ogDescription={entry.description ?? `A ${entry.rarity} LGTM interpretation: "${entry.meaning}"`}
+  canonicalUrl={shareUrl}
+>
+  {entry.rarity === 'legendary' && (
+    <LegendaryEffect client:load />
+  )}
+
+  <div class="detail-page">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/browse">Browse</a>
+        <span aria-hidden="true">/</span>
+        <span>{entry.meaning}</span>
+      </nav>
+
+      <!-- Main detail card -->
+      <div class="detail-card" data-rarity={entry.rarity}>
+        <div class="detail-badges">
+          <RarityBadge rarity={entry.rarity as Rarity} size="lg" />
+          <CategoryBadge category={entry.category} size="md" href={`/categories/${entry.category}`} />
+        </div>
+
+        <p class="detail-acronym">LGTM</p>
+        <h1 class="detail-meaning">{entry.meaning}</h1>
+
+        {entry.description && (
+          <p class="detail-description">{entry.description}</p>
+        )}
+
+        {entry.tags && entry.tags.length > 0 && (
+          <div class="detail-tags">
+            {entry.tags.map((tag) => (
+              <span class="detail-tag">#{tag}</span>
+            ))}
+          </div>
+        )}
+
+        <!-- Share section -->
+        <div class="detail-share">
+          <p class="share-label">Share this LGTM</p>
+          <div class="share-actions">
+            <code class="share-url">{shareUrl}</code>
+            <CopyShareButton client:load url={shareUrl} />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-page {
+    padding-block: 2.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-accent);
+  }
+
+  .breadcrumb span:last-child {
+    color: var(--color-text);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+  }
+
+  .detail-card {
+    max-width: 720px;
+    margin-inline: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .detail-card[data-rarity="common"]::before    { background: var(--color-common); }
+  .detail-card[data-rarity="regular"]::before   { background: var(--color-regular); }
+  .detail-card[data-rarity="rare"]::before      { background: var(--color-rare); }
+  .detail-card[data-rarity="legendary"]::before {
+    background: linear-gradient(90deg, var(--color-legendary), #f59e0b, var(--color-legendary));
+    background-size: 200%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+
+  .detail-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-acronym {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-faint);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+
+  .detail-meaning {
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 800;
+    color: var(--color-text);
+    margin: 0 0 1rem;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .detail-description {
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0 0 1.5rem;
+  }
+
+  .detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-tag {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-faint);
+    padding: 0.2em 0.5em;
+    border-radius: 5px;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+  }
+
+  .detail-share {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .share-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem;
+  }
+
+  .share-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .share-url {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.4em 0.75em;
+    word-break: break-all;
+  }
+</style>

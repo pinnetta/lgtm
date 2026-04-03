@@ -1,0 +1,46 @@
+import { useState } from 'react';
+
+interface Props {
+  url: string;
+  label?: string;
+}
+
+export default function CopyShareButton({ url, label = 'Copy share link' }: Props) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      const el = document.createElement('input');
+      el.value = url;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="btn btn-ghost"
+      style={{ fontFamily: 'inherit' }}
+      title={url}
+    >
+      {copied ? (
+        <>
+          <span aria-hidden="true">✓</span>
+          Copied!
+        </>
+      ) : (
+        <>
+          <span aria-hidden="true">⎘</span>
+          {label}
+        </>
+      )}
+    </button>
+  );
+}

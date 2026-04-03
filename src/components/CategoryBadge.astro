@@ -1,0 +1,69 @@
+---
+import { CATEGORY_LABELS } from '../lib/lgtm';
+
+interface Props {
+  category: string;
+  size?: 'sm' | 'md';
+  href?: string;
+}
+
+const { category, size = 'md', href } = Astro.props;
+const label = CATEGORY_LABELS[category] ?? category;
+---
+
+{href ? (
+  <a href={href} class={`cat-badge size-${size} cat-${category}`}>{label}</a>
+) : (
+  <span class={`cat-badge size-${size} cat-${category}`}>{label}</span>
+)}
+
+<style>
+  .cat-badge {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    background: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+  }
+
+  .cat-badge:hover {
+    opacity: 0.8;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .size-sm {
+    font-size: 0.6875rem;
+    padding: 0.2em 0.55em;
+  }
+
+  .size-md {
+    font-size: 0.8125rem;
+    padding: 0.3em 0.7em;
+  }
+
+  /* Category accent colours */
+  .cat-funny     { --cat-clr: #f59e0b; }
+  .cat-sarcastic { --cat-clr: #ef4444; }
+  .cat-wholesome { --cat-clr: #10b981; }
+  .cat-dev       { --cat-clr: #6366f1; }
+  .cat-existential { --cat-clr: #8b5cf6; }
+  .cat-corporate { --cat-clr: #0ea5e9; }
+  .cat-chaotic   { --cat-clr: #f97316; }
+
+  .cat-funny,
+  .cat-sarcastic,
+  .cat-wholesome,
+  .cat-dev,
+  .cat-existential,
+  .cat-corporate,
+  .cat-chaotic {
+    color: var(--cat-clr);
+    background: color-mix(in srgb, var(--cat-clr) 10%, var(--color-surface));
+    border-color: color-mix(in srgb, var(--cat-clr) 25%, transparent);
+  }
+</style>

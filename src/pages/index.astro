@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RandomGenerator from '../components/RandomGenerator';
+import { getAllEntries } from '../lib/lgtm';
+
+const entries = getAllEntries();
+const initial = entries[0]!;
+---
+
+<BaseLayout
+  title="LGTM — The Acronym Catalog"
+  description="Generate a random alternative meaning for LGTM to use in your next pull request. Updated URL on every pick — share it directly."
+>
+  <div class="hero-section">
+    <div class="container">
+      <!-- Page heading -->
+      <div class="hero-head">
+        <h1 class="hero-title">
+          What does <span class="acronym-highlight">LGTM</span> mean today?
+        </h1>
+        <p class="hero-sub">
+          A curated collection of alternative meanings for the classic code review acronym.
+          Each one is shareable, rarity-weighted, and ready to paste in your PR.
+        </p>
+      </div>
+
+      <!-- The random generator (React island) -->
+      <RandomGenerator client:load entries={entries} initialEntry={initial} />
+
+      <!-- Explore nudge -->
+      <div class="explore-row">
+        <a href="/browse" class="explore-link">
+          Browse all {entries.length} entries &rarr;
+        </a>
+        <a href="/categories" class="explore-link">
+          View by category &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    padding-block: 4rem 3rem;
+  }
+
+  .hero-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin: 0 0 1rem;
+    line-height: 1.1;
+  }
+
+  .acronym-highlight {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.175rem);
+    color: var(--color-text-muted);
+    max-width: 540px;
+    margin-inline: auto;
+    line-height: 1.65;
+  }
+
+  .explore-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .explore-link {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--color-border);
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .explore-link:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    text-decoration: none;
+  }
+</style>

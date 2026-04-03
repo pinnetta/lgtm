@@ -1,0 +1,1072 @@
+[
+  {
+    "id": 1,
+    "acronym": "LGTM",
+    "meaning": "Looks Good To Me",
+    "category": "dev",
+    "rarity": "common",
+    "description": "The original, the classic. The one that started it all.",
+    "tags": ["original", "classic", "code-review"],
+    "created_at": "2024-01-01"
+  },
+  {
+    "id": 2,
+    "acronym": "LGTM",
+    "meaning": "Let's Go To McDonald's",
+    "category": "funny",
+    "rarity": "common",
+    "description": "The ideal response to any PR opened right before lunch.",
+    "tags": ["food", "lunch", "relatable"],
+    "created_at": "2024-01-02"
+  },
+  {
+    "id": 3,
+    "acronym": "LGTM",
+    "meaning": "Looks Great, Totally Merged",
+    "category": "dev",
+    "rarity": "common",
+    "description": "You didn't read it. Nobody reads it. It's fine.",
+    "tags": ["code-review", "honest"],
+    "created_at": "2024-01-03"
+  },
+  {
+    "id": 4,
+    "acronym": "LGTM",
+    "meaning": "Let's Generate Technical Mess",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "Approved, but with a knowing sigh.",
+    "tags": ["tech-debt", "sarcasm"],
+    "created_at": "2024-01-04"
+  },
+  {
+    "id": 5,
+    "acronym": "LGTM",
+    "meaning": "Lord, Give This Mercy",
+    "category": "existential",
+    "rarity": "rare",
+    "description": "When the code is so bad that only divine intervention will save it.",
+    "tags": ["prayer", "desperate", "legacy-code"],
+    "created_at": "2024-01-05"
+  },
+  {
+    "id": 6,
+    "acronym": "LGTM",
+    "meaning": "Looks Gay To Me",
+    "category": "funny",
+    "rarity": "rare",
+    "description": "A playful reinterpretation used humorously.",
+    "tags": ["humor", "meme"],
+    "created_at": "2024-01-06"
+  },
+  {
+    "id": 7,
+    "acronym": "LGTM",
+    "meaning": "Literally Going To Merge",
+    "category": "dev",
+    "rarity": "common",
+    "description": "No notes. Just vibes. Shipping it.",
+    "tags": ["shipping", "bold"],
+    "created_at": "2024-01-07"
+  },
+  {
+    "id": 8,
+    "acronym": "LGTM",
+    "meaning": "Let's Get This Money",
+    "category": "chaotic",
+    "rarity": "regular",
+    "description": "Business-driven development at its finest.",
+    "tags": ["hustle", "startup"],
+    "created_at": "2024-01-08"
+  },
+  {
+    "id": 9,
+    "acronym": "LGTM",
+    "meaning": "Love Grows Through Merging",
+    "category": "wholesome",
+    "rarity": "rare",
+    "description": "A beautiful metaphor for collaboration and teamwork.",
+    "tags": ["teamwork", "collaboration", "love"],
+    "created_at": "2024-01-09"
+  },
+  {
+    "id": 10,
+    "acronym": "LGTM",
+    "meaning": "Large Gorilla Typing Madly",
+    "category": "funny",
+    "rarity": "regular",
+    "description": "An accurate description of how most code gets written.",
+    "tags": ["meme", "relatable", "chaos"],
+    "created_at": "2024-01-10"
+  },
+  {
+    "id": 11,
+    "acronym": "LGTM",
+    "meaning": "Let God Take Mercy",
+    "category": "existential",
+    "rarity": "regular",
+    "description": "Spiritual approval for a PR you don't fully understand.",
+    "tags": ["existential", "approval"],
+    "created_at": "2024-01-11"
+  },
+  {
+    "id": 12,
+    "acronym": "LGTM",
+    "meaning": "Legends Generally Trust Merges",
+    "category": "wholesome",
+    "rarity": "legendary",
+    "description": "Only the most senior engineers know this truth.",
+    "tags": ["senior", "wisdom", "trust"],
+    "created_at": "2024-01-12"
+  },
+  {
+    "id": 13,
+    "acronym": "LGTM",
+    "meaning": "Looks Good To Machines",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "CI passed. That's basically the same as a human review, right?",
+    "tags": ["ci", "automation", "lazy"],
+    "created_at": "2024-01-13"
+  },
+  {
+    "id": 14,
+    "acronym": "LGTM",
+    "meaning": "Local Git Totally Munged",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "Your local environment is a crime scene, but ship it anyway.",
+    "tags": ["git", "disaster", "relatable"],
+    "created_at": "2024-01-14"
+  },
+  {
+    "id": 15,
+    "acronym": "LGTM",
+    "meaning": "Leave Garbage To Maintainer",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "Time-honored tradition in open source.",
+    "tags": ["open-source", "tech-debt", "maintainer"],
+    "created_at": "2024-01-15"
+  },
+  {
+    "id": 16,
+    "acronym": "LGTM",
+    "meaning": "Looks Great To Management",
+    "category": "corporate",
+    "rarity": "common",
+    "description": "Management approved it in a deck. The engineers weep.",
+    "tags": ["management", "corporate", "slide-deck"],
+    "created_at": "2024-01-16"
+  },
+  {
+    "id": 17,
+    "acronym": "LGTM",
+    "meaning": "Let's Grab Thai Maybe",
+    "category": "funny",
+    "rarity": "common",
+    "description": "Somehow more productive than most sprint planning sessions.",
+    "tags": ["food", "lunch", "planning"],
+    "created_at": "2024-01-17"
+  },
+  {
+    "id": 18,
+    "acronym": "LGTM",
+    "meaning": "Lukewarm Glance, Then Merge",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "The most honest description of async code review.",
+    "tags": ["code-review", "honest", "async"],
+    "created_at": "2024-01-18"
+  },
+  {
+    "id": 19,
+    "acronym": "LGTM",
+    "meaning": "Life Gets Truly Messy",
+    "category": "existential",
+    "rarity": "regular",
+    "description": "Not strictly a code review term, but applicable.",
+    "tags": ["life", "philosophy"],
+    "created_at": "2024-01-19"
+  },
+  {
+    "id": 20,
+    "acronym": "LGTM",
+    "meaning": "Linting Good, Tests Missing",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "The code style is immaculate. The test coverage is zero.",
+    "tags": ["testing", "linting", "irony"],
+    "created_at": "2024-01-20"
+  },
+  {
+    "id": 21,
+    "acronym": "LGTM",
+    "meaning": "Lots Of Gibberish To Me",
+    "category": "funny",
+    "rarity": "regular",
+    "description": "Honesty unlocked.",
+    "tags": ["honesty", "confusion"],
+    "created_at": "2024-01-21"
+  },
+  {
+    "id": 22,
+    "acronym": "LGTM",
+    "meaning": "Love, Genuinely, This Merge",
+    "category": "wholesome",
+    "rarity": "regular",
+    "description": "When someone writes really beautiful code and you want them to know.",
+    "tags": ["love", "appreciation", "quality"],
+    "created_at": "2024-01-22"
+  },
+  {
+    "id": 23,
+    "acronym": "LGTM",
+    "meaning": "Let's Go To Meetings",
+    "category": "corporate",
+    "rarity": "common",
+    "description": "The corporate reflex. Problem solved via calendar invite.",
+    "tags": ["meetings", "corporate", "agile"],
+    "created_at": "2024-01-23"
+  },
+  {
+    "id": 24,
+    "acronym": "LGTM",
+    "meaning": "Line Got Too Many",
+    "category": "dev",
+    "rarity": "common",
+    "description": "That function is 800 lines. Nobody will say anything. LGTM.",
+    "tags": ["code-quality", "refactoring", "denial"],
+    "created_at": "2024-01-24"
+  },
+  {
+    "id": 25,
+    "acronym": "LGTM",
+    "meaning": "Looks Gnarly To Me",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "Surfboard not included. The code is still a wipeout.",
+    "tags": ["surfing", "gnarly", "sarcasm"],
+    "created_at": "2024-01-25"
+  },
+  {
+    "id": 26,
+    "acronym": "LGTM",
+    "meaning": "Launching Greatness Today, Maybe",
+    "category": "chaotic",
+    "rarity": "regular",
+    "description": "Optimism before the deploy. Chaos after.",
+    "tags": ["deployment", "optimism", "chaos"],
+    "created_at": "2024-01-26"
+  },
+  {
+    "id": 27,
+    "acronym": "LGTM",
+    "meaning": "Lighting Gradually Turns Midnight",
+    "category": "existential",
+    "rarity": "rare",
+    "description": "You've been debugging for six hours. The sun has set. LGTM.",
+    "tags": ["late-night", "debugging", "burnout"],
+    "created_at": "2024-01-27"
+  },
+  {
+    "id": 28,
+    "acronym": "LGTM",
+    "meaning": "Loosely Glanced, Typed, Merged",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "A workflow embraced by more engineers than will admit it.",
+    "tags": ["workflow", "lazy", "review"],
+    "created_at": "2024-01-28"
+  },
+  {
+    "id": 29,
+    "acronym": "LGTM",
+    "meaning": "Let's Go Touch Matplotlib",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "A rallying cry for data scientists who've touched the configs.",
+    "tags": ["python", "data-science", "matplotlib"],
+    "created_at": "2024-01-29"
+  },
+  {
+    "id": 30,
+    "acronym": "LGTM",
+    "meaning": "Little Gremlin Typed Magnificently",
+    "category": "chaotic",
+    "rarity": "rare",
+    "description": "Best code is written in a chaotic fugue state. This is that.",
+    "tags": ["chaos", "gremlin", "inspired"],
+    "created_at": "2024-01-30"
+  },
+  {
+    "id": 31,
+    "acronym": "LGTM",
+    "meaning": "Looking Good, Team Mate",
+    "category": "wholesome",
+    "rarity": "common",
+    "description": "Pure encouragement. No notes. Just positivity.",
+    "tags": ["encouragement", "team", "positive"],
+    "created_at": "2024-02-01"
+  },
+  {
+    "id": 32,
+    "acronym": "LGTM",
+    "meaning": "Logic Gone Totally Mad",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "The control flow is a fever dream. Approved.",
+    "tags": ["logic", "madness", "complex"],
+    "created_at": "2024-02-02"
+  },
+  {
+    "id": 33,
+    "acronym": "LGTM",
+    "meaning": "Legendary Giga-Tier Masterpiece",
+    "category": "chaotic",
+    "rarity": "legendary",
+    "description": "Reserved for code so transcendent it breaks the rating scale.",
+    "tags": ["legendary", "masterpiece", "hyperbole"],
+    "created_at": "2024-02-03"
+  },
+  {
+    "id": 34,
+    "acronym": "LGTM",
+    "meaning": "Let Go. To Merge.",
+    "category": "wholesome",
+    "rarity": "rare",
+    "description": "A gentle reminder that perfection is the enemy of shipping.",
+    "tags": ["shipping", "letting-go", "wisdom"],
+    "created_at": "2024-02-04"
+  },
+  {
+    "id": 35,
+    "acronym": "LGTM",
+    "meaning": "Lots Going Terribly Mainline",
+    "category": "sarcastic",
+    "rarity": "rare",
+    "description": "When the main branch is already on fire, one more won't hurt.",
+    "tags": ["mainline", "fire", "yolo"],
+    "created_at": "2024-02-05"
+  },
+  {
+    "id": 36,
+    "acronym": "LGTM",
+    "meaning": "Laugh Guaranteed, This Merge",
+    "category": "funny",
+    "rarity": "rare",
+    "description": "Someone will laugh at this code in 2 years. Probably you.",
+    "tags": ["future", "laugh", "irony"],
+    "created_at": "2024-02-06"
+  },
+  {
+    "id": 37,
+    "acronym": "LGTM",
+    "meaning": "Let GPT Think More",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "Modern code review: delegate to the machine, merge the answer.",
+    "tags": ["ai", "gpt", "modern"],
+    "created_at": "2024-02-07"
+  },
+  {
+    "id": 38,
+    "acronym": "LGTM",
+    "meaning": "Low-Grade Technical Mediocrity",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "It works. That's enough. That's the bar. Cleared.",
+    "tags": ["mediocrity", "bar", "pragmatism"],
+    "created_at": "2024-02-08"
+  },
+  {
+    "id": 39,
+    "acronym": "LGTM",
+    "meaning": "Lore Guarded Through Millennia",
+    "category": "existential",
+    "rarity": "legendary",
+    "description": "This codebase predates the company. Nobody knows what it does. It must be preserved.",
+    "tags": ["legacy", "ancient", "lore"],
+    "created_at": "2024-02-09"
+  },
+  {
+    "id": 40,
+    "acronym": "LGTM",
+    "meaning": "Latte Got Too Many",
+    "category": "funny",
+    "rarity": "common",
+    "description": "Three espresso shots deep. The PR review is caffeinated.",
+    "tags": ["coffee", "energy", "review"],
+    "created_at": "2024-02-10"
+  },
+  {
+    "id": 41,
+    "acronym": "LGTM",
+    "meaning": "Let Greybeard Take Maintainership",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "Pass the burden to the most experienced. They'll know what to do. Maybe.",
+    "tags": ["senior", "greybeard", "ownership"],
+    "created_at": "2024-02-11"
+  },
+  {
+    "id": 42,
+    "acronym": "LGTM",
+    "meaning": "Life Goals Totally Met",
+    "category": "wholesome",
+    "rarity": "regular",
+    "description": "You merged your first PR. This is what success feels like.",
+    "tags": ["first-pr", "success", "goals"],
+    "created_at": "2024-02-12"
+  },
+  {
+    "id": 43,
+    "acronym": "LGTM",
+    "meaning": "Less Gloomy Than Monday",
+    "category": "wholesome",
+    "rarity": "common",
+    "description": "The bar is low and this code cleared it. A win is a win.",
+    "tags": ["monday", "optimism", "low-bar"],
+    "created_at": "2024-02-13"
+  },
+  {
+    "id": 44,
+    "acronym": "LGTM",
+    "meaning": "Let Governance Tackle Mess",
+    "category": "corporate",
+    "rarity": "regular",
+    "description": "This is above my pay grade. Escalating.",
+    "tags": ["governance", "corporate", "escalation"],
+    "created_at": "2024-02-14"
+  },
+  {
+    "id": 45,
+    "acronym": "LGTM",
+    "meaning": "Looks Great To Most",
+    "category": "dev",
+    "rarity": "common",
+    "description": "Collective approval is still approval. Democracy in code review.",
+    "tags": ["democracy", "collective", "review"],
+    "created_at": "2024-02-15"
+  },
+  {
+    "id": 46,
+    "acronym": "LGTM",
+    "meaning": "Lost Git, Totally Mangled",
+    "category": "chaotic",
+    "rarity": "regular",
+    "description": "The merge conflicts were resolved... somehow.",
+    "tags": ["git", "conflicts", "chaos"],
+    "created_at": "2024-02-16"
+  },
+  {
+    "id": 47,
+    "acronym": "LGTM",
+    "meaning": "Lightly Glanced, Truly Merged",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "A scroll and a click. Peer review, done.",
+    "tags": ["review", "scroll", "rubber-stamp"],
+    "created_at": "2024-02-17"
+  },
+  {
+    "id": 48,
+    "acronym": "LGTM",
+    "meaning": "Living Glorious Tiny Moments",
+    "category": "wholesome",
+    "rarity": "legendary",
+    "description": "Every merged PR is a small victory. Celebrate each one.",
+    "tags": ["joy", "moments", "gratitude"],
+    "created_at": "2024-02-18"
+  },
+  {
+    "id": 49,
+    "acronym": "LGTM",
+    "meaning": "Leveraging Groundbreaking Technical Magic",
+    "category": "corporate",
+    "rarity": "rare",
+    "description": "From the deck that got funding. The code tells a different story.",
+    "tags": ["buzzwords", "corporate", "magic"],
+    "created_at": "2024-02-19"
+  },
+  {
+    "id": 50,
+    "acronym": "LGTM",
+    "meaning": "Look, Genuine Treat To Myself",
+    "category": "wholesome",
+    "rarity": "rare",
+    "description": "Self-reviewing your own PR and being genuinely proud of it.",
+    "tags": ["self-care", "pride", "solo"],
+    "created_at": "2024-02-20"
+  },
+  {
+    "id": 51,
+    "acronym": "LGTM",
+    "meaning": "Laughing Genuinely This Monday",
+    "category": "funny",
+    "rarity": "common",
+    "description": "Impossible. But somehow it happened. LGTM.",
+    "tags": ["monday", "impossible", "laugh"],
+    "created_at": "2024-02-21"
+  },
+  {
+    "id": 52,
+    "acronym": "LGTM",
+    "meaning": "Light Goes Through Matter",
+    "category": "existential",
+    "rarity": "legendary",
+    "description": "We are but particles in the quantum foam of the CI pipeline.",
+    "tags": ["physics", "philosophy", "cosmic"],
+    "created_at": "2024-02-22"
+  },
+  {
+    "id": 53,
+    "acronym": "LGTM",
+    "meaning": "Let Go, Then Maintain",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "The eternal cycle of every software project.",
+    "tags": ["cycle", "ownership", "maintenance"],
+    "created_at": "2024-02-23"
+  },
+  {
+    "id": 54,
+    "acronym": "LGTM",
+    "meaning": "Loud Groans Through Microphone",
+    "category": "chaotic",
+    "rarity": "rare",
+    "description": "The standup when someone shows the production metrics.",
+    "tags": ["standup", "production", "pain"],
+    "created_at": "2024-02-24"
+  },
+  {
+    "id": 55,
+    "acronym": "LGTM",
+    "meaning": "Lads Getting Tacos Midday",
+    "category": "funny",
+    "rarity": "regular",
+    "description": "The real reason Friday deploys get skipped.",
+    "tags": ["tacos", "friday", "team-lunch"],
+    "created_at": "2024-02-25"
+  },
+  {
+    "id": 56,
+    "acronym": "LGTM",
+    "meaning": "Language Grew Too Much",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "Started with bash. Now it's a distributed system. Classic.",
+    "tags": ["scope-creep", "growth", "complexity"],
+    "created_at": "2024-02-26"
+  },
+  {
+    "id": 57,
+    "acronym": "LGTM",
+    "meaning": "Lungs Gone Totally Mentholated",
+    "category": "chaotic",
+    "rarity": "legendary",
+    "description": "The codebase opened and something happened. Nobody knows.",
+    "tags": ["unexplained", "legendary", "mystery"],
+    "created_at": "2024-02-27"
+  },
+  {
+    "id": 58,
+    "acronym": "LGTM",
+    "meaning": "Let's Get To Marketing",
+    "category": "corporate",
+    "rarity": "common",
+    "description": "The product still has bugs but the campaign goes live Monday.",
+    "tags": ["marketing", "corporate", "launch"],
+    "created_at": "2024-03-01"
+  },
+  {
+    "id": 59,
+    "acronym": "LGTM",
+    "meaning": "Loosely Governed, Technically Messy",
+    "category": "corporate",
+    "rarity": "regular",
+    "description": "No standards, no docs, one brave engineer holding it together.",
+    "tags": ["governance", "chaos", "undocumented"],
+    "created_at": "2024-03-02"
+  },
+  {
+    "id": 60,
+    "acronym": "LGTM",
+    "meaning": "Lower Ground, Truly Mined",
+    "category": "existential",
+    "rarity": "rare",
+    "description": "Every refactor reveals another layer of decisions made in despair.",
+    "tags": ["refactor", "depth", "archaeology"],
+    "created_at": "2024-03-03"
+  },
+  {
+    "id": 61,
+    "acronym": "LGTM",
+    "meaning": "Let's Go Touch Monitors",
+    "category": "chaotic",
+    "rarity": "common",
+    "description": "Unplug everything. Walk away. Come back Monday.",
+    "tags": ["burnout", "it-crowd", "reboot"],
+    "created_at": "2024-03-04"
+  },
+  {
+    "id": 62,
+    "acronym": "LGTM",
+    "meaning": "Liked, Glanced, Then Moved On",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "The GitHub notification was dismissed without opening the diff.",
+    "tags": ["notification", "ignored", "inbox-zero"],
+    "created_at": "2024-03-05"
+  },
+  {
+    "id": 63,
+    "acronym": "LGTM",
+    "meaning": "Luckily Got The Memo",
+    "category": "wholesome",
+    "rarity": "regular",
+    "description": "Someone actually read the RFC before writing the code. Miraculous.",
+    "tags": ["rfc", "documentation", "prepared"],
+    "created_at": "2024-03-06"
+  },
+  {
+    "id": 64,
+    "acronym": "LGTM",
+    "meaning": "Loaded, Green, Tests Missing",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "All checks passed. There are no checks. Ship it.",
+    "tags": ["ci", "no-tests", "green-build"],
+    "created_at": "2024-03-07"
+  },
+  {
+    "id": 65,
+    "acronym": "LGTM",
+    "meaning": "Love Given To Maintainers",
+    "category": "wholesome",
+    "rarity": "rare",
+    "description": "A rare act of gratitude towards the people who keep the lights on.",
+    "tags": ["gratitude", "maintainers", "open-source"],
+    "created_at": "2024-03-08"
+  },
+  {
+    "id": 66,
+    "acronym": "LGTM",
+    "meaning": "Lasagna Gets Too Many",
+    "category": "funny",
+    "rarity": "common",
+    "description": "Like legacy code: layer upon layer, nobody remembers why.",
+    "tags": ["lasagna", "layers", "legacy"],
+    "created_at": "2024-03-09"
+  },
+  {
+    "id": 67,
+    "acronym": "LGTM",
+    "meaning": "Living Gratefully Through Mondays",
+    "category": "wholesome",
+    "rarity": "common",
+    "description": "A radical act of optimism in the enterprise software industry.",
+    "tags": ["monday", "gratitude", "optimism"],
+    "created_at": "2024-03-10"
+  },
+  {
+    "id": 68,
+    "acronym": "LGTM",
+    "meaning": "Linter Got Totally Mocked",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "eslint-disable on every line. The linter weeps silently.",
+    "tags": ["eslint", "disabled", "shame"],
+    "created_at": "2024-03-11"
+  },
+  {
+    "id": 69,
+    "acronym": "LGTM",
+    "meaning": "Long Gone, Totally Missing",
+    "category": "existential",
+    "rarity": "regular",
+    "description": "The author left the company. The PR remains. Nobody dares close it.",
+    "tags": ["offboarding", "orphan-pr", "ghost"],
+    "created_at": "2024-03-12"
+  },
+  {
+    "id": 70,
+    "acronym": "LGTM",
+    "meaning": "Let's Go Terraform More",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "Infrastructure as code becomes infrastructure as chaos.",
+    "tags": ["terraform", "infra", "iac"],
+    "created_at": "2024-03-13"
+  },
+  {
+    "id": 71,
+    "acronym": "LGTM",
+    "meaning": "Let's Get This Merged",
+    "category": "chaotic",
+    "rarity": "common",
+    "description": "No further discussion required. The deadline was yesterday.",
+    "tags": ["deadline", "pressure", "yolo"],
+    "created_at": "2024-03-14"
+  },
+  {
+    "id": 72,
+    "acronym": "LGTM",
+    "meaning": "Lacks Good Test Management",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "Eighty percent coverage... of the happy path only.",
+    "tags": ["testing", "coverage", "edge-cases"],
+    "created_at": "2024-03-15"
+  },
+  {
+    "id": 73,
+    "acronym": "LGTM",
+    "meaning": "Loads, Generally, Too Many",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "The bundle weighs 4MB. The landing page loads in 9 seconds. Ship it.",
+    "tags": ["performance", "bundle", "web-vitals"],
+    "created_at": "2024-03-16"
+  },
+  {
+    "id": 74,
+    "acronym": "LGTM",
+    "meaning": "Lofty Goals, Terminal Mediocrity",
+    "category": "existential",
+    "rarity": "rare",
+    "description": "The architecture doc promised elegance. The implementation delivered entropy.",
+    "tags": ["architecture", "entropy", "gap"],
+    "created_at": "2024-03-17"
+  },
+  {
+    "id": 75,
+    "acronym": "LGTM",
+    "meaning": "Landed, Good, Talk Monday",
+    "category": "corporate",
+    "rarity": "common",
+    "description": "Friday afternoon merge. Full radio silence until the post-incident review.",
+    "tags": ["friday-deploy", "silence", "incident"],
+    "created_at": "2024-03-18"
+  },
+  {
+    "id": 76,
+    "acronym": "LGTM",
+    "meaning": "Lightly Grepped, Then Merged",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "Ctrl+F for your name. Not found. LGTM.",
+    "tags": ["grep", "blame", "review"],
+    "created_at": "2024-03-19"
+  },
+  {
+    "id": 77,
+    "acronym": "LGTM",
+    "meaning": "Lost, Generally, Through Migration",
+    "category": "chaotic",
+    "rarity": "rare",
+    "description": "Half the data came over. Nobody checked which half.",
+    "tags": ["migration", "data-loss", "oops"],
+    "created_at": "2024-03-20"
+  },
+  {
+    "id": 78,
+    "acronym": "LGTM",
+    "meaning": "Let Go, Trust More",
+    "category": "wholesome",
+    "rarity": "rare",
+    "description": "The best review is one that builds trust as much as it catches bugs.",
+    "tags": ["trust", "culture", "collaboration"],
+    "created_at": "2024-03-21"
+  },
+  {
+    "id": 79,
+    "acronym": "LGTM",
+    "meaning": "Laughed, Grimaced, Then Merged",
+    "category": "funny",
+    "rarity": "regular",
+    "description": "The variable name was unhinged. It stays. The build passes.",
+    "tags": ["naming", "variable", "coping"],
+    "created_at": "2024-03-22"
+  },
+  {
+    "id": 80,
+    "acronym": "LGTM",
+    "meaning": "Loops, Globals, Total Madness",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "The code works by accident. Do not refactor. Do not touch. Do not look directly at it.",
+    "tags": ["globals", "loops", "forbidden"],
+    "created_at": "2024-03-23"
+  },
+  {
+    "id": 81,
+    "acronym": "LGTM",
+    "meaning": "Legendary Gremlins Took Maintainership",
+    "category": "existential",
+    "rarity": "legendary",
+    "description": "Nobody wrote this code. Nobody owns it. It simply exists.",
+    "tags": ["gremlins", "ownership", "haunted"],
+    "created_at": "2024-03-24"
+  },
+  {
+    "id": 82,
+    "acronym": "LGTM",
+    "meaning": "Left Group, Thanks Much",
+    "category": "funny",
+    "rarity": "regular",
+    "description": "The PR review chat had 200 messages. One brave soul signed off and left.",
+    "tags": ["chat", "exit", "resolved"],
+    "created_at": "2024-03-25"
+  },
+  {
+    "id": 83,
+    "acronym": "LGTM",
+    "meaning": "Looking Good, Trust Me",
+    "category": "chaotic",
+    "rarity": "common",
+    "description": "Famous last words before a production incident.",
+    "tags": ["trust", "famous-last-words", "incident"],
+    "created_at": "2024-03-26"
+  },
+  {
+    "id": 84,
+    "acronym": "LGTM",
+    "meaning": "Leveraged Generic Template Magic",
+    "category": "corporate",
+    "rarity": "regular",
+    "description": "The whole product is a Jira template duct-taped to a Lambda.",
+    "tags": ["template", "lambda", "jira"],
+    "created_at": "2024-03-27"
+  },
+  {
+    "id": 85,
+    "acronym": "LGTM",
+    "meaning": "Lightly Guessing The Meaning",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "The codebase has no comments. The reviewer has no context. Approved.",
+    "tags": ["context", "comments", "guessing"],
+    "created_at": "2024-03-28"
+  },
+  {
+    "id": 86,
+    "acronym": "LGTM",
+    "meaning": "Living Gracefully Through Mistakes",
+    "category": "wholesome",
+    "rarity": "regular",
+    "description": "Every bug is a learning opportunity. Some opportunities are on-call.",
+    "tags": ["mistakes", "learning", "on-call"],
+    "created_at": "2024-03-29"
+  },
+  {
+    "id": 87,
+    "acronym": "LGTM",
+    "meaning": "Latency Got Too Much",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "P99 is 14 seconds. The SLA says 200ms. Ship it anyway.",
+    "tags": ["latency", "performance", "p99"],
+    "created_at": "2024-03-30"
+  },
+  {
+    "id": 88,
+    "acronym": "LGTM",
+    "meaning": "Let's Get Tea, Mate",
+    "category": "wholesome",
+    "rarity": "common",
+    "description": "Sometimes the best response to a PR is stepping away for a brew.",
+    "tags": ["tea", "break", "british"],
+    "created_at": "2024-04-01"
+  },
+  {
+    "id": 89,
+    "acronym": "LGTM",
+    "meaning": "Looks Genuinely Terrible, Merging",
+    "category": "chaotic",
+    "rarity": "rare",
+    "description": "Full awareness of the consequences. Zero hesitation.",
+    "tags": ["self-aware", "consequences", "chaos"],
+    "created_at": "2024-04-02"
+  },
+  {
+    "id": 90,
+    "acronym": "LGTM",
+    "meaning": "Last Good Thing Merged",
+    "category": "existential",
+    "rarity": "rare",
+    "description": "The project was deprecated the next morning. This was the final commit.",
+    "tags": ["deprecated", "last-commit", "elegy"],
+    "created_at": "2024-04-03"
+  },
+  {
+    "id": 91,
+    "acronym": "LGTM",
+    "meaning": "Luckily Got Two Monitors",
+    "category": "funny",
+    "rarity": "common",
+    "description": "The diff is 4,000 lines. You need both screens and a prayer.",
+    "tags": ["monitors", "diff", "ergonomics"],
+    "created_at": "2024-04-04"
+  },
+  {
+    "id": 92,
+    "acronym": "LGTM",
+    "meaning": "Looks Good, Thought Maybe",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "Uncertainty dressed up as confidence. A classic.",
+    "tags": ["uncertainty", "confidence", "bluffing"],
+    "created_at": "2024-04-05"
+  },
+  {
+    "id": 93,
+    "acronym": "LGTM",
+    "meaning": "Lyrical, Genuine, Timeless Mastery",
+    "category": "wholesome",
+    "rarity": "legendary",
+    "description": "When the code is so clean it reads like poetry. This happens roughly once per career.",
+    "tags": ["clean-code", "poetry", "mastery"],
+    "created_at": "2024-04-06"
+  },
+  {
+    "id": 94,
+    "acronym": "LGTM",
+    "meaning": "Let's Go, Team, Merge!",
+    "category": "wholesome",
+    "rarity": "common",
+    "description": "A rallying cry. The whole team ships together.",
+    "tags": ["team", "ship", "rally"],
+    "created_at": "2024-04-07"
+  },
+  {
+    "id": 95,
+    "acronym": "LGTM",
+    "meaning": "Logged, Groaned, Then Moved",
+    "category": "sarcastic",
+    "rarity": "regular",
+    "description": "The ticket exists. The problem persists. The sprint advances.",
+    "tags": ["ticket", "backlog", "jira"],
+    "created_at": "2024-04-08"
+  },
+  {
+    "id": 96,
+    "acronym": "LGTM",
+    "meaning": "Low-key Genius Technical Move",
+    "category": "dev",
+    "rarity": "rare",
+    "description": "Nobody noticed how elegant that solution was. It will be overwritten in six months.",
+    "tags": ["elegant", "underrated", "doomed"],
+    "created_at": "2024-04-09"
+  },
+  {
+    "id": 97,
+    "acronym": "LGTM",
+    "meaning": "Literally Go Test More",
+    "category": "dev",
+    "rarity": "common",
+    "description": "The review comment that should appear on every PR but never does.",
+    "tags": ["testing", "please", "coverage"],
+    "created_at": "2024-04-10"
+  },
+  {
+    "id": 98,
+    "acronym": "LGTM",
+    "meaning": "Leveraged GPL, Thanks Microsoft",
+    "category": "chaotic",
+    "rarity": "rare",
+    "description": "The license is ambiguous. Legal is on vacation. We ship.",
+    "tags": ["license", "gpl", "legal"],
+    "created_at": "2024-04-11"
+  },
+  {
+    "id": 99,
+    "acronym": "LGTM",
+    "meaning": "Let's Guess The Meaning",
+    "category": "existential",
+    "rarity": "regular",
+    "description": "No variable names make sense. The function has no return type. We proceed.",
+    "tags": ["naming", "types", "mystery"],
+    "created_at": "2024-04-12"
+  },
+  {
+    "id": 100,
+    "acronym": "LGTM",
+    "meaning": "Literally God-Tier Mastery",
+    "category": "chaotic",
+    "rarity": "legendary",
+    "description": "Entry number 100. The milestone. The legend. The one.",
+    "tags": ["milestone", "legendary", "100"],
+    "created_at": "2024-04-13"
+  },
+  {
+    "id": 101,
+    "acronym": "LGTM",
+    "meaning": "Long, Granular, Tedious Migration",
+    "category": "dev",
+    "rarity": "regular",
+    "description": "The migration has 47 steps. Step 23 has never worked in production.",
+    "tags": ["migration", "database", "steps"],
+    "created_at": "2024-04-14"
+  },
+  {
+    "id": 102,
+    "acronym": "LGTM",
+    "meaning": "Looks Good To Margins",
+    "category": "corporate",
+    "rarity": "rare",
+    "description": "The feature reduces costs by 0.3%. It ships immediately.",
+    "tags": ["margins", "cost", "priority"],
+    "created_at": "2024-04-15"
+  },
+  {
+    "id": 103,
+    "acronym": "LGTM",
+    "meaning": "Love, Grace, Trust, Merge",
+    "category": "wholesome",
+    "rarity": "legendary",
+    "description": "The four pillars of a healthy engineering culture, in one comment.",
+    "tags": ["culture", "values", "engineering"],
+    "created_at": "2024-04-16"
+  },
+  {
+    "id": 104,
+    "acronym": "LGTM",
+    "meaning": "Left Git To Marinate",
+    "category": "chaotic",
+    "rarity": "regular",
+    "description": "Branch opened six months ago. Rebased three times. Still not merged.",
+    "tags": ["branch", "stale", "rebase"],
+    "created_at": "2024-04-17"
+  },
+  {
+    "id": 105,
+    "acronym": "LGTM",
+    "meaning": "Looks Great To Myself",
+    "category": "sarcastic",
+    "rarity": "common",
+    "description": "The self-approval special. No review required when you trust your own judgment unconditionally.",
+    "tags": ["self-review", "confidence", "yolo"],
+    "created_at": "2024-04-18"
+  },
+  {
+    "id": 106,
+    "acronym": "LGTM",
+    "meaning": "Let's Get This Meeting",
+    "category": "corporate",
+    "rarity": "regular",
+    "description": "The code is fine. The alignment meeting is not optional.",
+    "tags": ["meeting", "alignment", "corporate"],
+    "created_at": "2024-04-19"
+  },
+  {
+    "id": 107,
+    "acronym": "LGTM",
+    "meaning": "Lost, Grateful, Trying More",
+    "category": "existential",
+    "rarity": "rare",
+    "description": "The senior engineer's mantra. Nobody fully understands the system. We keep going.",
+    "tags": ["senior", "humility", "perseverance"],
+    "created_at": "2024-04-20"
+  }
+]

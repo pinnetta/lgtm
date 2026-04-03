@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllEntries } from '../lib/lgtm';
+
+// Pass all entries to the client-side script via a JSON embed.
+// The script picks a weighted-random entry and redirects immediately.
+const entries = getAllEntries();
+const entriesJson = JSON.stringify(
+  entries.map((e) => ({ id: e.id, rarity: e.rarity }))
+);
+---
+
+<BaseLayout
+  title="LGTM — Getting a random one..."
+  description="Redirecting to a random LGTM meaning."
+>
+  <div class="random-page">
+    <div class="container">
+      <p class="redirecting">Picking a random LGTM&hellip;</p>
+      <noscript>
+        <p>JavaScript is required to pick a random entry.
+          <a href="/browse">Browse all entries instead.</a>
+        </p>
+      </noscript>
+    </div>
+  </div>
+</BaseLayout>
+
+<!-- Inline script: runs synchronously, no defer/async, redirects immediately -->
+<script is:inline define:vars={{ entriesJson }}>
+  (function () {
+    try {
+      var entries = JSON.parse(entriesJson);
+      if (!entries || entries.length === 0) {
+        window.location.replace('/browse');
+        return;
+      }
+
+      var weights = { common: 60, regular: 30, rare: 15, legendary: 5 };
+
+      var totalWeight = entries.reduce(function (sum, e) {
+        return sum + (weights[e.rarity] || weights.common);
+      }, 0);
+
+      var rand = Math.random() * totalWeight;
+
+      for (var i = 0; i < entries.length; i++) {
+        var w = weights[entries[i].rarity] || weights.common;
+        rand -= w;
+        if (rand <= 0) {
+          window.location.replace('/lgtm/' + entries[i].id);
+          return;
+        }
+      }
+
+      // Floating-point fallback
+      window.location.replace('/lgtm/' + entries[entries.length - 1].id);
+    } catch (err) {
+      window.location.replace('/browse');
+    }
+  })();
+</script>
+
+<style>
+  .random-page {
+    padding-block: 6rem;
+    text-align: center;
+  }
+
+  .redirecting {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
