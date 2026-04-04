@@ -1,5 +1,5 @@
-import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
+import type { ReactElement } from 'react';
 import { THEME_STORAGE_KEY } from '@/lib/config';
 
 type Theme = 'system' | 'light' | 'dark';
@@ -15,7 +15,17 @@ function applyTheme(theme: Theme) {
 
 function IconSystem() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <rect x="2" y="3" width="20" height="14" rx="2" />
       <line x1="8" y1="21" x2="16" y2="21" />
       <line x1="12" y1="17" x2="12" y2="21" />
@@ -25,7 +35,17 @@ function IconSystem() {
 
 function IconSun() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <circle cx="12" cy="12" r="4" />
       <line x1="12" y1="2" x2="12" y2="4" />
       <line x1="12" y1="20" x2="12" y2="22" />
@@ -41,7 +61,17 @@ function IconSun() {
 
 function IconMoon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
@@ -49,24 +79,24 @@ function IconMoon() {
 
 const THEMES: { value: Theme; icon: () => ReactElement; label: string }[] = [
   { value: 'system', icon: IconSystem, label: 'System theme' },
-  { value: 'light',  icon: IconSun,    label: 'Light theme' },
-  { value: 'dark',   icon: IconMoon,   label: 'Dark theme' },
+  { value: 'light', icon: IconSun, label: 'Light theme' },
+  { value: 'dark', icon: IconMoon, label: 'Dark theme' },
 ];
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<Theme>('system');
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'system';
+    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    const validValues = THEMES.map((themeOption) => themeOption.value);
+    return stored && validValues.includes(stored) ? stored : 'system';
+  });
 
   useEffect(() => {
-    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    const valid = THEMES.map((t) => t.value);
-    if (stored && valid.includes(stored)) {
-      setTheme(stored);
-      applyTheme(stored);
-    }
-  }, []);
+    applyTheme(theme);
+  }, [theme]);
 
   function cycle() {
-    const idx = THEMES.findIndex((t) => t.value === theme);
+    const idx = THEMES.findIndex((themeOption) => themeOption.value === theme);
     const next = THEMES[(idx + 1) % THEMES.length].value;
     setTheme(next);
     applyTheme(next);
@@ -77,7 +107,7 @@ export default function ThemeSwitcher() {
     }
   }
 
-  const current = THEMES.find((t) => t.value === theme)!;
+  const current = THEMES.find((themeOption) => themeOption.value === theme)!;
   const Icon = current.icon;
 
   return (
@@ -86,19 +116,11 @@ export default function ThemeSwitcher() {
       onClick={cycle}
       aria-label={current.label}
       title={current.label}
+      className="inline-flex items-center justify-center w-9 h-9 rounded-lg border flex-shrink-0 cursor-pointer transition-[background,color] duration-150 hover:[background:var(--color-surface-raised)] hover:[color:var(--color-text)]"
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '2.25rem',
-        height: '2.25rem',
-        borderRadius: '8px',
         border: '1px solid var(--color-border)',
         background: 'transparent',
         color: 'var(--color-text-muted)',
-        cursor: 'pointer',
-        transition: 'background 0.15s, color 0.15s',
-        flexShrink: 0,
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-surface-raised)';

@@ -1,6 +1,6 @@
 ---
-import type { Rarity } from '@/lib/lgtm';
 import { RARITY_LABELS } from '@/lib/lgtm';
+import type { Rarity } from '@/lib/lgtm';
 
 interface Props {
   rarity: Rarity;
@@ -17,8 +17,22 @@ const sizeClasses = {
 }[size];
 ---
 
-<span class={`rarity-badge badge-${rarity} inline-flex items-center gap-[0.3em] font-semibold tracking-[0.04em] uppercase whitespace-nowrap ${sizeClasses}`}>
-  {rarity === 'legendary' && <span class="text-[0.85em] leading-none" aria-hidden="true">★</span>}
-  {rarity === 'epic' && <span class="text-[0.85em] leading-none" aria-hidden="true">◆</span>}
+<span
+  class={`rarity-badge badge-${rarity} inline-flex items-center gap-[0.3em] font-semibold tracking-[0.04em] uppercase whitespace-nowrap ${sizeClasses}`}
+>
+  {
+    rarity === 'legendary' && (
+      <span class="text-[0.85em] leading-none" aria-hidden="true">
+        ★
+      </span>
+    )
+  }
+  {
+    rarity === 'epic' && (
+      <span class="text-[0.85em] leading-none" aria-hidden="true">
+        ◆
+      </span>
+    )
+  }
   {label}
 </span>

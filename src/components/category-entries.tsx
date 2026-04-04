@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Pagination from '@/components/pagination';
+import { useState } from 'react';
 import type { LGTMEntry } from '@/lib/lgtm';
 import { PAGE_SIZE } from '@/lib/config';
+import Pagination from '@/components/pagination';
 
 interface Props {
   entries: LGTMEntry[];
@@ -13,44 +13,10 @@ export default function CategoryEntries({ entries }: Props) {
   const start = (page - 1) * PAGE_SIZE;
   const slice = entries.slice(start, start + PAGE_SIZE);
 
-  function handlePage(p: number) {
-    setPage(p);
+  function handlePageChange(pageNumber: number) {
+    setPage(pageNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
-  const rowStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'flex-start',
-    gap: '1rem',
-    padding: '1rem 0',
-    borderBottom: '1px solid var(--color-border)',
-    textDecoration: 'none',
-    color: 'inherit',
-    transition: 'background 0.15s',
-  };
-
-  const idStyle: React.CSSProperties = {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '0.75rem',
-    color: 'var(--color-text-faint)',
-    flexShrink: 0,
-    paddingTop: '0.2rem',
-    minWidth: '2.5rem',
-  };
-
-  const meaningStyle: React.CSSProperties = {
-    fontWeight: 600,
-    fontSize: '0.9375rem',
-    color: 'var(--color-text)',
-    lineHeight: 1.4,
-  };
-
-  const descStyle: React.CSSProperties = {
-    fontSize: '0.8125rem',
-    color: 'var(--color-text-muted)',
-    lineHeight: 1.5,
-    marginTop: '0.2rem',
-  };
 
   return (
     <div>
@@ -59,20 +25,39 @@ export default function CategoryEntries({ entries }: Props) {
           <a
             key={entry.id}
             href={`/lgtm/${entry.id}`}
-            style={rowStyle}
+            className="flex items-start gap-4 py-4 border-b no-underline transition-colors duration-150"
+            style={{
+              borderColor: 'var(--color-border)',
+              color: 'inherit',
+            }}
           >
-            <span style={idStyle}>#{entry.id}</span>
+            <span
+              className="flex-shrink-0 text-xs pt-[0.2rem] min-w-[2.5rem]"
+              style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-text-faint)' }}
+            >
+              #{entry.id}
+            </span>
             <div>
-              <div style={meaningStyle}>{entry.meaning}</div>
+              <div
+                className="font-semibold text-[0.9375rem] leading-[1.4]"
+                style={{ color: 'var(--color-text)' }}
+              >
+                {entry.meaning}
+              </div>
               {entry.description && (
-                <div style={descStyle}>{entry.description}</div>
+                <div
+                  className="text-[0.8125rem] leading-[1.5] mt-[0.2rem]"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  {entry.description}
+                </div>
               )}
             </div>
           </a>
         ))}
       </div>
 
-      <Pagination page={page} totalPages={totalPages} onPage={handlePage} />
+      <Pagination page={page} totalPages={totalPages} onPage={handlePageChange} />
     </div>
   );
 }

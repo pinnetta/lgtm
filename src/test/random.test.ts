@@ -28,7 +28,10 @@ describe('weightedRandom', () => {
   });
 
   it('respects weights, common is more frequent than legendary', () => {
-    const pool = [makeEntry({ id: 1, rarity: 'common' }), makeEntry({ id: 2, rarity: 'legendary' })];
+    const pool = [
+      makeEntry({ id: 1, rarity: 'common' }),
+      makeEntry({ id: 2, rarity: 'legendary' }),
+    ];
     let commonCount = 0;
     const TRIALS = 1000;
 

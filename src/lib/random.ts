@@ -5,25 +5,22 @@ export function weightedRandom(entries: LGTMEntry[]): LGTMEntry {
   if (entries.length === 0) throw new Error('Cannot pick from empty list');
 
   const totalWeight = entries.reduce(
-    (sum, e) => sum + (RARITY_WEIGHTS[e.rarity as Rarity] ?? RARITY_WEIGHTS.common),
+    (sum, entry) => sum + (RARITY_WEIGHTS[entry.rarity as Rarity] ?? RARITY_WEIGHTS.common),
     0,
   );
 
-  let rand = Math.random() * totalWeight;
+  let remaining = Math.random() * totalWeight;
 
   for (const entry of entries) {
     const weight = RARITY_WEIGHTS[entry.rarity as Rarity] ?? RARITY_WEIGHTS.common;
-    rand -= weight;
-    if (rand <= 0) return entry;
+    remaining -= weight;
+    if (remaining <= 0) return entry;
   }
 
   return entries[entries.length - 1]!;
 }
 
-export function weightedRandomExcluding(
-  entries: LGTMEntry[],
-  excludeId: number,
-): LGTMEntry {
-  const pool = entries.length > 1 ? entries.filter((e) => e.id !== excludeId) : entries;
+export function weightedRandomExcluding(entries: LGTMEntry[], excludeId: number): LGTMEntry {
+  const pool = entries.length > 1 ? entries.filter((entry) => entry.id !== excludeId) : entries;
   return weightedRandom(pool);
 }

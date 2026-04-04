@@ -37,7 +37,7 @@ export default function CountUp({ to, duration = 1400, className }: Props) {
           requestAnimationFrame(tick);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     observer.observe(el);

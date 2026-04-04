@@ -26,24 +26,25 @@ const label = CATEGORY_LABELS[category] ?? category;
   title="LGTM"
   description={`All ${entries.length} LGTM alternative meanings in the "${label}" category.`}
 >
-  <BreadcrumbBar items={[
-    { label: 'Home', href: '/' },
-    { label: 'Categories', href: '/categories' },
-    { label },
-  ]} />
+  <BreadcrumbBar
+    items={[{ label: 'Home', href: '/' }, { label: 'Categories', href: '/categories' }, { label }]}
+  />
 
   <div class="py-10 pb-16">
     <div class="container">
-
       <div class="mb-6">
         <div class="flex items-center gap-4 flex-wrap mb-2">
           <h1
             class="text-[clamp(1.75rem,5vw,2.5rem)] font-extrabold tracking-[-0.03em] m-0"
             style="color: var(--color-text);"
-          >{label}</h1>
+          >
+            {label}
+          </h1>
           <CategoryBadge category={category} size="md" />
         </div>
-        <p class="text-base m-0" style="color: var(--color-text-muted);">{entries.length} entries in this category.</p>
+        <p class="text-base m-0" style="color: var(--color-text-muted);">
+          {entries.length} entries in this category.
+        </p>
       </div>
 
       <div class="flex gap-6 mb-8">
@@ -53,18 +54,19 @@ const label = CATEGORY_LABELS[category] ?? category;
           style="color: var(--color-text-muted); border-color: var(--color-border);"
           onmouseover="this.style.color='var(--color-accent)';this.style.borderColor='var(--color-accent)';"
           onmouseout="this.style.color='var(--color-text-muted)';this.style.borderColor='var(--color-border)';"
-        >&larr; All categories</a>
+          >&larr; All categories</a
+        >
         <a
           href="/browse"
           class="text-[0.9rem] no-underline border-b pb-[2px] transition-colors duration-150"
           style="color: var(--color-text-muted); border-color: var(--color-border);"
           onmouseover="this.style.color='var(--color-accent)';this.style.borderColor='var(--color-accent)';"
           onmouseout="this.style.color='var(--color-text-muted)';this.style.borderColor='var(--color-border)';"
-        >Browse all &rarr;</a>
+          >Browse all &rarr;</a
+        >
       </div>
 
       <CategoryEntries client:load entries={entries} />
-
     </div>
   </div>
 </BaseLayout>

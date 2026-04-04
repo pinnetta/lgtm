@@ -1,3 +1,5 @@
+import rawData from '../../data/lgtm.json';
+
 export type Rarity = 'common' | 'rare' | 'epic' | 'legendary';
 
 export type Category =
@@ -43,22 +45,20 @@ export const CATEGORY_LABELS: Record<string, string> = {
   chaotic: 'Chaotic',
 };
 
-import rawData from '../../data/lgtm.json';
-
 export function getAllEntries(): LGTMEntry[] {
   return rawData as LGTMEntry[];
 }
 
 export function getEntryById(id: number): LGTMEntry | undefined {
-  return getAllEntries().find((e) => e.id === id);
+  return getAllEntries().find((entry) => entry.id === id);
 }
 
 export function getEntriesByCategory(category: string): LGTMEntry[] {
-  return getAllEntries().filter((e) => e.category === category);
+  return getAllEntries().filter((entry) => entry.category === category);
 }
 
 export function getAllCategories(): string[] {
-  return [...new Set(getAllEntries().map((e) => e.category))].sort();
+  return [...new Set(getAllEntries().map((entry) => entry.category))].sort();
 }
 
 export function getAllRarities(): Rarity[] {
@@ -66,5 +66,5 @@ export function getAllRarities(): Rarity[] {
 }
 
 export function getEntriesByRarity(rarity: Rarity): LGTMEntry[] {
-  return getAllEntries().filter((e) => e.rarity === rarity);
+  return getAllEntries().filter((entry) => entry.rarity === rarity);
 }

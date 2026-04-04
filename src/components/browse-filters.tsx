@@ -22,89 +22,63 @@ function RarityDot({ rarity }: { rarity: Rarity }) {
   return (
     <span
       aria-hidden="true"
-      style={{
-        display: 'inline-block',
-        width: '8px',
-        height: '8px',
-        borderRadius: '50%',
-        background: RARITY_COLORS[rarity],
-        flexShrink: 0,
-        marginTop: '1px',
-      }}
+      className="inline-block w-2 h-2 rounded-full flex-shrink-0 mt-[1px]"
+      style={{ background: RARITY_COLORS[rarity] }}
     />
   );
 }
 
 function EntryRow({ entry }: { entry: LGTMEntry }) {
-  const clr = CATEGORY_COLORS[entry.category] ?? 'var(--color-text-muted)';
+  const color = CATEGORY_COLORS[entry.category] ?? 'var(--color-text-muted)';
 
   return (
     <a
       href={`/lgtm/${entry.id}`}
+      className="grid gap-x-6 gap-y-1 items-start p-4 rounded-[10px] border no-underline transition-[border-color,box-shadow] duration-150"
       style={{
-        display: 'grid',
         gridTemplateColumns: '1fr auto',
-        gap: '0.75rem 1.5rem',
-        alignItems: 'start',
-        padding: '1rem 1.25rem',
         background: 'var(--color-surface)',
-        border: '1px solid var(--color-border)',
-        borderRadius: '10px',
-        textDecoration: 'none',
-        transition: 'border-color 0.15s, box-shadow 0.15s',
+        borderColor: 'var(--color-border)',
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-accent)';
-        (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 8px color-mix(in srgb, var(--color-accent) 10%, transparent)';
+        (e.currentTarget as HTMLElement).style.boxShadow =
+          '0 2px 8px color-mix(in srgb, var(--color-accent) 10%, transparent)';
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)';
         (e.currentTarget as HTMLElement).style.boxShadow = 'none';
       }}
     >
-      <div style={{ minWidth: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+      <div className="min-w-0">
+        <div className="flex items-center gap-2 mb-[0.2rem]">
           <RarityDot rarity={entry.rarity as Rarity} />
-          <span style={{
-            fontWeight: 600,
-            fontSize: '0.9375rem',
-            color: 'var(--color-text)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}>
+          <span
+            className="font-semibold text-[0.9375rem] overflow-hidden text-ellipsis whitespace-nowrap"
+            style={{ color: 'var(--color-text)' }}
+          >
             {entry.meaning}
           </span>
         </div>
         {entry.description && (
-          <p style={{
-            margin: 0,
-            fontSize: '0.8125rem',
-            color: 'var(--color-text-muted)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}>
+          <p
+            className="m-0 text-[0.8125rem] overflow-hidden text-ellipsis whitespace-nowrap"
+            style={{ color: 'var(--color-text-muted)' }}
+          >
             {entry.description}
           </p>
         )}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem', flexShrink: 0 }}>
-        <span style={{
-          fontSize: '0.75rem',
-          fontWeight: 700,
-          letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-          color: RARITY_COLORS[entry.rarity as Rarity] ?? 'var(--color-text-faint)',
-        }}>
-          {RARITY_ICONS[entry.rarity as Rarity]}{RARITY_ICONS[entry.rarity as Rarity] ? ' ' : ''}{RARITY_LABELS[entry.rarity as Rarity]}
+      <div className="flex flex-col items-end gap-1 flex-shrink-0">
+        <span
+          className="text-xs font-bold tracking-[0.04em] uppercase"
+          style={{ color: RARITY_COLORS[entry.rarity as Rarity] ?? 'var(--color-text-faint)' }}
+        >
+          {RARITY_ICONS[entry.rarity as Rarity]}
+          {RARITY_ICONS[entry.rarity as Rarity] ? ' ' : ''}
+          {RARITY_LABELS[entry.rarity as Rarity]}
         </span>
-        <span style={{
-          fontSize: '0.75rem',
-          color: clr,
-          fontWeight: 500,
-          padding: '0.15em 0.45em',
-        }}>
+        <span className="text-xs font-medium py-[0.15em] px-[0.45em]" style={{ color }}>
           {CATEGORY_LABELS[entry.category] ?? entry.category}
         </span>
       </div>
@@ -113,7 +87,10 @@ function EntryRow({ entry }: { entry: LGTMEntry }) {
 }
 
 export default function BrowseFilters({ entries }: Props) {
-  const allCategories = useMemo(() => [...new Set(entries.map((e) => e.category))].sort(), [entries]);
+  const allCategories = useMemo(
+    () => [...new Set(entries.map((entry) => entry.category))].sort(),
+    [entries],
+  );
   const allRarities = getAllRarities();
 
   const [search, setSearch] = useState('');
@@ -122,19 +99,27 @@ export default function BrowseFilters({ entries }: Props) {
   const [sort, setSort] = useState<SortOption>('alpha');
   const [page, setPage] = useState(1);
 
-  function toggleCategory(cat: string) {
+  function toggleCategory(category: string) {
     setActiveCategories((prev) => {
       const next = new Set(prev);
-      next.has(cat) ? next.delete(cat) : next.add(cat);
+      if (next.has(category)) {
+        next.delete(category);
+      } else {
+        next.add(category);
+      }
       return next;
     });
     setPage(1);
   }
 
-  function toggleRarity(r: string) {
+  function toggleRarity(rarity: string) {
     setActiveRarities((prev) => {
       const next = new Set(prev);
-      next.has(r) ? next.delete(r) : next.add(r);
+      if (next.has(rarity)) {
+        next.delete(rarity);
+      } else {
+        next.add(rarity);
+      }
       return next;
     });
     setPage(1);
@@ -144,21 +129,21 @@ export default function BrowseFilters({ entries }: Props) {
     let result = entries;
 
     if (search.trim()) {
-      const q = search.toLowerCase();
+      const searchQuery = search.toLowerCase();
       result = result.filter(
-        (e) =>
-          e.meaning.toLowerCase().includes(q) ||
-          e.description?.toLowerCase().includes(q) ||
-          e.tags?.some((t) => t.toLowerCase().includes(q))
+        (entry) =>
+          entry.meaning.toLowerCase().includes(searchQuery) ||
+          entry.description?.toLowerCase().includes(searchQuery) ||
+          entry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery)),
       );
     }
 
     if (activeCategories.size > 0) {
-      result = result.filter((e) => activeCategories.has(e.category));
+      result = result.filter((entry) => activeCategories.has(entry.category));
     }
 
     if (activeRarities.size > 0) {
-      result = result.filter((e) => activeRarities.has(e.rarity));
+      result = result.filter((entry) => activeRarities.has(entry.rarity));
     }
 
     return [...result].sort((a, b) => {
@@ -191,42 +176,34 @@ export default function BrowseFilters({ entries }: Props) {
     setPage(1);
   }
 
-  function handlePageChange(p: number) {
-    setPage(p);
+  function handlePageChange(pageNumber: number) {
+    setPage(pageNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div className="flex flex-col gap-6">
       {/* Search input */}
-      <div style={{ position: 'relative' }}>
-        <span style={{
-          position: 'absolute',
-          left: '1rem',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          color: 'var(--color-text-faint)',
-          fontSize: '1rem',
-          pointerEvents: 'none',
-        }}>
+      <div className="relative">
+        <span
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-base pointer-events-none"
+          style={{ color: 'var(--color-text-faint)' }}
+        >
           ⌕
         </span>
         <input
           type="search"
           placeholder="Search meanings, descriptions, tags…"
           value={search}
-          onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="w-full py-3 pl-10 pr-4 text-[0.9375rem] rounded-[10px] border outline-none transition-[border-color] duration-150 box-border"
           style={{
-            width: '100%',
-            padding: '0.75rem 1rem 0.75rem 2.5rem',
-            fontSize: '0.9375rem',
             background: 'var(--color-surface)',
-            border: '1px solid var(--color-border)',
-            borderRadius: '10px',
+            borderColor: 'var(--color-border)',
             color: 'var(--color-text)',
-            outline: 'none',
-            transition: 'border-color 0.15s',
-            boxSizing: 'border-box',
           }}
           onFocus={(e) => (e.target.style.borderColor = 'var(--color-accent)')}
           onBlur={(e) => (e.target.style.borderColor = 'var(--color-border)')}
@@ -234,81 +211,62 @@ export default function BrowseFilters({ entries }: Props) {
       </div>
 
       {/* Filter pills */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
-          <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            color: 'var(--color-text-faint)',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            marginRight: '0.25rem',
-          }}>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-wrap gap-2 items-center">
+          <span
+            className="text-xs font-semibold tracking-[0.06em] uppercase mr-1"
+            style={{ color: 'var(--color-text-faint)' }}
+          >
             Category
           </span>
-          {allCategories.map((cat) => {
-            const active = activeCategories.has(cat);
-            const clr = CATEGORY_COLORS[cat] ?? 'var(--color-text-muted)';
+          {allCategories.map((category) => {
+            const active = activeCategories.has(category);
+            const color = CATEGORY_COLORS[category] ?? 'var(--color-text-muted)';
             return (
               <button
-                key={cat}
-                onClick={() => toggleCategory(cat)}
+                key={category}
+                onClick={() => toggleCategory(category)}
+                className="text-[0.8125rem] font-medium py-[0.3em] px-[0.75em] rounded-[20px] cursor-pointer transition-all duration-150"
                 style={{
-                  fontSize: '0.8125rem',
-                  fontWeight: 500,
-                  padding: '0.3em 0.75em',
-                  borderRadius: '20px',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  border: `1.5px solid ${active ? clr : 'var(--color-border)'}`,
+                  border: `1.5px solid ${active ? color : 'var(--color-border)'}`,
                   background: active
-                    ? `color-mix(in srgb, ${clr} 12%, var(--color-surface))`
+                    ? `color-mix(in srgb, ${color} 12%, var(--color-surface))`
                     : 'var(--color-surface)',
-                  color: active ? clr : 'var(--color-text-muted)',
+                  color: active ? color : 'var(--color-text-muted)',
                 }}
               >
-                {CATEGORY_LABELS[cat] ?? cat}
+                {CATEGORY_LABELS[category] ?? category}
               </button>
             );
           })}
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
-          <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            color: 'var(--color-text-faint)',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            marginRight: '0.25rem',
-          }}>
+        <div className="flex flex-wrap gap-2 items-center">
+          <span
+            className="text-xs font-semibold tracking-[0.06em] uppercase mr-1"
+            style={{ color: 'var(--color-text-faint)' }}
+          >
             Rarity
           </span>
-          {allRarities.map((r) => {
-            const active = activeRarities.has(r);
-            const clr = RARITY_COLORS[r];
-            const icon = RARITY_ICONS[r];
+          {allRarities.map((rarity) => {
+            const active = activeRarities.has(rarity);
+            const color = RARITY_COLORS[rarity];
+            const icon = RARITY_ICONS[rarity];
             return (
               <button
-                key={r}
-                onClick={() => toggleRarity(r)}
+                key={rarity}
+                onClick={() => toggleRarity(rarity)}
+                className="text-[0.8125rem] font-semibold py-[0.3em] px-[0.75em] rounded-[20px] cursor-pointer transition-all duration-150 tracking-[0.03em] uppercase"
                 style={{
-                  fontSize: '0.8125rem',
-                  fontWeight: 600,
-                  padding: '0.3em 0.75em',
-                  borderRadius: '20px',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  border: `1.5px solid ${active ? clr : 'var(--color-border)'}`,
+                  border: `1.5px solid ${active ? color : 'var(--color-border)'}`,
                   background: active
-                    ? `color-mix(in srgb, ${clr} 12%, var(--color-surface))`
+                    ? `color-mix(in srgb, ${color} 12%, var(--color-surface))`
                     : 'var(--color-surface)',
-                  color: active ? clr : 'var(--color-text-muted)',
-                  letterSpacing: '0.03em',
-                  textTransform: 'uppercase',
+                  color: active ? color : 'var(--color-text-muted)',
                 }}
               >
-                {icon && `${icon} `}{RARITY_LABELS[r]}
+                {icon && `${icon} `}
+                {RARITY_LABELS[rarity]}
               </button>
             );
           })}
@@ -316,61 +274,55 @@ export default function BrowseFilters({ entries }: Props) {
       </div>
 
       {/* Results bar */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '0.75rem',
-        paddingBottom: '0.75rem',
-        borderBottom: '1px solid var(--color-border)',
-      }}>
-        <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
-          <strong style={{ color: 'var(--color-text)' }}>{filtered.length}</strong> of {entries.length} entries
+      <div
+        className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b"
+        style={{ borderColor: 'var(--color-border)' }}
+      >
+        <p className="m-0 text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          <strong style={{ color: 'var(--color-text)' }}>{filtered.length}</strong> of{' '}
+          {entries.length} entries
           {filtered.length > PAGE_SIZE && (
-            <span style={{ color: 'var(--color-text-faint)', marginLeft: '0.5rem' }}>
+            <span className="ml-2" style={{ color: 'var(--color-text-faint)' }}>
               page {clampedPage} of {totalPages}
             </span>
           )}
           {hasFilters && (
             <button
               onClick={clearAll}
-              style={{
-                marginLeft: '0.75rem',
-                fontSize: '0.8125rem',
-                color: 'var(--color-accent)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: 0,
-                textDecoration: 'underline',
-              }}
+              className="ml-3 text-[0.8125rem] bg-none border-none cursor-pointer p-0 underline"
+              style={{ color: 'var(--color-accent)', background: 'none' }}
             >
               Clear filters
             </button>
           )}
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <label htmlFor="sort-select" style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
+        <div className="flex items-center gap-2">
+          <label
+            htmlFor="sort-select"
+            className="text-[0.8125rem]"
+            style={{ color: 'var(--color-text-muted)' }}
+          >
             Sort:
           </label>
           <select
             id="sort-select"
             value={sort}
-            onChange={(e) => { setSort(e.target.value as SortOption); setPage(1); }}
+            onChange={(e) => {
+              setSort(e.target.value as SortOption);
+              setPage(1);
+            }}
+            className="text-sm py-[0.3rem] px-[0.6rem] rounded-md border cursor-pointer"
             style={{
-              fontSize: '0.875rem',
-              padding: '0.3rem 0.6rem',
-              borderRadius: '6px',
-              border: '1px solid var(--color-border)',
               background: 'var(--color-surface)',
+              borderColor: 'var(--color-border)',
               color: 'var(--color-text)',
-              cursor: 'pointer',
             }}
           >
             {Object.entries(SORT_LABELS).map(([key, label]) => (
-              <option key={key} value={key}>{label}</option>
+              <option key={key} value={key}>
+                {label}
+              </option>
             ))}
           </select>
         </div>
@@ -378,41 +330,26 @@ export default function BrowseFilters({ entries }: Props) {
 
       {/* Results list */}
       {filtered.length === 0 ? (
-        <div style={{
-          textAlign: 'center',
-          padding: '3rem 1rem',
-          color: 'var(--color-text-muted)',
-        }}>
-          <p style={{ fontSize: '2rem', margin: '0 0 0.75rem' }}>🔍</p>
-          <p style={{ margin: 0, fontWeight: 600 }}>No entries match your filters.</p>
+        <div className="text-center py-12 px-4" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="text-[2rem] m-0 mb-3">🔍</p>
+          <p className="m-0 font-semibold">No entries match your filters.</p>
           <button
             onClick={clearAll}
-            style={{
-              marginTop: '1rem',
-              fontSize: '0.9rem',
-              color: 'var(--color-accent)',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
+            className="mt-4 text-[0.9rem] bg-none border-none cursor-pointer underline"
+            style={{ color: 'var(--color-accent)', background: 'none' }}
           >
             Clear all filters
           </button>
         </div>
       ) : (
         <>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div className="flex flex-col gap-2">
             {paginated.map((entry) => (
               <EntryRow key={entry.id} entry={entry} />
             ))}
           </div>
 
-          <Pagination
-            page={clampedPage}
-            totalPages={totalPages}
-            onPage={handlePageChange}
-          />
+          <Pagination page={clampedPage} totalPages={totalPages} onPage={handlePageChange} />
         </>
       )}
     </div>

@@ -24,7 +24,7 @@ describe('LegendaryEffect', () => {
   it('calls confetti with particleCount', () => {
     render(<LegendaryEffect />);
     expect(confetti).toHaveBeenCalledWith(
-      expect.objectContaining({ particleCount: expect.any(Number) })
+      expect.objectContaining({ particleCount: expect.any(Number) }),
     );
   });
 

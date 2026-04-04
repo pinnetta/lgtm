@@ -15,18 +15,7 @@ function RarityBadgeInline({ rarity }: { rarity: Rarity }) {
   const icon = RARITY_ICONS[rarity];
   return (
     <span
-      className={`badge-${rarity}`}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.3em',
-        fontSize: '0.75rem',
-        fontWeight: 700,
-        letterSpacing: '0.04em',
-        textTransform: 'uppercase',
-        borderRadius: '6px',
-        padding: '0.3em 0.65em',
-      }}
+      className={`badge-${rarity} inline-flex items-center gap-[0.3em] text-xs font-bold tracking-[0.04em] uppercase rounded-md py-[0.3em] px-[0.65em]`}
     >
       {icon && <span aria-hidden="true">{icon}</span>}
       {RARITY_LABELS[rarity]}
@@ -35,22 +24,15 @@ function RarityBadgeInline({ rarity }: { rarity: Rarity }) {
 }
 
 function CategoryBadgeInline({ category }: { category: string }) {
-  const clr = CATEGORY_COLORS[category] ?? 'var(--color-text-muted)';
+  const color = CATEGORY_COLORS[category] ?? 'var(--color-text-muted)';
   return (
     <a
       href={`/categories/${category}`}
+      className="inline-flex items-center text-[0.8125rem] font-medium rounded-md py-[0.3em] px-[0.7em] no-underline transition-opacity duration-150 hover:opacity-80"
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        fontSize: '0.8125rem',
-        fontWeight: 500,
-        borderRadius: '6px',
-        padding: '0.3em 0.7em',
-        color: clr,
-        background: `color-mix(in srgb, ${clr} 10%, var(--color-surface))`,
-        border: `1px solid color-mix(in srgb, ${clr} 25%, transparent)`,
-        textDecoration: 'none',
-        transition: 'opacity 0.15s',
+        color,
+        background: `color-mix(in srgb, ${color} 10%, var(--color-surface))`,
+        border: `1px solid color-mix(in srgb, ${color} 25%, transparent)`,
       }}
     >
       {CATEGORY_LABELS[category] ?? category}
@@ -59,9 +41,9 @@ function CategoryBadgeInline({ category }: { category: string }) {
 }
 
 export default function RandomGenerator({ entries, initialEntry }: Props) {
-  const [current, setCurrent] = useState<LGTMEntry>(
-    initialEntry ?? entries[Math.floor(Math.random() * entries.length)]!
-  );
+  const [current, setCurrent] = useState<LGTMEntry>(() => {
+    return initialEntry ?? entries[Math.floor(Math.random() * entries.length)]!;
+  });
   const [isAnimating, setIsAnimating] = useState(false);
   const [copied, setCopied] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -72,6 +54,7 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
       setCurrent(picked);
       history.replaceState(null, '', `/lgtm/${picked.id}`);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const generate = useCallback(() => {
@@ -86,20 +69,21 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
     }, 180);
   }, [current.id, entries, isAnimating]);
 
-  const shareUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/lgtm/${current.id}`
-    : `/lgtm/${current.id}`;
+  const shareUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/lgtm/${current.id}`
+      : `/lgtm/${current.id}`;
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
     } catch {
-      const el = document.createElement('input');
-      el.value = shareUrl;
-      document.body.appendChild(el);
-      el.select();
+      const input = document.createElement('input');
+      input.value = shareUrl;
+      document.body.appendChild(input);
+      input.select();
       document.execCommand('copy');
-      document.body.removeChild(el);
+      document.body.removeChild(input);
     }
     setCopied(true);
     setTimeout(() => setCopied(false), COPY_FEEDBACK_MS);
@@ -108,95 +92,66 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
   const rarityColor = RARITY_COLORS[current.rarity as Rarity] ?? 'var(--color-common)';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+    <div className="flex flex-col items-center gap-8">
       <div
         ref={cardRef}
+        className="w-full max-w-[680px] rounded-[20px] border p-10 relative overflow-hidden transition-[opacity,transform] duration-[180ms] ease-[ease]"
         style={{
-          width: '100%',
-          maxWidth: '680px',
           background: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
-          borderRadius: '20px',
-          padding: '2.5rem',
-          position: 'relative',
-          overflow: 'hidden',
+          borderColor: 'var(--color-border)',
           opacity: isAnimating ? 0 : 1,
           transform: isAnimating ? 'translateY(8px)' : 'translateY(0)',
-          transition: 'opacity 0.18s ease, transform 0.18s ease',
           boxShadow: `0 8px 32px color-mix(in srgb, ${rarityColor} 10%, transparent)`,
         }}
       >
+        {/* Dynamic rarity stripe — color is a runtime hex value */}
         <div
+          className="absolute top-0 left-0 right-0 h-1 rounded-t-[20px]"
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '4px',
-            borderRadius: '20px 20px 0 0',
-            background: current.rarity === 'legendary'
-              ? `linear-gradient(90deg, ${rarityColor}, #f59e0b, ${rarityColor})`
-              : rarityColor,
+            background:
+              current.rarity === 'legendary'
+                ? `linear-gradient(90deg, ${rarityColor}, #f59e0b, ${rarityColor})`
+                : rarityColor,
           }}
         />
 
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+        <div className="flex gap-2 flex-wrap mb-5">
           <RarityBadgeInline rarity={current.rarity as Rarity} />
           <CategoryBadgeInline category={current.category} />
         </div>
 
-        <p style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.8125rem',
-          fontWeight: 600,
-          color: 'var(--color-text-faint)',
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
-          margin: '0 0 0.375rem',
-        }}>
+        <p
+          className="text-[0.8125rem] font-semibold tracking-[0.12em] uppercase m-0 mb-[0.375rem]"
+          style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-text-faint)' }}
+        >
           LGTM
         </p>
 
-        <h1 style={{
-          fontSize: 'clamp(1.625rem, 5vw, 2.5rem)',
-          fontWeight: 800,
-          color: 'var(--color-text)',
-          margin: '0 0 0.75rem',
-          lineHeight: 1.2,
-          letterSpacing: '-0.02em',
-        }}>
+        <h1
+          className="text-[clamp(1.625rem,5vw,2.5rem)] font-extrabold leading-[1.2] tracking-[-0.02em] m-0 mb-3"
+          style={{ color: 'var(--color-text)' }}
+        >
           {current.meaning}
         </h1>
 
         {current.description && (
-          <p style={{
-            fontSize: '1rem',
-            color: 'var(--color-text-muted)',
-            margin: '0',
-            lineHeight: 1.6,
-          }}>
+          <p className="text-base m-0 leading-[1.6]" style={{ color: 'var(--color-text-muted)' }}>
             {current.description}
           </p>
         )}
 
         {current.tags && current.tags.length > 0 && (
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0.375rem',
-            marginTop: '1.25rem',
-            paddingTop: '1rem',
-            borderTop: '1px solid var(--color-border)',
-          }}>
+          <div
+            className="flex flex-wrap gap-[0.375rem] mt-5 pt-4 border-t"
+            style={{ borderColor: 'var(--color-border)' }}
+          >
             {current.tags.map((tag) => (
               <span
                 key={tag}
+                className="text-xs py-[0.15em] px-[0.45em] rounded"
                 style={{
-                  fontSize: '0.75rem',
                   fontFamily: 'var(--font-mono)',
                   color: 'var(--color-text-faint)',
-                  padding: '0.15em 0.45em',
-                  borderRadius: '4px',
                   background: 'var(--color-surface-raised)',
                 }}
               >
@@ -207,27 +162,17 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
         )}
       </div>
 
-      <div style={{
-        display: 'flex',
-        gap: '0.75rem',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-      }}>
+      <div className="flex gap-3 flex-wrap justify-center">
         <button
           onClick={generate}
           disabled={isAnimating}
-          className="btn btn-primary"
-          style={{ fontSize: '1rem', padding: '0.7rem 1.75rem', gap: '0.5rem' }}
+          className="btn btn-primary text-base py-[0.7rem] px-7 gap-2"
         >
           <Shuffle size={16} aria-hidden="true" />
           Generate another
         </button>
 
-        <button
-          onClick={handleCopy}
-          className="btn btn-ghost"
-          style={{ fontSize: '0.9375rem' }}
-        >
+        <button onClick={handleCopy} className="btn btn-ghost text-[0.9375rem]">
           {copied ? (
             <>
               <Check size={14} aria-hidden="true" />
@@ -241,23 +186,16 @@ export default function RandomGenerator({ entries, initialEntry }: Props) {
           )}
         </button>
 
-        <a
-          href={`/lgtm/${current.id}`}
-          className="btn btn-ghost"
-          style={{ fontSize: '0.9375rem' }}
-        >
+        <a href={`/lgtm/${current.id}`} className="btn btn-ghost text-[0.9375rem]">
           <ExternalLink size={14} aria-hidden="true" />
           View detail
         </a>
       </div>
 
-      <p style={{
-        fontSize: '0.8125rem',
-        color: 'var(--color-text-faint)',
-        fontFamily: 'var(--font-mono)',
-        margin: 0,
-        textAlign: 'center',
-      }}>
+      <p
+        className="text-[0.8125rem] m-0 text-center"
+        style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-text-faint)' }}
+      >
         {shareUrl}
       </p>
     </div>

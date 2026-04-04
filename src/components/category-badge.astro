@@ -10,35 +10,42 @@ interface Props {
 const { category, size = 'md', href } = Astro.props;
 const label = CATEGORY_LABELS[category] ?? category;
 
-const sizeClasses = size === 'sm'
-  ? 'text-[0.6875rem] py-[0.2em] px-[0.55em]'
-  : 'text-[0.8125rem] py-[0.3em] px-[0.7em]';
+const sizeClasses =
+  size === 'sm'
+    ? 'text-[0.6875rem] py-[0.2em] px-[0.55em]'
+    : 'text-[0.8125rem] py-[0.3em] px-[0.7em]';
 
 const categoryColors: Record<string, string> = {
-  funny:       '#f59e0b',
-  sarcastic:   '#ef4444',
-  wholesome:   '#10b981',
-  nerd:        '#6366f1',
+  funny: '#f59e0b',
+  sarcastic: '#ef4444',
+  wholesome: '#10b981',
+  nerd: '#6366f1',
   existential: '#8b5cf6',
-  corporate:   '#0ea5e9',
-  chaotic:     '#f97316',
+  corporate: '#0ea5e9',
+  chaotic: '#f97316',
 };
 
-const clr = categoryColors[category];
-const badgeStyle = clr
-  ? `color: ${clr}; background: color-mix(in srgb, ${clr} 10%, var(--color-surface)); border-color: color-mix(in srgb, ${clr} 25%, transparent);`
+const color = categoryColors[category];
+const badgeStyle = color
+  ? `color: ${color}; background: color-mix(in srgb, ${color} 10%, var(--color-surface)); border-color: color-mix(in srgb, ${color} 25%, transparent);`
   : 'color: var(--color-text-muted); background: var(--color-surface-raised); border-color: var(--color-border);';
 ---
 
-{href ? (
-  <a
-    href={href}
-    class={`inline-flex items-center font-medium rounded-md border no-underline transition-opacity duration-150 hover:opacity-80 ${sizeClasses}`}
-    style={badgeStyle}
-  >{label}</a>
-) : (
-  <span
-    class={`inline-flex items-center font-medium rounded-md border ${sizeClasses}`}
-    style={badgeStyle}
-  >{label}</span>
-)}
+{
+  href ? (
+    <a
+      href={href}
+      class={`inline-flex items-center font-medium rounded-md border no-underline transition-opacity duration-150 hover:opacity-80 ${sizeClasses}`}
+      style={badgeStyle}
+    >
+      {label}
+    </a>
+  ) : (
+    <span
+      class={`inline-flex items-center font-medium rounded-md border ${sizeClasses}`}
+      style={badgeStyle}
+    >
+      {label}
+    </span>
+  )
+}

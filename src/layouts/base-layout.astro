@@ -50,26 +50,35 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
     <script is:inline define:vars={{ THEME_STORAGE_KEY }}>
       (function () {
         try {
-          var t = localStorage.getItem(THEME_STORAGE_KEY);
-          if (t === 'light' || t === 'dark') {
-            document.documentElement.setAttribute('data-theme', t);
+          const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+          if (storedTheme === 'light' || storedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', storedTheme);
           }
-        } catch (_) {}
+        } catch {
+          // localStorage may be unavailable (e.g. private browsing on some browsers)
+        }
       })();
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <title>{title}</title>
   </head>
 
   <body>
-    <!-- sticky header with frosted glass effect -->
     <header
       class="sticky top-0 z-50 border-b"
       style="background: color-mix(in srgb, var(--color-bg) 85%, transparent); backdrop-filter: blur(12px); border-color: var(--color-border);"
@@ -80,10 +89,10 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
             <span
               class="text-lg font-semibold tracking-tight"
               style="font-family: var(--font-mono); color: var(--color-accent); letter-spacing: -0.02em;"
-            >LGTM</span>
+              >LGTM</span
+            >
           </a>
 
-          <!-- desktop nav -->
           <div class="hidden sm:flex items-center gap-1.5">
             <a
               href="/browse"
@@ -91,26 +100,28 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
               style="color: var(--color-text-muted);"
               onmouseover="this.style.color='var(--color-text)';this.style.background='var(--color-surface-raised)';"
               onmouseout="this.style.color='var(--color-text-muted)';this.style.background='';"
-            >Browse</a>
+              >Browse</a
+            >
             <a
               href="/categories"
               class="text-[0.9375rem] font-medium px-3 py-1.5 rounded-md no-underline transition-colors duration-150"
               style="color: var(--color-text-muted);"
               onmouseover="this.style.color='var(--color-text)';this.style.background='var(--color-surface-raised)';"
               onmouseout="this.style.color='var(--color-text-muted)';this.style.background='';"
-            >Categories</a>
+              >Categories</a
+            >
             <a
               href="/rarities"
               class="text-[0.9375rem] font-medium px-3 py-1.5 rounded-md no-underline transition-colors duration-150"
               style="color: var(--color-text-muted);"
               onmouseover="this.style.color='var(--color-text)';this.style.background='var(--color-surface-raised)';"
               onmouseout="this.style.color='var(--color-text-muted)';this.style.background='';"
-            >Rarities</a>
+              >Rarities</a
+            >
             <a href="/random" class="btn-nav-random mr-1">Random</a>
             <ThemeSwitcher client:load />
           </div>
 
-          <!-- mobile: theme + hamburger -->
           <div class="flex sm:hidden items-center gap-2">
             <ThemeSwitcher client:load />
             <button
@@ -128,12 +139,7 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
         </nav>
       </div>
 
-      <!-- mobile drawer -->
-      <div
-        id="mobile-menu"
-        class="mobile-menu sm:hidden"
-        aria-hidden="true"
-      >
+      <div id="mobile-menu" class="mobile-menu sm:hidden" aria-hidden="true">
         <div class="container">
           <div class="mobile-menu-inner">
             <a href="/browse" class="mobile-nav-link">Browse</a>
@@ -149,45 +155,54 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
       <slot />
     </main>
 
-    <!-- footer -->
     <footer class="footer-root border-t" style="border-color: var(--color-border);">
       <div class="container">
-
-        <!-- top row: brand + nav columns -->
         <div class="footer-top">
-
-          <!-- brand -->
           <div class="footer-brand">
             <span
               class="footer-logo"
-              style="font-family: var(--font-mono); color: var(--color-accent);"
-            >LGTM</span>
+              style="font-family: var(--font-mono); color: var(--color-accent);">LGTM</span
+            >
             <p class="footer-tagline" style="color: var(--color-text-muted);">
               A playful catalog of alternative meanings for the famous code review acronym.
             </p>
           </div>
 
-          <!-- nav columns -->
           <div class="footer-nav-cols">
             <div class="footer-nav-col">
-              <span class="footer-col-heading" style="color: var(--color-text-faint);">Explore</span>
-              <a href="/browse" class="footer-link" style="color: var(--color-text-muted);">Browse All</a>
-              <a href="/categories" class="footer-link" style="color: var(--color-text-muted);">Categories</a>
-              <a href="/rarities" class="footer-link" style="color: var(--color-text-muted);">Rarities</a>
+              <span class="footer-col-heading" style="color: var(--color-text-faint);">Explore</span
+              >
+              <a href="/browse" class="footer-link" style="color: var(--color-text-muted);"
+                >Browse All</a
+              >
+              <a href="/categories" class="footer-link" style="color: var(--color-text-muted);"
+                >Categories</a
+              >
+              <a href="/rarities" class="footer-link" style="color: var(--color-text-muted);"
+                >Rarities</a
+              >
             </div>
             <div class="footer-nav-col">
-              <span class="footer-col-heading" style="color: var(--color-text-faint);">Discover</span>
-              <a href="/random" class="footer-link" style="color: var(--color-text-muted);">Random Entry</a>
-              <a href="/rarities/legendary" class="footer-link" style="color: var(--color-text-muted);">Legendary Tier</a>
-              <a href="/rarities/epic" class="footer-link" style="color: var(--color-text-muted);">Epic Tier</a>
+              <span class="footer-col-heading" style="color: var(--color-text-faint);"
+                >Discover</span
+              >
+              <a href="/random" class="footer-link" style="color: var(--color-text-muted);"
+                >Random Entry</a
+              >
+              <a
+                href="/rarities/legendary"
+                class="footer-link"
+                style="color: var(--color-text-muted);">Legendary Tier</a
+              >
+              <a href="/rarities/epic" class="footer-link" style="color: var(--color-text-muted);"
+                >Epic Tier</a
+              >
             </div>
           </div>
         </div>
 
-        <!-- divider -->
         <div class="footer-divider" style="background: var(--color-border);"></div>
 
-        <!-- bottom row: copyright + made-with -->
         <div class="footer-bottom">
           <p class="footer-copy" style="color: var(--color-text-faint);">
             &copy; {new Date().getFullYear()} LGTM. Star on
@@ -196,21 +211,26 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
               target="_blank"
               rel="noopener noreferrer"
               class="footer-ext-link"
-              style="color: var(--color-text-muted);"
-            >GitHub</a>.
+              style="color: var(--color-text-muted);">GitHub</a
+            >.
           </p>
           <p class="footer-copy" style="color: var(--color-text-faint);">
             Built by
-            <a href="https://airscript.it" target="_blank" rel="noopener noreferrer" class="footer-ext-link" style="color: var(--color-text-muted);">Airscript</a>.
+            <a
+              href="https://airscript.it"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-ext-link"
+              style="color: var(--color-text-muted);">Airscript</a
+            >.
           </p>
         </div>
-
       </div>
     </footer>
 
     <script>
       const toggle = document.getElementById('nav-toggle');
-      const menu   = document.getElementById('mobile-menu');
+      const menu = document.getElementById('mobile-menu');
 
       toggle?.addEventListener('click', () => {
         const open = toggle.getAttribute('aria-expanded') === 'true';
@@ -220,7 +240,6 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
         menu?.classList.toggle('is-open', !open);
       });
 
-      // close on nav (same-page link)
       menu?.querySelectorAll('a').forEach((a) => {
         a.addEventListener('click', () => {
           toggle?.setAttribute('aria-expanded', 'false');
@@ -247,7 +266,10 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
     background: var(--color-accent);
     color: #fff;
     text-decoration: none;
-    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease,
+      box-shadow 0.15s ease;
     border: none;
     cursor: pointer;
     white-space: nowrap;
@@ -288,9 +310,10 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
     border-radius: 2px;
     background: var(--color-text-muted);
     transform-origin: center;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity   0.25s ease,
-                width     0.25s ease;
+    transition:
+      transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.25s ease,
+      width 0.25s ease;
   }
 
   /* X state */
@@ -309,8 +332,9 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
   .mobile-menu {
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity   0.25s ease;
+    transition:
+      max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.25s ease;
     opacity: 0;
     border-top: 1px solid transparent;
   }
@@ -333,7 +357,9 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
     border-radius: 8px;
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 0.15s ease, background 0.15s ease;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
   }
   .mobile-nav-link:hover {
     color: var(--color-text);
@@ -352,7 +378,9 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
     background: var(--color-accent);
     color: #fff;
     text-decoration: none;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease;
   }
   .mobile-nav-random:hover {
     background: var(--color-accent-hover);
@@ -441,7 +469,9 @@ const ogImageUrl = `${SITE_URL}/og-default.png`;
   .footer-ext-link {
     text-decoration: none;
     border-bottom: 1px solid var(--color-border);
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
   }
   .footer-ext-link:hover {
     color: var(--color-text) !important;

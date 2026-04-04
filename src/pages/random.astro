@@ -1,11 +1,9 @@
 ---
-import BaseLayout from "@/layouts/base-layout.astro";
-import { getAllEntries, RARITY_WEIGHTS } from "@/lib/lgtm";
+import BaseLayout from '@/layouts/base-layout.astro';
+import { getAllEntries, RARITY_WEIGHTS } from '@/lib/lgtm';
 
 const entries = getAllEntries();
-const entriesJson = JSON.stringify(
-  entries.map((e) => ({ id: e.id, rarity: e.rarity })),
-);
+const entriesJson = JSON.stringify(entries.map((e) => ({ id: e.id, rarity: e.rarity })));
 const weightsJson = JSON.stringify(RARITY_WEIGHTS);
 ---
 
@@ -26,31 +24,31 @@ const weightsJson = JSON.stringify(RARITY_WEIGHTS);
 <script is:inline define:vars={{ entriesJson, weightsJson }}>
   (function () {
     try {
-      var entries = JSON.parse(entriesJson);
-      var weights = JSON.parse(weightsJson);
+      const entries = JSON.parse(entriesJson);
+      const weights = JSON.parse(weightsJson);
       if (!entries || entries.length === 0) {
-        window.location.replace("/browse");
+        window.location.replace('/browse');
         return;
       }
 
-      var totalWeight = entries.reduce(function (sum, e) {
-        return sum + (weights[e.rarity] || weights.common);
+      const totalWeight = entries.reduce(function (sum, entry) {
+        return sum + (weights[entry.rarity] || weights.common);
       }, 0);
 
-      var rand = Math.random() * totalWeight;
+      let remaining = Math.random() * totalWeight;
 
-      for (var i = 0; i < entries.length; i++) {
-        var w = weights[entries[i].rarity] || weights.common;
-        rand -= w;
-        if (rand <= 0) {
-          window.location.replace("/lgtm/" + entries[i].id);
+      for (let i = 0; i < entries.length; i++) {
+        const weight = weights[entries[i].rarity] || weights.common;
+        remaining -= weight;
+        if (remaining <= 0) {
+          window.location.replace('/lgtm/' + entries[i].id);
           return;
         }
       }
 
-      window.location.replace("/lgtm/" + entries[entries.length - 1].id);
-    } catch (err) {
-      window.location.replace("/browse");
+      window.location.replace('/lgtm/' + entries[entries.length - 1].id);
+    } catch {
+      window.location.replace('/browse');
     }
   })();
 </script>

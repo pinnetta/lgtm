@@ -10,10 +10,34 @@ beforeEach(() => {
 });
 
 const entries: LGTMEntry[] = [
-  makeEntry({ id: 1, rarity: 'common', meaning: 'Meaning 1', description: 'Description for 1', tags: ['tag1'] }),
-  makeEntry({ id: 2, rarity: 'rare', meaning: 'Meaning 2', description: 'Description for 2', tags: ['tag2'] }),
-  makeEntry({ id: 3, rarity: 'epic', meaning: 'Meaning 3', description: 'Description for 3', tags: ['tag3'] }),
-  makeEntry({ id: 4, rarity: 'legendary', meaning: 'Meaning 4', description: 'Description for 4', tags: ['tag4'] }),
+  makeEntry({
+    id: 1,
+    rarity: 'common',
+    meaning: 'Meaning 1',
+    description: 'Description for 1',
+    tags: ['tag1'],
+  }),
+  makeEntry({
+    id: 2,
+    rarity: 'rare',
+    meaning: 'Meaning 2',
+    description: 'Description for 2',
+    tags: ['tag2'],
+  }),
+  makeEntry({
+    id: 3,
+    rarity: 'epic',
+    meaning: 'Meaning 3',
+    description: 'Description for 3',
+    tags: ['tag3'],
+  }),
+  makeEntry({
+    id: 4,
+    rarity: 'legendary',
+    meaning: 'Meaning 4',
+    description: 'Description for 4',
+    tags: ['tag4'],
+  }),
 ];
 
 describe('RandomGenerator', () => {
@@ -65,8 +89,11 @@ describe('RandomGenerator', () => {
     const btn = screen.getByText(/Generate another/i);
     fireEvent.click(btn);
 
-    await waitFor(() => {
-      expect(window.history.pushState).toHaveBeenCalled();
-    }, { timeout: 500 });
+    await waitFor(
+      () => {
+        expect(window.history.pushState).toHaveBeenCalled();
+      },
+      { timeout: 500 },
+    );
   });
 });

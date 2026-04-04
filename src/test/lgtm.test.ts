@@ -95,7 +95,7 @@ describe('constants', () => {
 
   it('rarity labels covers all rarities', () => {
     expect(Object.keys(RARITY_LABELS)).toEqual(
-      expect.arrayContaining(['common', 'rare', 'epic', 'legendary'])
+      expect.arrayContaining(['common', 'rare', 'epic', 'legendary']),
     );
   });
 

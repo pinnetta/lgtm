@@ -14,12 +14,12 @@ export default function CopyShareButton({ url, label = 'Copy share link' }: Prop
     try {
       await navigator.clipboard.writeText(url);
     } catch {
-      const el = document.createElement('input');
-      el.value = url;
-      document.body.appendChild(el);
-      el.select();
+      const input = document.createElement('input');
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
       document.execCommand('copy');
-      document.body.removeChild(el);
+      document.body.removeChild(input);
     }
     setCopied(true);
     setTimeout(() => setCopied(false), COPY_FEEDBACK_MS);

@@ -1,49 +1,247 @@
 ---
-import BaseLayout from "@/layouts/base-layout.astro";
+import BaseLayout from '@/layouts/base-layout.astro';
 ---
 
 <BaseLayout
-  title="LGTM"
-  description="This page doesn't exist."
+  title="404 — Page Not Found | LGTM"
+  description="This page doesn't exist. Maybe LGTM stands for 'Lost, Gone, Totally Missing'?"
 >
-  <div
-    class="flex flex-1 flex-col items-center justify-center text-center px-5 py-24"
-    style="background: var(--color-bg);"
-  >
-    <p
-      class="text-[0.6875rem] font-bold tracking-[0.22em] uppercase m-0 mb-4"
-      style="font-family: var(--font-mono); color: var(--color-text-faint);"
-    >
-      404
-    </p>
-
-    <h1
-      class="text-[clamp(2rem,6vw,3rem)] font-extrabold tracking-[-0.03em] m-0 mb-4 leading-[1.1]"
-      style="color: var(--color-text);"
-    >
-      Page Not Found
-    </h1>
-
-    <p
-      class="text-[1.0625rem] leading-[1.7] m-0 mb-5 max-w-[440px]"
-      style="color: var(--color-text-muted);"
-    >
-      If you think something should be here, contributions are welcome!
-    </p>
-
-    <div class="flex flex-wrap justify-center mb-5">
-      <a href="/" class="btn btn-primary">Return Home</a>
+  <div class="not-found-root">
+    <div class="not-found-bg" aria-hidden="true">
+      <span class="bg-glyph bg-glyph-1">404</span>
+      <span class="bg-glyph bg-glyph-2">LGTM</span>
     </div>
 
-    <p class="text-sm m-0" style="color: var(--color-text-faint);">
-      Want to contribute a missing meaning?{" "}
-      <a
-        href="https://github.com/airscripts/lgtm"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-medium"
-        style="color: var(--color-accent);">Open a PR on GitHub &rarr;</a
-      >
-    </p>
+    <div class="container not-found-inner">
+      <div class="not-found-content">
+        <p class="not-found-eyebrow">Error 404</p>
+
+        <h1 class="not-found-heading">
+          Page not<br />found
+        </h1>
+
+        <p class="not-found-sub">
+          <span class="not-found-mono">"Looks Good To Me"</span> — but this URL clearly didn't.
+        </p>
+
+        <p class="not-found-body">
+          Whatever brought you here has vanished into the void. Try heading home or browsing all {
+            ' '
+          }
+          <strong>LGTM</strong> meanings instead.
+        </p>
+
+        <div class="not-found-actions">
+          <a href="/" class="btn btn-primary">Back to home</a>
+          <a href="/browse" class="btn btn-ghost">Browse all entries</a>
+        </div>
+
+        <p class="not-found-footer">
+          Found a broken link?{' '}
+          <a
+            href="https://github.com/airscripts/lgtm/issues"
+            target="_blank"
+            rel="noopener noreferrer">Open an issue on GitHub &rarr;</a
+          >
+        </p>
+      </div>
+
+      <div class="not-found-code" aria-hidden="true">
+        <pre
+          class="code-block"><code><span class="code-comment">// src/pages/404.astro</span>
+<span class="code-kw">throw new</span> <span class="code-cls">Error</span><span class="code-punc">(</span>
+  <span class="code-str">"404: page not found"</span>
+<span class="code-punc">);</span>
+
+<span class="code-comment">// suggestion:</span>
+<span class="code-kw">return</span> redirect<span class="code-punc">(</span><span class="code-str">"/"</span><span class="code-punc">);</span></code></pre>
+      </div>
+    </div>
   </div>
 </BaseLayout>
+
+<style>
+  .not-found-root {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .not-found-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .bg-glyph {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.03;
+    white-space: nowrap;
+  }
+
+  .bg-glyph-1 {
+    font-size: clamp(14rem, 40vw, 28rem);
+    top: -2rem;
+    left: -1rem;
+    color: var(--color-accent);
+    letter-spacing: -0.06em;
+  }
+
+  .bg-glyph-2 {
+    font-size: clamp(6rem, 18vw, 12rem);
+    bottom: 1rem;
+    right: -1rem;
+    color: var(--color-text);
+    letter-spacing: -0.04em;
+  }
+
+  .not-found-inner {
+    position: relative;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding-block: 6rem;
+  }
+
+  @media (max-width: 767px) {
+    .not-found-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-block: 4rem;
+    }
+  }
+
+  .not-found-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .not-found-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 1.25rem;
+  }
+
+  .not-found-heading {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    margin: 0 0 1.5rem;
+  }
+
+  .not-found-sub {
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+  }
+
+  .not-found-mono {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    color: var(--color-accent);
+    background: var(--color-accent-subtle);
+    padding: 0.1em 0.45em;
+    border-radius: 4px;
+  }
+
+  .not-found-body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 42ch;
+    margin: 0 0 2rem;
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .not-found-footer {
+    font-size: 0.8125rem;
+    color: var(--color-text-faint);
+    margin: 0;
+  }
+
+  .not-found-footer a {
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .not-found-footer a:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .not-found-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 767px) {
+    .not-found-code {
+      justify-content: flex-start;
+    }
+  }
+
+  .code-block {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    box-shadow: 0 4px 24px color-mix(in srgb, var(--color-text) 6%, transparent);
+    width: 100%;
+    max-width: 360px;
+    overflow: auto;
+  }
+
+  .code-block code {
+    font-family: inherit;
+  }
+
+  .code-comment {
+    color: var(--color-text-faint);
+    font-style: italic;
+  }
+  .code-kw {
+    color: var(--color-accent);
+  }
+  .code-cls {
+    color: var(--color-legendary);
+  }
+  .code-str {
+    color: var(--color-rare);
+  }
+  .code-punc {
+    color: var(--color-text-muted);
+  }
+</style>

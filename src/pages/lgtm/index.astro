@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '@/layouts/base-layout.astro';
+import { getAllEntries } from '@/lib/lgtm';
+
+const totalEntries = getAllEntries().length;
 ---
 
 <BaseLayout
@@ -13,7 +16,9 @@ import BaseLayout from '@/layouts/base-layout.astro';
     <p
       class="text-[0.6875rem] font-bold tracking-[0.22em] uppercase m-0 mb-4"
       style="font-family: var(--font-mono); color: var(--color-text-faint);"
-    >LGTM</p>
+    >
+      LGTM
+    </p>
 
     <h1
       class="text-[clamp(2rem,6vw,3rem)] font-extrabold tracking-[-0.03em] m-0 mb-4 leading-[1.1]"
@@ -27,8 +32,8 @@ import BaseLayout from '@/layouts/base-layout.astro';
       style="color: var(--color-text-muted);"
     >
       This LGTM entry doesn't exist — yet.<br />
-      We currently have <strong style="color: var(--color-text);">250 meanings</strong> and we're always looking for more.
-      Think you have a good one? Contribute it!
+      We currently have <strong style="color: var(--color-text);">{totalEntries} meanings</strong> and
+      we're always looking for more. Think you have a good one? Contribute it!
     </p>
 
     <div class="flex flex-wrap justify-center gap-3 mb-10">
@@ -43,8 +48,8 @@ import BaseLayout from '@/layouts/base-layout.astro';
         target="_blank"
         rel="noopener noreferrer"
         class="font-medium"
-        style="color: var(--color-accent);"
-      >Contribute on GitHub &rarr;</a>
+        style="color: var(--color-accent);">Contribute on GitHub &rarr;</a
+      >
     </p>
   </div>
 </BaseLayout>
