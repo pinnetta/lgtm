@@ -42,7 +42,7 @@ function CategoryBadgeInline({ category }: { category: string }) {
 
 export default function RandomGenerator({ entries, initialEntry }: Props) {
   const [current, setCurrent] = useState<LGTMEntry>(() => {
-    return initialEntry ?? entries[Math.floor(Math.random() * entries.length)]!;
+    return initialEntry ?? entries[0]!;
   });
   const [isAnimating, setIsAnimating] = useState(false);
   const [copied, setCopied] = useState(false);
