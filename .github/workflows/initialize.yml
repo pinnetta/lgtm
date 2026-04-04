@@ -5,7 +5,9 @@ on:
 
 jobs:
   initialize:
+    name: Initialize
     runs-on: ubuntu-latest
+
     steps:
       - name: Run
         run: echo "run ${{ github.run_id }}"
