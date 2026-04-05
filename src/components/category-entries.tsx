@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import { PAGE_SIZE } from '@/lib/config';
 import type { LGTMEntry } from '@/lib/lgtm';

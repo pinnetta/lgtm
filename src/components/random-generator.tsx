@@ -1,4 +1,3 @@
-'use client';
 import type { CSSProperties } from 'react';
 import { COPY_FEEDBACK_MS } from '@/lib/config';
 import type { LGTMEntry, Rarity } from '@/lib/lgtm';
@@ -146,15 +145,15 @@ export function RandomGenerator({ entries, initialEntry }: RandomGeneratorProps)
         </h1>
 
         {current.description && (
-          <p style={{ color: 'var(--color-text-muted)' }} className="text-base m-0 leading-[1.6]">
+          <p className="text-base m-0 leading-[1.6]" style={{ color: 'var(--color-text-muted)' }}>
             {current.description}
           </p>
         )}
 
         {hasTags(current) && (
           <div
-            className="flex flex-wrap gap-[0.375rem] mt-5 pt-4 border-t"
             style={{ borderColor: 'var(--color-border)' }}
+            className="flex flex-wrap gap-[0.375rem] mt-5 pt-4 border-t"
           >
             {current.tags!.map((tag) => (
               <span

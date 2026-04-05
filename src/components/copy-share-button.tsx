@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import { Link, Check } from 'lucide-react';
 import { COPY_FEEDBACK_MS } from '@/lib/config';

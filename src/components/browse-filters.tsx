@@ -1,4 +1,3 @@
-'use client';
 import { Search, X } from 'lucide-react';
 import { PAGE_SIZE } from '@/lib/config';
 import { useState, useMemo } from 'react';
@@ -49,9 +48,9 @@ function filterButtonStyle(active: boolean, color: string): CSSProperties {
 function RarityDot({ rarity }: { rarity: Rarity }) {
   return (
     <span
+      aria-hidden="true"
       style={{ background: RARITY_COLORS[rarity] }}
       className="inline-block w-2 h-2 rounded-full flex-shrink-0 mt-[1px]"
-      aria-hidden="true"
     />
   );
 }
@@ -355,8 +354,8 @@ export function BrowseFilters({ entries }: BrowseFiltersProps) {
           </label>
 
           <select
-            id="sort-select"
             value={sort}
+            id="sort-select"
             onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--color-border)')}
             onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--color-accent)')}
             className="text-sm py-[0.3rem] px-[0.6rem] rounded-md border cursor-pointer outline-none transition-colors duration-150"

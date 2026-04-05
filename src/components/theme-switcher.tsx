@@ -1,4 +1,3 @@
-'use client';
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import { THEME_STORAGE_KEY } from '@/lib/config';
