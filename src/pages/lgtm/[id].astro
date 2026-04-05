@@ -1,9 +1,8 @@
 ---
 import { SITE_URL } from '@/lib/config';
-import { getAllEntries } from '@/lib/lgtm';
-import type { Rarity, LGTMEntry } from '@/lib/lgtm';
+import type { LGTMEntry } from '@/lib/lgtm';
 import BaseLayout from '@/layouts/base-layout.astro';
-import RarityBadge from '@/components/rarity-badge.astro';
+import { getAllEntries, RARITY_LABELS } from '@/lib/lgtm';
 import BreadcrumbBar from '@/components/breadcrumb-bar.astro';
 import CategoryBadge from '@/components/category-badge.astro';
 import { LegendaryEffect } from '@/components/legendary-effect';
@@ -72,7 +71,9 @@ const rarityBg: Record<string, string> = {
     <div class="flex flex-1 flex-col justify-center max-w-[680px] w-full mx-auto px-5 py-12 pb-8 gap-10">
       <div class="flex flex-col flex-1 animate-up">
         <div class="flex gap-2 flex-wrap mb-8">
-          <RarityBadge rarity={entry.rarity as Rarity} size="lg" />
+          <span class={`rarity-badge badge-${entry.rarity} inline-flex items-center font-semibold tracking-[0.04em] uppercase whitespace-nowrap text-[0.875rem] py-[0.4em] px-[0.85em] rounded-lg`}>
+            {RARITY_LABELS[entry.rarity]}
+          </span>
 
           <CategoryBadge category={entry.category} size="md" href={`/categories/${entry.category}`} />
         </div>

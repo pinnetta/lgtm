@@ -1,6 +1,6 @@
 ---
+import { RARITY_LABELS } from '@/lib/lgtm';
 import type { LGTMEntry } from '@/lib/lgtm';
-import RarityBadge from '@/components/rarity-badge.astro';
 import CategoryBadge from '@/components/category-badge.astro';
 
 type Props = {
@@ -23,10 +23,19 @@ const meaningSize = variant === 'featured' ? 'text-[2rem]' : 'text-[1.375rem]';
 const rarityStripeStyle: Record<string, string> = {
   legendary:
     'background: linear-gradient(90deg, var(--color-legendary), #f59e0b, var(--color-legendary)); background-size: 200% 100%; animation: shimmer 3s linear infinite;',
+
   epic: 'background: var(--color-epic);',
   rare: 'background: var(--color-rare);',
   common: 'background: var(--color-common);',
 };
+
+const badgeSize = variant === 'compact' ? 'sm' : 'md';
+
+const rarityBadgeSizeClasses = {
+  sm: 'text-[0.6875rem] py-[0.2em] px-[0.5em] rounded',
+  md: 'text-[0.75rem] py-[0.3em] px-[0.65em] rounded-md',
+  lg: 'text-[0.875rem] py-[0.4em] px-[0.85em] rounded-lg',
+}[badgeSize];
 
 function showTags(): boolean {
   return variant !== 'compact' && (entry.tags?.length ?? 0) > 0;
@@ -48,7 +57,11 @@ function showTags(): boolean {
 
   <div class="mb-4">
     <div class="flex items-center gap-2 flex-wrap">
-      <RarityBadge rarity={entry.rarity} size={variant === 'compact' ? 'sm' : 'md'} />
+      <span
+        class={`rarity-badge badge-${entry.rarity} inline-flex items-center font-semibold tracking-[0.04em] uppercase whitespace-nowrap ${rarityBadgeSizeClasses}`}
+      >
+        {RARITY_LABELS[entry.rarity]}
+      </span>
 
       <CategoryBadge
         category={entry.category}
