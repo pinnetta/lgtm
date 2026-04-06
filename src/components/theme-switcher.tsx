@@ -44,6 +44,7 @@ export function ThemeSwitcher() {
   function cycle() {
     const idx = THEMES.findIndex((themeOption) => themeOption.value === theme);
     const next = THEMES[(idx + 1) % THEMES.length].value;
+
     setTheme(next);
     applyTheme(next);
 

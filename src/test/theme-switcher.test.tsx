@@ -1,12 +1,13 @@
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, test, expect, beforeEach, afterEach } from 'vitest';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
 
 function getTheme() {
   return document.documentElement.getAttribute('data-theme');
 }
 
 beforeEach(() => {
+  vi.clearAllMocks();
   localStorage.clear();
   document.documentElement.removeAttribute('data-theme');
 });
